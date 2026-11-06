@@ -87,6 +87,20 @@
       "source": "Architecture-Group-Icons_07312026/Private-subnet_32.svg",
       "file": "/aws-icons/groups/Private-subnet_32.svg",
       "sha256": "0666b2c8784d303a850c7cd1b40236f3d6d97012b4f4d2bad65a28c6ec614ba4"
+    },
+    "amazon-ec2-auto-scaling": {
+      "label": "Amazon EC2 Auto Scaling",
+      "category": "compute",
+      "source": "Architecture-Service-Icons_07312026/Arch_Compute/48/Arch_Amazon-EC2-Auto-Scaling_48.svg",
+      "file": "/aws-icons/compute/Arch_Amazon-EC2-Auto-Scaling_48.svg",
+      "sha256": "575637da8fc56a59a29b3cc7195e7b0d439f379c58284eb065d4a79d3a73f3c7"
+    },
+    "group-auto-scaling": {
+      "label": "Auto Scaling group",
+      "category": "groups",
+      "source": "Architecture-Group-Icons_07312026/Auto-Scaling-group_32.svg",
+      "file": "/aws-icons/groups/Auto-Scaling-group_32.svg",
+      "sha256": "e5e6b44e61a3768c8c8b5c92affc8cdf1588b0ae09472d948f81d66b5efb8be5"
     }
   }
 }

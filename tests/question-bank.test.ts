@@ -38,7 +38,8 @@ describe('question bank', () => {
   });
 
   it('rejects a task statement outside the domain', () => {
-    expect(() => buildBank({ f: [{ ...sample, taskStatementId: '1.1' }] })).toThrow(/not in/);
+    const invalid = { ...sample, domainId: 'cloud-concepts', taskStatementId: '3.2' };
+    expect(() => buildBank({ f: [invalid] })).toThrow(/not in/);
   });
 
   it('rejects duplicate question ids', () => {

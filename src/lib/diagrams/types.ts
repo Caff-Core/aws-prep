@@ -1,4 +1,5 @@
-export type BoundaryKind = 'cloud' | 'region' | 'availability-zone' | 'vpc' | 'subnet' | 'external';
+export type BoundaryKind =
+  'cloud' | 'region' | 'availability-zone' | 'vpc' | 'subnet' | 'scaling-group' | 'external';
 
 export interface DiagramBoundary {
   kind: BoundaryKind;
