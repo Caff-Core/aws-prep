@@ -1,0 +1,49 @@
+{
+  "name": "aws-prep",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "icons:import": "node scripts/import-aws-icons.mjs",
+    "verify": "npm run format:check && npm run lint && npm run check && npm run test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Caff-Core/aws-prep.git"
+  },
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Caff-Core/aws-prep/issues"
+  },
+  "homepage": "https://github.com/Caff-Core/aws-prep#readme",
+  "private": true,
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.10",
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "astro": "^7.4.7",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "eslint": "^10.14.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.1.0",
+    "yaml": "^2.9.1"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
