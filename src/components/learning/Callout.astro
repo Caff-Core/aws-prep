@@ -1,0 +1,90 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import type { ComponentProps } from 'astro/types';
+
+type IconName = ComponentProps<typeof Icon>['name'];
+
+export type CalloutVariant = 'exam-tip' | 'concept' | 'example' | 'cost';
+
+interface Props {
+  variant: CalloutVariant;
+  title: string;
+}
+
+const icons: Record<CalloutVariant, IconName> = {
+  'exam-tip': 'star',
+  concept: 'information',
+  example: 'open-book',
+  cost: 'warning',
+};
+
+const { variant, title } = Astro.props;
+---
+
+<aside class="callout not-content" data-variant={variant} aria-label={title}>
+  <p class="callout-title">
+    <Icon name={icons[variant]} size="1.1rem" />
+    {title}
+  </p>
+  <div class="callout-body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    --callout-color: var(--color-info);
+    --callout-bg: var(--color-info-soft);
+    margin-block: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    border-inline-start: 4px solid var(--callout-color);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: var(--callout-bg);
+    color: var(--color-text);
+  }
+
+  .callout[data-variant='exam-tip'] {
+    --callout-color: var(--color-accent);
+    --callout-bg: var(--color-accent-soft);
+  }
+
+  .callout[data-variant='example'] {
+    --callout-color: var(--color-border-strong);
+    --callout-bg: var(--color-surface-raised);
+  }
+
+  .callout[data-variant='cost'] {
+    --callout-color: var(--color-warning);
+    --callout-bg: var(--color-warning-soft);
+  }
+
+  .callout-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-2);
+    font-weight: 700;
+    color: var(--color-text-strong);
+  }
+
+  .callout-body :global(> :first-child) {
+    margin-top: 0;
+  }
+
+  .callout-body :global(> :last-child) {
+    margin-bottom: 0;
+  }
+
+  .callout-body :global(p + p),
+  .callout-body :global(ul) {
+    margin-top: var(--space-2);
+  }
+
+  .callout-body :global(ul) {
+    padding-inline-start: var(--space-5);
+  }
+
+  .callout-body :global(code) {
+    background: var(--color-surface);
+  }
+</style>

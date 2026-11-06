@@ -1,0 +1,13 @@
+---
+import Callout from './Callout.astro';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Cost warning' } = Astro.props;
+---
+
+<Callout variant="cost" title={title}>
+  <slot />
+</Callout>

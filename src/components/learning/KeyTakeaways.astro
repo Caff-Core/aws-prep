@@ -1,0 +1,33 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'Key takeaways' } = Astro.props;
+---
+
+<section class="takeaways not-content" aria-label={title}>
+  <p class="data-label">{title}</p>
+  <slot />
+</section>
+
+<style>
+  .takeaways {
+    margin-block: var(--space-6);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .takeaways :global(ul) {
+    margin: var(--space-3) 0 0;
+    padding-inline-start: var(--space-5);
+  }
+
+  .takeaways :global(li + li) {
+    margin-top: var(--space-2);
+  }
+</style>
