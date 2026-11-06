@@ -1,0 +1,26 @@
+---
+import { getIcon } from '~/lib/icons';
+
+interface Props {
+  icon: string;
+  x: number;
+  y: number;
+  size: number;
+}
+
+const { icon: iconId, x, y, size } = Astro.props;
+const icon = getIcon(iconId);
+const darkIcon = icon.darkThemeIcon ? getIcon(icon.darkThemeIcon) : undefined;
+---
+
+<image
+  href={icon.file}
+  x={x}
+  y={y}
+  width={size}
+  height={size}
+  class={darkIcon ? 'light-theme-only' : undefined}
+/>
+{darkIcon && (
+  <image href={darkIcon.file} x={x} y={y} width={size} height={size} class="dark-theme-only" />
+)}
