@@ -129,5 +129,136 @@
       }
     ],
     "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-global-infra-edge-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.2",
+    "lessonId": "cloud-practitioner/global-infrastructure",
+    "reviewStatus": "in-review",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A media company stores video thumbnails in one AWS Region. Viewers on other continents report that the images load slowly. Which AWS capability is designed to deliver this content with lower latency?",
+    "options": [
+      {
+        "id": "edge-locations",
+        "text": "Amazon CloudFront edge locations",
+        "explanation": "Correct. CloudFront routes each request to the edge location with the lowest latency and can serve cached copies of files from there."
+      },
+      {
+        "id": "more-azs",
+        "text": "Additional Availability Zones in the same Region",
+        "explanation": "More Availability Zones improve availability. They do not move content closer to viewers on other continents."
+      },
+      {
+        "id": "bigger-instance",
+        "text": "A larger Amazon EC2 instance",
+        "explanation": "A larger server does not shorten the distance between the content and distant viewers."
+      },
+      {
+        "id": "support-plan",
+        "text": "A higher AWS Support plan",
+        "explanation": "Support plans provide access to help. They do not change how content is delivered."
+      }
+    ],
+    "correctOptionIds": ["edge-locations"],
+    "explanation": "Edge locations exist to deliver content close to users. Caching copies of files there reduces the delay for users who are far from the origin.",
+    "references": [
+      {
+        "title": "What is Amazon CloudFront?",
+        "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
+      }
+    ]
+  },
+  {
+    "id": "clf-global-infra-region-selection",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.2",
+    "lessonId": "cloud-practitioner/global-infrastructure",
+    "reviewStatus": "in-review",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "A company is choosing an AWS Region for a new application. Which TWO factors should influence the decision?",
+    "options": [
+      {
+        "id": "services-available",
+        "text": "Whether the Region offers the AWS services and features the application needs",
+        "explanation": "Correct. AWS advises selecting a Region that has the services and features you need."
+      },
+      {
+        "id": "user-proximity",
+        "text": "How close the Region is to most of the application's users",
+        "explanation": "Correct. A Region close to most users lowers network latency."
+      },
+      {
+        "id": "account-age",
+        "text": "How long the company has held its AWS account",
+        "explanation": "Account age is not a factor in choosing a Region."
+      },
+      {
+        "id": "az-count-for-free",
+        "text": "Whether the Region makes Availability Zones free of charge",
+        "explanation": "Availability Zones are part of every Region and are not a way to avoid charges."
+      },
+      {
+        "id": "root-user",
+        "text": "Which Region stores the root user's password",
+        "explanation": "This is not a factor in choosing where to run an application."
+      }
+    ],
+    "correctOptionIds": ["services-available", "user-proximity"],
+    "explanation": "Service availability and proximity to users both matter. Regulatory, compliance, and legal requirements can also determine the choice.",
+    "references": [
+      {
+        "title": "AWS Regions (AWS Global Infrastructure documentation)",
+        "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+      }
+    ]
+  },
+  {
+    "id": "clf-global-infra-az-independence",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.2",
+    "lessonId": "cloud-practitioner/global-infrastructure",
+    "reviewStatus": "in-review",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Why can an application that runs in two Availability Zones keep working when one of them has a power failure?",
+    "options": [
+      {
+        "id": "no-shared-failure",
+        "text": "Availability Zones do not share common points of failure such as generators and cooling equipment",
+        "explanation": "Correct. This independence means a failure in one Availability Zone should not take down another."
+      },
+      {
+        "id": "same-building",
+        "text": "Both Availability Zones are in the same building, so power can be switched between them",
+        "explanation": "Availability Zones are physically separated by a meaningful distance."
+      },
+      {
+        "id": "different-regions",
+        "text": "Each Availability Zone is in a different Region",
+        "explanation": "Availability Zones are inside a Region. A Region contains several of them."
+      },
+      {
+        "id": "edge-backup",
+        "text": "Edge locations automatically run the application during a failure",
+        "explanation": "Edge locations deliver content close to users. They do not take over running the application in this way."
+      }
+    ],
+    "correctOptionIds": ["no-shared-failure"],
+    "explanation": "AWS designs Availability Zones so that common points of failure are not shared, and they are physically separated while linked by low-latency networking.",
+    "references": [
+      {
+        "title": "AWS Fault Isolation Boundaries: Availability Zones",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html"
+      }
+    ]
   }
 ]

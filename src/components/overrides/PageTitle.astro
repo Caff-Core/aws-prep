@@ -1,5 +1,5 @@
 ---
-import { getCertification, certificationUrl } from '~/lib/certifications/registry';
+import { certificationUrl, getCertification } from '~/lib/certifications/registry';
 import { certificationIdFromPath } from '~/lib/navigation/sidebar';
 import LessonHeader from '~/components/course/LessonHeader.astro';
 
@@ -7,6 +7,7 @@ const { entry } = Astro.locals.starlightRoute;
 const lesson = entry.data.lesson;
 const certificationId = certificationIdFromPath(Astro.url.pathname);
 const certification = certificationId ? getCertification(certificationId) : undefined;
+const isOverview = certification && Astro.url.pathname === certificationUrl(certification.id);
 const module =
   lesson && certification?.status === 'available'
     ? certification.modules.find((item) => item.slug === lesson.module)
@@ -19,12 +20,12 @@ const module =
       <li>
         <a href="/certifications/">Certifications</a>
       </li>
-      {lesson ? (
+      {isOverview ? (
+        <li aria-current="page">{certification.shortTitle}</li>
+      ) : (
         <li>
           <a href={certificationUrl(certification.id)}>{certification.shortTitle}</a>
         </li>
-      ) : (
-        <li aria-current="page">{certification.shortTitle}</li>
       )}
       {module && <li>{module.title}</li>}
     </ol>

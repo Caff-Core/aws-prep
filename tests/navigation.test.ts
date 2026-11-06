@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { getAvailableCertification } from '~/lib/certifications/registry';
-import { certificationIdFromPath, paginationFor, scopeSidebar } from '~/lib/navigation/sidebar';
+import {
+  certificationIdFromPath,
+  paginationFor,
+  practiceLink,
+  scopeSidebar,
+} from '~/lib/navigation/sidebar';
 
 const link = (label: string, isCurrent = false) => ({
   type: 'link' as const,
@@ -53,5 +58,16 @@ describe('certification navigation', () => {
     const { prev, next } = paginationFor(scopeSidebar(sidebar, cert));
     expect(prev?.label).toBe('benefits');
     expect(next).toBeUndefined();
+  });
+
+  it('leads from the last lesson into practice', () => {
+    const scoped = scopeSidebar(sidebar, cert);
+    const link = practiceLink(cert.id, '/elsewhere/');
+    expect(paginationFor([...scoped, link]).next?.label).toBe('Practice questions');
+  });
+
+  it('marks the practice link current on its own page', () => {
+    const path = `/certifications/${cert.id}/practice/`;
+    expect(practiceLink(cert.id, path).isCurrent).toBe(true);
   });
 });

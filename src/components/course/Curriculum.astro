@@ -12,27 +12,29 @@ const lessons = await getLessons(certificationId);
 ---
 
 <ol class="modules not-content">
-  {modules.map((module, index) => {
-    const moduleLessons = lessons.filter((lesson) => lesson.meta.module === module.slug);
-    return (
-      <li>
-        <p class="data-label">Module {index + 1}</p>
-        <h3>{module.title}</h3>
-        <p>{module.description}</p>
-        {moduleLessons.length > 0 ? (
-          <ul>
-            {moduleLessons.map((lesson) => (
-              <li>
-                <a href={lesson.url}>{lesson.title}</a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class="pending">Lessons in production</p>
-        )}
-      </li>
-    );
-  })}
+  {modules.map((module, index) => (
+    <li>
+      <p class="data-label">Module {index + 1}</p>
+      <h3>{module.title}</h3>
+      <p>{module.description}</p>
+      <ul>
+        {module.topics.map((topic) => {
+          const lesson = lessons.find(
+            (item) => item.meta.id === `${certificationId}/${topic.slug}`,
+          );
+          return (
+            <li>
+              {lesson ? <a href={lesson.url}>{lesson.title}</a> : <span>{topic.title}</span>}
+              <span class="task">
+                Task {topic.taskStatements.join(', ')}
+                {!lesson && ' · Planned'}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </li>
+  ))}
 </ol>
 
 <style>
@@ -79,9 +81,13 @@ const lessons = await getLessons(certificationId);
     color: var(--color-accent);
   }
 
-  .modules .pending {
-    margin-top: var(--space-2);
-    font: 500 var(--sl-text-2xs) / 1.3 var(--font-data);
+  ul li + li {
+    margin-top: var(--space-1);
+  }
+
+  .task {
+    display: block;
+    font: 500 var(--sl-text-2xs) / 1.4 var(--font-data);
     color: var(--color-text-muted);
   }
 </style>

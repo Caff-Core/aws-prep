@@ -65,6 +65,33 @@ h4,
     display: none;
   }
 
+  /*
+   * Icon-only at phone widths, so the site title keeps its room. The icon shows
+   * the current theme, and the native select keeps its label and option list.
+   */
+  .header .right-group select {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: transparent;
+  }
+
+  .header .right-group select option {
+    color: var(--color-text);
+    background: var(--color-surface);
+  }
+
+  .header .right-group .caret {
+    display: none;
+  }
+
+  .header .right-group .label-icon {
+    inset-inline-start: 0.75rem;
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
   :root[data-has-sidebar] .header .right-group {
     margin-inline-end: calc(var(--sl-menu-button-size) + var(--space-2));
   }

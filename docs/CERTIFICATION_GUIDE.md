@@ -7,11 +7,13 @@ No core code should change. If it must, treat that as a design issue and raise i
 2. **Create the definition** at `src/data/certifications/<id>.ts`. The `id` is permanent. Start with
    `status: 'planned'` to show a Coming Soon card.
 3. **Upgrade to available** by setting `status: 'available'` and filling in the exam, domains,
-   modules, mock exam, study plan, and references. See `cloud-practitioner.ts`.
+   modules, topics, mock exam, study plan, and references. See `cloud-practitioner.ts`. Validation
+   fails unless topics cover every task statement.
 4. **Add the overview** at `src/content/docs/certifications/<id>/index.mdx`.
 5. **Add lessons** at `src/content/docs/certifications/<id>/<module>/<lesson>.mdx`. Folder names must
    match module slugs.
-6. **Add questions** at `src/data/questions/<id>/<topic>.json`.
+6. **Add questions** at `src/data/questions/<id>/<topic>.json`. The practice page and its sidebar link
+   appear automatically once a certification has a question.
 7. **Run** `npm run verify`.
 
 The certification then appears in the catalog with scoped navigation. Never publish an `available`

@@ -21,11 +21,19 @@ const domainSchema = z.object({
   taskStatements: z.array(taskStatementSchema).min(1),
 });
 
+/** A planned or published lesson. A lesson's id is "<certification>/<topic slug>". */
+const topicSchema = z.object({
+  slug,
+  title: z.string().min(1),
+  taskStatements: z.array(z.string().regex(/^\d+\.\d+$/)).min(1),
+});
+
 const moduleSchema = z.object({
   slug,
   title: z.string().min(1),
   description: z.string().min(1),
   domainIds: z.array(slug).min(1),
+  topics: z.array(topicSchema).min(1),
 });
 
 const examSchema = z.object({
@@ -106,6 +114,25 @@ export const certificationSchema = z
           });
         }
       }
+    }
+
+    // Curriculum map: every official task statement must be taught somewhere.
+    const topics = cert.modules.flatMap((module) => module.topics);
+    const covered = new Set(topics.flatMap((topic) => topic.taskStatements));
+    const official = cert.domains.flatMap((domain) => domain.taskStatements.map((task) => task.id));
+    for (const id of official) {
+      if (!covered.has(id)) {
+        ctx.addIssue({ code: 'custom', message: `No topic covers task statement ${id}` });
+      }
+    }
+    for (const id of covered) {
+      if (!official.includes(id)) {
+        ctx.addIssue({ code: 'custom', message: `Unknown task statement ${id}` });
+      }
+    }
+    const slugs = topics.map((topic) => topic.slug);
+    if (new Set(slugs).size !== slugs.length) {
+      ctx.addIssue({ code: 'custom', message: 'Topic slugs must be unique in a certification' });
     }
   });
 

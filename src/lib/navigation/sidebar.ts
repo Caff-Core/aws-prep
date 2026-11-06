@@ -57,6 +57,18 @@ export function paginationFor(entries: SidebarEntry[]): Pagination {
   return { prev: links[index - 1], next: links[index + 1] };
 }
 
+export function practiceLink(certificationId: string, pathname: string): SidebarLink {
+  const href = `/certifications/${certificationId}/practice/`;
+  return {
+    type: 'link',
+    label: 'Practice questions',
+    href,
+    isCurrent: pathname === href,
+    badge: undefined,
+    attrs: {},
+  };
+}
+
 export function allCertificationsLink(): SidebarLink {
   return {
     type: 'link',
