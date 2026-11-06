@@ -1,0 +1,57 @@
+---
+interface Props {
+  level: 'beginner' | 'intermediate' | 'advanced';
+}
+
+const bars = { beginner: 1, intermediate: 2, advanced: 3 };
+const { level } = Astro.props;
+---
+
+<span class="badge">
+  <span class="bars" aria-hidden="true">
+    {[1, 2, 3].map((bar) => (
+      <span data-filled={bar <= bars[level]} />
+    ))}
+  </span>
+  {level}
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font: 500 var(--sl-text-2xs) / 1.3 var(--font-data);
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+    color: var(--color-text);
+  }
+
+  .bars {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .bars span {
+    width: 4px;
+    border: 1px solid var(--color-text-muted);
+  }
+
+  .bars span:nth-child(1) {
+    height: 6px;
+  }
+
+  .bars span:nth-child(2) {
+    height: 9px;
+  }
+
+  .bars span:nth-child(3) {
+    height: 12px;
+  }
+
+  .bars span[data-filled='true'] {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+</style>

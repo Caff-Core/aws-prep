@@ -1,0 +1,208 @@
+---
+title: AWS global infrastructure
+description: How AWS Regions, Availability Zones, and edge locations relate, and how they support high availability and low latency.
+sidebar:
+  order: 2
+lesson:
+  id: cloud-practitioner/global-infrastructure
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.2']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 20
+  lastReviewed: 2026-11-07
+  objectives:
+    - Describe how Regions, Availability Zones, and edge locations relate to each other.
+    - Explain how multiple Availability Zones provide high availability.
+    - Recognise that Availability Zones do not share single points of failure.
+    - Identify when a company should use multiple Regions.
+  prerequisites:
+    - A general idea of what a data center and a website server are.
+  references:
+    - title: AWS Regions and Availability Zones
+      url: https://aws.amazon.com/about-aws/global-infrastructure/regions_az/
+    - title: AWS Regions (AWS Global Infrastructure documentation)
+      url: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
+    - title: 'AWS Fault Isolation Boundaries: Availability Zones'
+      url: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html
+    - title: What is Amazon CloudFront?
+      url: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  ArchitectureDiagram,
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+import { multiAzWebApp } from '~/data/diagrams/cloud-practitioner/multi-az-web-app';
+
+## The idea in plain language
+
+When you use a website, your request travels to a computer somewhere in the world. If that computer
+is far away, the site feels slow. If it is the only one and it fails, the site disappears.
+
+AWS addresses both problems by building its infrastructure in layers. Think of a national retail
+chain. It has a head office in each country, several separate warehouses around each major city, and
+small pick-up points close to customers. If one warehouse floods, the others keep shipping. The
+pick-up points get popular items into customers' hands quickly.
+
+AWS has three matching layers: **Regions**, **Availability Zones**, and **edge locations**.
+
+## The three layers
+
+### Regions
+
+A **Region** is a physical location in the world where AWS clusters data centers. Each Region has its
+own name and code. For example, Africa (Cape Town) has the code `af-south-1`.
+
+You choose which Regions to use. When you create most resources, you create them in a Region you have
+selected.
+
+### Availability Zones
+
+An **Availability Zone**, often shortened to AZ, is one or more discrete data centers with redundant
+power, networking, and connectivity in a Region. Each Region has at least three Availability Zones.
+
+Availability Zones in a Region are:
+
+- **Physically separated** by a meaningful distance, and all within 100 km (60 miles) of each other.
+- **Independent.** Common points of failure, such as generators and cooling equipment, are not shared
+  between them.
+- **Connected** with high-bandwidth, low-latency networking over redundant, dedicated metro fiber.
+
+<ImportantConcept>
+  Distance protects against shared disasters such as floods or power failures. Fast links let
+  Availability Zones work together as if they were close. You need both for high availability.
+</ImportantConcept>
+
+### Edge locations
+
+An **edge location** is a site in a worldwide network that Amazon CloudFront uses to deliver content.
+CloudFront is the AWS content delivery service.
+
+When a user requests content, CloudFront routes the request to the edge location with the lowest
+latency, which means the shortest delay. Copies of files can be held there, in a cache, so they do not
+have to travel from their origin each time.
+
+## How the layers work together
+
+<ArchitectureDiagram spec={multiAzWebApp} />
+
+**High availability** means a system keeps working even when part of it fails. In this design, a
+failure in Availability Zone A does not have to stop the website, because servers in Availability Zone
+B can keep serving users. A single Availability Zone would be a single point of failure.
+
+<RealWorldExample title="Real-world example: an online retailer">
+  A South African online shop runs its website in the Africa (Cape Town) Region, on servers in two
+  Availability Zones behind a load balancer. Product images are delivered through CloudFront, so
+  shoppers receive cached copies from a nearby edge location. During a sale, a power fault hits one
+  Availability Zone. Customers can keep shopping, because the load balancer sends requests to the
+  healthy servers.
+</RealWorldExample>
+
+## Choosing where to run
+
+AWS advises selecting a Region that has the services and features you need. A Region close to most of
+your users lowers network latency. Location can also matter for regulatory, compliance, and legal
+requirements.
+
+Sometimes one Region is not enough. The exam guide lists these reasons to use multiple Regions:
+
+- **Disaster recovery** and **business continuity**: somewhere to recover if a whole Region is affected.
+- **Low latency for end users**: serving customers on different continents from nearby Regions.
+- **Data sovereignty**: keeping data in a particular country to meet legal requirements.
+
+<CostWarning>
+  Running in several Availability Zones or Regions means running more resources, and that can
+  increase your bill. Check the pricing of each service for the Regions you use.
+</CostWarning>
+
+## Comparing the layers
+
+<ServiceComparison
+  caption="Regions, Availability Zones, and edge locations compared"
+  columns={['Layer', 'What it is', 'Main benefit', 'Typical exam clue']}
+  rows={[
+    {
+      name: 'Region',
+      cells: [
+        'A physical location where AWS clusters data centers',
+        'Choice of location for latency, compliance, and recovery',
+        'Data sovereignty, disaster recovery',
+      ],
+    },
+    {
+      name: 'Availability Zone',
+      cells: [
+        'One or more discrete data centers in a Region',
+        'High availability through separate failure domains',
+        'Survive a data center failure',
+      ],
+    },
+    {
+      name: 'Edge location',
+      cells: [
+        'A site that delivers content close to users',
+        'Lower latency through caching',
+        'Deliver content faster worldwide',
+      ],
+    },
+  ]}
+/>
+
+## What the exam expects
+
+<ExamTip>
+  Match the need to the layer. **Survive a data center failure** points to multiple Availability
+  Zones. **Survive a Regional disaster**, or keep data in a country, points to Regions. **Deliver
+  content faster to users worldwide** points to edge locations.
+</ExamTip>
+
+Avoid memorising how many Regions AWS has. The number changes, and the concepts are what matter.
+
+## Common misconceptions
+
+- **"An Availability Zone is one building."** It can be one or more discrete data centers.
+- **"Edge locations run my whole application."** In this lesson's design, they deliver cached content
+  close to users. The servers stay in the Region.
+- **"One Availability Zone is highly available."** It is a single point of failure for your
+  application. High availability comes from using more than one.
+
+## Try it yourself (optional)
+
+You can explore this without creating any resources. Open the
+[AWS Regions list](https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html)
+and find the Region closest to you. Note its code and how many Availability Zones it lists. Viewing
+documentation costs nothing.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/global-infrastructure"
+  questionIds={[
+    'clf-global-infra-az-definition',
+    'clf-global-infra-multi-az-scenario',
+    'clf-global-infra-multi-region-reasons',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- A Region is a physical location containing at least three Availability Zones. - Availability
+  Zones are separate, independent, and linked by fast networking. - Using multiple Availability
+  Zones provides high availability. - Multiple Regions support disaster recovery, low latency, and
+  data sovereignty. - Edge locations let CloudFront deliver content close to users with lower
+  latency.
+
+</LessonSummary>

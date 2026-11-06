@@ -1,0 +1,49 @@
+---
+import { siteConfig } from '~/config/site';
+
+const { url, providerName } = siteConfig.support;
+---
+
+<section class="support not-content" aria-labelledby="support-card-title">
+  <h2 id="support-card-title">Support this project</h2>
+  <p>
+    Every lesson stays free whether or not you donate. Contributions only help cover hosting and the
+    time spent writing lessons.
+  </p>
+  {url ? (
+    <a class="button" href={url} rel="noopener">
+      Donate with {providerName}
+    </a>
+  ) : (
+    <p class="pending">
+      Donations are not open yet. No payment provider has been set up, so there is nothing to pay.
+    </p>
+  )}
+</section>
+
+<style>
+  .support {
+    margin-block: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: var(--sl-text-xl);
+    color: var(--color-text-strong);
+  }
+
+  p {
+    margin: var(--space-2) 0 var(--space-4);
+  }
+
+  .pending {
+    margin-bottom: 0;
+    font-size: var(--sl-text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

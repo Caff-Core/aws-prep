@@ -1,0 +1,70 @@
+---
+import { getAvailableCertification } from '~/lib/certifications/registry';
+
+interface Props {
+  certificationId: string;
+}
+
+const certification = getAvailableCertification(Astro.props.certificationId);
+const { exam } = certification;
+const facts = [
+  ['Exam code', certification.examCode],
+  ['Duration', `${exam.durationMinutes} minutes`],
+  [
+    'Questions',
+    `${exam.totalQuestions} (${exam.scoredQuestions} scored, ${exam.unscoredQuestions} unscored)`,
+  ],
+  ['Passing score', `${exam.passingScore} on a ${exam.scoreRange[0]}–${exam.scoreRange[1]} scale`],
+  ['Question types', 'Multiple choice, multiple response'],
+  ['Valid for', `${exam.validityYears} years`],
+  ['Fee listed by AWS', `USD ${exam.feeUsd}`],
+];
+---
+
+<dl class="facts not-content">
+  {facts.map(([label, value]) => (
+    <div>
+      <dt class="data-label">{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  ))}
+</dl>
+<p class="source not-content">
+  Details last checked {certification.lastReviewed}. AWS prices this exam in US dollars, so the rand
+  cost varies with exchange rates and taxes. Always confirm with
+  <a href={certification.references[0]?.url}>the official exam guide</a>.
+</p>
+
+<style>
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1px;
+    margin-block: var(--space-4) 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-border);
+  }
+
+  .facts div {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  .source {
+    margin-top: var(--space-2);
+    font-size: var(--sl-text-xs);
+    color: var(--color-text-muted);
+  }
+
+  a {
+    color: var(--color-accent);
+  }
+</style>

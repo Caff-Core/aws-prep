@@ -1,0 +1,102 @@
+---
+import { getAvailableCertification } from '~/lib/certifications/registry';
+
+interface Props {
+  certificationId: string;
+}
+
+const { domains } = getAvailableCertification(Astro.props.certificationId);
+---
+
+<ol class="domains not-content">
+  {domains.map((domain) => (
+    <li>
+      <div class="row">
+        <span class="title">
+          {domain.number}. {domain.title}
+        </span>
+        <span class="weight">{domain.weightPercent}%</span>
+      </div>
+      <div class="bar" aria-hidden="true">
+        <span
+          style={`width: ${domain.weightPercent}%; background: var(--stratum-${domain.number})`}
+        />
+      </div>
+      <details>
+        <summary>{domain.taskStatements.length} task statements</summary>
+        <ul>
+          {domain.taskStatements.map((task) => (
+            <li>
+              <span class="task-id">{task.id}</span> {task.title}
+            </li>
+          ))}
+        </ul>
+      </details>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .domains {
+    margin-block: var(--space-4);
+    padding: 0;
+    list-style: none;
+    color: var(--color-text);
+  }
+
+  .domains > li + li {
+    margin-top: var(--space-4);
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .title {
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  .weight {
+    font: 700 var(--sl-text-base) / 1.5 var(--font-data);
+    color: var(--color-text-strong);
+  }
+
+  .bar {
+    height: 0.5rem;
+    margin-top: var(--space-1);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--color-surface-raised);
+  }
+
+  .bar span {
+    display: block;
+    height: 100%;
+  }
+
+  summary {
+    margin-top: var(--space-1);
+    font-size: var(--sl-text-sm);
+    color: var(--color-accent);
+    cursor: pointer;
+  }
+
+  details ul {
+    margin: var(--space-2) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--sl-text-sm);
+  }
+
+  details li + li {
+    margin-top: var(--space-1);
+  }
+
+  .task-id {
+    font-family: var(--font-data);
+    color: var(--color-text-muted);
+  }
+</style>

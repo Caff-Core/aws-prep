@@ -1,0 +1,221 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { certificationUrl, getCertifications } from '~/lib/certifications/registry';
+import { getLessons } from '~/lib/lessons';
+
+const available = getCertifications().filter((item) => item.status === 'available');
+const lessons = await getLessons();
+const courses = available.map((certification) => ({
+  id: certification.id,
+  title: certification.title,
+  url: certificationUrl(certification.id),
+  lessons: lessons
+    .filter((lesson) => lesson.meta.certification === certification.id)
+    .map((lesson) => ({ id: lesson.meta.id, title: lesson.title, url: lesson.url })),
+}));
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'My progress',
+    description: 'Review and reset study progress saved in this browser.',
+    template: 'splash',
+  }}
+>
+  <progress-dashboard class="page-section not-content">
+    <p class="notice">
+      <strong>Saved on this device only.</strong> Progress lives in this browser. It does not sync
+      to other devices, and clearing browser data removes it.
+    </p>
+    <p class="notice" data-health hidden></p>
+
+    {courses.map((course) => (
+      <section class="course" data-course={course.id} data-lessons={JSON.stringify(course.lessons)}>
+        <h2>
+          <a href={course.url}>{course.title}</a>
+        </h2>
+        <dl>
+          <div>
+            <dt class="data-label">Lessons complete</dt>
+            <dd data-completed>0 of {course.lessons.length}</dd>
+          </div>
+          <div>
+            <dt class="data-label">Knowledge checks</dt>
+            <dd data-quizzes>0</dd>
+          </div>
+          <div>
+            <dt class="data-label">Last visited</dt>
+            <dd data-last>None yet</dd>
+          </div>
+        </dl>
+        <h3 class="data-label">Bookmarks</h3>
+        <ul data-bookmarks />
+        <p class="empty" data-no-bookmarks>
+          No bookmarks yet.
+        </p>
+        <button type="button" class="button" data-variant="secondary" data-reset={course.id}>
+          Reset progress for this course
+        </button>
+      </section>
+    ))}
+    <p role="status" data-status></p>
+    <noscript>
+      <p>Viewing progress needs JavaScript.</p>
+    </noscript>
+  </progress-dashboard>
+</StarlightPage>
+
+<script>
+  import {
+    PROGRESS_CHANGED_EVENT,
+    progressRepository,
+    updateProgress,
+  } from '~/lib/progress/client';
+  import { resetCertification } from '~/lib/progress/state';
+
+  interface LessonLink {
+    id: string;
+    title: string;
+    url: string;
+  }
+
+  const healthMessages = {
+    unavailable: 'Browser storage is unavailable, so progress will be lost when you leave.',
+    recovered: 'Saved progress could not be read, so it was set aside and tracking restarted.',
+    'newer-version': 'Progress was saved by a newer version of this site. Refresh to load it.',
+  };
+
+  class ProgressDashboard extends HTMLElement {
+    connectedCallback() {
+      void this.render();
+      document.addEventListener(PROGRESS_CHANGED_EVENT, () => void this.render());
+      this.querySelectorAll<HTMLButtonElement>('[data-reset]').forEach((button) => {
+        button.addEventListener('click', () => void this.reset(button));
+      });
+    }
+
+    private async reset(button: HTMLButtonElement) {
+      const id = button.dataset['reset'] ?? '';
+      if (!window.confirm('Reset all saved progress for this course? This cannot be undone.')) {
+        return;
+      }
+      await updateProgress((state) => resetCertification(state, id));
+      this.querySelector('[data-status]')!.textContent = 'Progress reset.';
+    }
+
+    private async render() {
+      const state = await progressRepository.load();
+
+      const health = this.querySelector<HTMLElement>('[data-health]')!;
+      const { health: status } = progressRepository;
+      health.hidden = status === 'ok';
+      if (status !== 'ok') health.textContent = healthMessages[status];
+
+      this.querySelectorAll<HTMLElement>('[data-course]').forEach((section) => {
+        const progress = state.certifications[section.dataset['course'] ?? ''];
+        const lessons = JSON.parse(section.dataset['lessons'] ?? '[]') as LessonLink[];
+        const done = lessons.filter((lesson) => progress?.completedLessons[lesson.id]).length;
+        const bookmarked = lessons.filter((lesson) => progress?.bookmarks[lesson.id]);
+
+        section.querySelector('[data-completed]')!.textContent = `${done} of ${lessons.length}`;
+        section.querySelector('[data-quizzes]')!.textContent = String(
+          Object.keys(progress?.quizResults ?? {}).length,
+        );
+
+        const last = section.querySelector('[data-last]')!;
+        if (progress?.lastVisited) {
+          const link = document.createElement('a');
+          link.href = progress.lastVisited.url;
+          link.textContent = progress.lastVisited.title;
+          last.replaceChildren(link);
+        } else {
+          last.textContent = 'None yet';
+        }
+
+        const list = section.querySelector('[data-bookmarks]')!;
+        list.replaceChildren(
+          ...bookmarked.map((lesson) => {
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = lesson.url;
+            link.textContent = lesson.title;
+            item.append(link);
+            return item;
+          }),
+        );
+        section.querySelector<HTMLElement>('[data-no-bookmarks]')!.hidden = bookmarked.length > 0;
+      });
+    }
+  }
+  customElements.define('progress-dashboard', ProgressDashboard);
+</script>
+
+<style>
+  progress-dashboard {
+    display: block;
+    color: var(--color-text);
+  }
+
+  .notice {
+    max-width: 44rem;
+    margin: 0 0 var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-inline-start: 4px solid var(--color-info);
+    background: var(--color-info-soft);
+  }
+
+  .course {
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: var(--sl-text-2xl);
+  }
+
+  a {
+    color: var(--color-accent);
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: var(--space-3);
+    margin: var(--space-4) 0;
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  h3.data-label {
+    margin: 0;
+    font-family: var(--font-data);
+    font-size: var(--sl-text-2xs);
+  }
+
+  ul {
+    margin: var(--space-2) 0;
+    padding-inline-start: var(--space-5);
+  }
+
+  ul:empty {
+    display: none;
+  }
+
+  .empty {
+    margin: var(--space-2) 0 var(--space-4);
+    font-size: var(--sl-text-sm);
+    color: var(--color-text-muted);
+  }
+
+  [data-status]:empty {
+    display: none;
+  }
+</style>

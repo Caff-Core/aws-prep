@@ -1,0 +1,149 @@
+---
+import type { LessonMeta } from '~/lib/lessons/schema';
+
+interface Props {
+  lesson: LessonMeta;
+  title: string;
+}
+
+const { lesson, title } = Astro.props;
+---
+
+<section class="references" aria-labelledby="official-references">
+  <h2 id="official-references" class="data-label">
+    Official AWS references
+  </h2>
+  <ul>
+    {lesson.references.map((reference) => (
+      <li>
+        <a href={reference.url}>{reference.title}</a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<lesson-actions
+  data-certification={lesson.certification}
+  data-lesson-id={lesson.id}
+  data-title={title}
+  data-url={Astro.url.pathname}
+>
+  <div class="actions">
+    <button type="button" class="button" data-complete aria-pressed="false">
+      Mark as complete
+    </button>
+    <button
+      type="button"
+      class="button"
+      data-variant="secondary"
+      data-bookmark
+      aria-pressed="false"
+    >
+      Bookmark
+    </button>
+    <p role="status" data-status></p>
+  </div>
+  <noscript>
+    <p>Saving progress needs JavaScript. Lessons work without it.</p>
+  </noscript>
+</lesson-actions>
+
+<script>
+  import {
+    PROGRESS_CHANGED_EVENT,
+    progressRepository,
+    updateProgress,
+  } from '~/lib/progress/client';
+  import { recordVisit, toggleBookmark, toggleLessonComplete } from '~/lib/progress/state';
+
+  class LessonActions extends HTMLElement {
+    private certification = this.dataset['certification'] ?? '';
+    private lessonId = this.dataset['lessonId'] ?? '';
+    private complete = this.querySelector<HTMLButtonElement>('[data-complete]');
+    private bookmark = this.querySelector<HTMLButtonElement>('[data-bookmark]');
+    private status = this.querySelector<HTMLElement>('[data-status]');
+
+    connectedCallback() {
+      this.complete?.addEventListener('click', () => void this.toggle('complete'));
+      this.bookmark?.addEventListener('click', () => void this.toggle('bookmark'));
+      document.addEventListener(PROGRESS_CHANGED_EVENT, () => void this.render());
+
+      const { title = '', url = '' } = this.dataset;
+      void updateProgress((state) =>
+        recordVisit(state, this.certification, {
+          lessonId: this.lessonId,
+          title,
+          url,
+          visitedAt: new Date().toISOString(),
+        }),
+      );
+    }
+
+    private async toggle(kind: 'complete' | 'bookmark') {
+      const at = new Date().toISOString();
+      const change = kind === 'complete' ? toggleLessonComplete : toggleBookmark;
+      await updateProgress((state) => change(state, this.certification, this.lessonId, at));
+      if (progressRepository.health === 'unavailable' && this.status) {
+        this.status.textContent = 'Browser storage is unavailable, so this will not be kept.';
+      }
+    }
+
+    private async render() {
+      const state = await progressRepository.load();
+      const progress = state.certifications[this.certification];
+      const isComplete = Boolean(progress?.completedLessons[this.lessonId]);
+      const isBookmarked = Boolean(progress?.bookmarks[this.lessonId]);
+
+      if (this.complete) {
+        this.complete.setAttribute('aria-pressed', String(isComplete));
+        this.complete.textContent = isComplete ? 'Completed' : 'Mark as complete';
+      }
+      if (this.bookmark) {
+        this.bookmark.setAttribute('aria-pressed', String(isBookmarked));
+        this.bookmark.textContent = isBookmarked ? 'Bookmarked' : 'Bookmark';
+      }
+    }
+  }
+  customElements.define('lesson-actions', LessonActions);
+</script>
+
+<style>
+  .references {
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  h2.data-label {
+    margin: 0;
+    font-family: var(--font-data);
+    font-size: var(--sl-text-2xs);
+  }
+
+  ul {
+    margin: var(--space-2) 0 0;
+    padding-inline-start: var(--space-5);
+  }
+
+  li a {
+    color: var(--color-accent);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  [data-status] {
+    margin: 0;
+    font-size: var(--sl-text-sm);
+    color: var(--color-text-muted);
+  }
+
+  [data-status]:empty {
+    display: none;
+  }
+</style>

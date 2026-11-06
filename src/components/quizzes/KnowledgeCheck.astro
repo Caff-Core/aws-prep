@@ -1,0 +1,355 @@
+---
+import { getQuestions } from '~/lib/assessment/bank';
+
+interface Props {
+  /** Stable identifier used to store the learner's result. */
+  quizId: string;
+  questionIds: string[];
+  title?: string;
+}
+
+const { quizId, questionIds, title = 'Knowledge check' } = Astro.props;
+const questions = getQuestions(questionIds);
+const certificationId = questions[0]?.certificationId;
+
+const numberWords = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
+---
+
+<knowledge-check data-quiz-id={quizId} data-certification={certificationId}>
+  <section class="quiz not-content" aria-label={title}>
+    <p class="data-label">
+      {title} · {questions.length} questions
+    </p>
+    <noscript>
+      <p>These questions need JavaScript to check your answers.</p>
+    </noscript>
+
+    {questions.map((question, index) => (
+      <form data-correct={JSON.stringify(question.correctOptionIds)} novalidate>
+        <fieldset>
+          <legend>
+            <span class="question-number">Question {index + 1}</span>
+            {question.prompt}
+            {question.type === 'multiple-response' && (
+              <span class="choose">Choose {numberWords[question.correctOptionIds.length]}.</span>
+            )}
+          </legend>
+          <ul class="options">
+            {question.options.map((option) => (
+              <li data-option={option.id}>
+                <label>
+                  <input
+                    type={question.type === 'single-answer' ? 'radio' : 'checkbox'}
+                    name={question.id}
+                    value={option.id}
+                  />
+                  <span>
+                    {option.text}
+                    <strong class="verdict" hidden />
+                  </span>
+                </label>
+                <p class="option-explanation" hidden>
+                  {option.explanation}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" class="button">
+            Check answer
+          </button>
+          <button type="button" class="button" data-variant="secondary" data-retry hidden>
+            Try again
+          </button>
+        </div>
+        <p class="feedback" role="status" data-feedback />
+        <div class="explanation" data-explanation hidden>
+          <p>{question.explanation}</p>
+          <ul>
+            {question.references.map((reference) => (
+              <li>
+                <a href={reference.url}>{reference.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </form>
+    ))}
+    <p class="score" role="status" data-score></p>
+  </section>
+</knowledge-check>
+
+<script>
+  import { gradeAnswer, scoreAttempt } from '~/lib/assessment/grading';
+  import type { GradedAnswer } from '~/lib/assessment/grading';
+  import { updateProgress } from '~/lib/progress/client';
+  import { recordQuizResult } from '~/lib/progress/state';
+
+  class KnowledgeCheck extends HTMLElement {
+    private results = new Map<HTMLFormElement, GradedAnswer>();
+
+    connectedCallback() {
+      this.querySelectorAll('form').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          this.check(form);
+        });
+        form.querySelector('[data-retry]')?.addEventListener('click', () => this.reset(form));
+      });
+    }
+
+    private check(form: HTMLFormElement) {
+      const feedback = form.querySelector<HTMLElement>('[data-feedback]');
+      const inputs = [...form.querySelectorAll('input')];
+      const selected = inputs.filter((input) => input.checked).map((input) => input.value);
+      if (!feedback) return;
+
+      if (selected.length === 0) {
+        feedback.dataset['state'] = 'prompt';
+        feedback.textContent = 'Select an answer first.';
+        return;
+      }
+
+      const correct = JSON.parse(form.dataset['correct'] ?? '[]') as string[];
+      const result = gradeAnswer(correct, selected);
+      this.results.set(form, result);
+
+      form.querySelectorAll<HTMLElement>('[data-option]').forEach((item) => {
+        const id = item.dataset['option'] ?? '';
+        const verdict = item.querySelector<HTMLElement>('.verdict');
+        const isAnswer = correct.includes(id);
+        const wasSelected = selected.includes(id);
+        const state = isAnswer ? 'correct' : wasSelected ? 'incorrect' : 'neutral';
+
+        item.dataset['state'] = state;
+        item.querySelector<HTMLElement>('.option-explanation')?.removeAttribute('hidden');
+        if (verdict && state !== 'neutral') {
+          verdict.hidden = false;
+          verdict.textContent = isAnswer
+            ? wasSelected
+              ? 'Correct answer, selected'
+              : 'Correct answer, not selected'
+            : 'Incorrect, selected';
+        }
+      });
+
+      inputs.forEach((input) => (input.disabled = true));
+      form.querySelector<HTMLButtonElement>('[type="submit"]')!.hidden = true;
+      form.querySelector<HTMLButtonElement>('[data-retry]')!.hidden = false;
+      form.querySelector<HTMLElement>('[data-explanation]')!.hidden = false;
+      feedback.dataset['state'] = result.isCorrect ? 'correct' : 'incorrect';
+      feedback.textContent = result.isCorrect ? 'Correct.' : 'Not quite. Review the explanations.';
+
+      void this.finishIfComplete();
+    }
+
+    private reset(form: HTMLFormElement) {
+      this.results.delete(form);
+      form.reset();
+      form.querySelectorAll('input').forEach((input) => (input.disabled = false));
+      form.querySelectorAll<HTMLElement>('[data-option]').forEach((item) => {
+        delete item.dataset['state'];
+        item.querySelector<HTMLElement>('.option-explanation')!.hidden = true;
+        item.querySelector<HTMLElement>('.verdict')!.hidden = true;
+      });
+      form.querySelector<HTMLButtonElement>('[type="submit"]')!.hidden = false;
+      const retry = form.querySelector<HTMLButtonElement>('[data-retry]')!;
+      retry.hidden = true;
+      form.querySelector<HTMLElement>('[data-explanation]')!.hidden = true;
+      const feedback = form.querySelector<HTMLElement>('[data-feedback]')!;
+      delete feedback.dataset['state'];
+      feedback.textContent = '';
+      form.querySelector('input')?.focus();
+    }
+
+    private async finishIfComplete() {
+      const total = this.querySelectorAll('form').length;
+      if (this.results.size !== total) return;
+
+      const score = scoreAttempt([...this.results.values()]);
+      const scoreElement = this.querySelector('[data-score]');
+      if (scoreElement) {
+        scoreElement.textContent = `You scored ${score.correct} of ${score.total}. This is practice feedback, not an official AWS score.`;
+      }
+
+      const { certification, quizId } = this.dataset;
+      if (!certification || !quizId) return;
+      await updateProgress((state) =>
+        recordQuizResult(state, certification, quizId, {
+          correct: score.correct,
+          total: score.total,
+          completedAt: new Date().toISOString(),
+        }),
+      );
+    }
+  }
+  customElements.define('knowledge-check', KnowledgeCheck);
+</script>
+
+<style>
+  .quiz {
+    margin-block: var(--space-6);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  form {
+    margin-top: var(--space-5);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    padding: 0;
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  .question-number {
+    display: block;
+    margin-bottom: var(--space-1);
+    font: 500 var(--sl-text-2xs) / 1.3 var(--font-data);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .choose {
+    display: block;
+    margin-top: var(--space-1);
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .options {
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .options li {
+    margin-top: var(--space-2);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast);
+  }
+
+  .options li:hover:not([data-state]) {
+    border-color: var(--color-border-strong);
+  }
+
+  .options li:has(input:checked):not([data-state]) {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  .options li:has(input:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .options li[data-state='correct'] {
+    border-color: var(--color-success);
+    background: var(--color-success-soft);
+  }
+
+  .options li[data-state='incorrect'] {
+    border-color: var(--color-danger);
+    background: var(--color-danger-soft);
+  }
+
+  label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    cursor: pointer;
+  }
+
+  li[data-state] label {
+    cursor: default;
+  }
+
+  input {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.25rem;
+    accent-color: var(--color-accent);
+  }
+
+  .verdict {
+    display: block;
+    font-size: var(--sl-text-sm);
+    color: var(--color-text-strong);
+  }
+
+  .verdict[hidden] {
+    display: none;
+  }
+
+  .option-explanation {
+    margin: 0;
+    padding: 0 var(--space-3) var(--space-3) calc(1.1rem + var(--space-3) * 2);
+    font-size: var(--sl-text-sm);
+  }
+
+  .actions {
+    margin-top: var(--space-4);
+  }
+
+  .feedback {
+    margin: var(--space-3) 0 0;
+    font-weight: 700;
+  }
+
+  .feedback:empty,
+  .score:empty {
+    display: none;
+  }
+
+  .feedback[data-state='correct'] {
+    color: var(--color-success);
+  }
+
+  .feedback[data-state='incorrect'] {
+    color: var(--color-danger);
+  }
+
+  .explanation {
+    margin-top: var(--space-2);
+  }
+
+  .explanation p {
+    margin: 0;
+  }
+
+  .explanation ul {
+    margin: var(--space-2) 0 0;
+    padding-inline-start: var(--space-5);
+    font-size: var(--sl-text-sm);
+  }
+
+  .explanation a {
+    color: var(--color-accent);
+  }
+
+  .score {
+    margin: var(--space-5) 0 0;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-weight: 700;
+    color: var(--color-text-strong);
+  }
+</style>

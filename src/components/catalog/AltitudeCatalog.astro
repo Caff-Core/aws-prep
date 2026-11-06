@@ -1,0 +1,98 @@
+---
+import CertificationCard from './CertificationCard.astro';
+import { getCertifications, levelLabels } from '~/lib/certifications/registry';
+import type { CertificationLevel } from '~/lib/certifications/schema';
+import { getLessons } from '~/lib/lessons';
+
+const lessons = await getLessons();
+const certifications = getCertifications();
+const levels = Object.keys(levelLabels) as CertificationLevel[];
+const groups = levels
+  .map((level) => ({
+    level,
+    items: certifications.filter((certification) => certification.level === level),
+  }))
+  .filter((group) => group.items.length > 0);
+
+const lessonCount = (id: string) =>
+  lessons.filter((lesson) => lesson.meta.certification === id).length;
+---
+
+<ol class="rail not-content">
+  {groups.map((group, index) => (
+    <li class="layer" style={`--stratum: var(--stratum-${index + 1})`}>
+      <div class="marker">
+        <span class="level-number" aria-hidden="true">
+          {`L${index + 1}`}
+        </span>
+        <h2>{levelLabels[group.level]}</h2>
+      </div>
+      <ul class="cards">
+        {group.items.map((certification) => (
+          <li>
+            <CertificationCard {certification} lessonCount={lessonCount(certification.id)} />
+          </li>
+        ))}
+      </ul>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .rail {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .layer {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: var(--space-5);
+    padding-bottom: var(--space-7);
+    border-inline-start: 3px solid var(--stratum);
+    padding-inline-start: var(--space-5);
+  }
+
+  .marker {
+    position: sticky;
+    top: calc(var(--sl-nav-height, 4rem) + var(--space-4));
+    align-self: start;
+  }
+
+  .level-number {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--stratum);
+    color: var(--on-stratum);
+    font: 700 var(--sl-text-xs) / 1.4 var(--font-data);
+  }
+
+  h2 {
+    margin: var(--space-2) 0 0;
+    font-size: var(--sl-text-2xl);
+    line-height: 1.1;
+    color: var(--color-text-strong);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 50rem) {
+    .layer {
+      grid-template-columns: 1fr;
+      padding-inline-start: var(--space-4);
+    }
+
+    .marker {
+      position: static;
+    }
+  }
+</style>

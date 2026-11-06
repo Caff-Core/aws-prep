@@ -1,0 +1,115 @@
+---
+import type { AvailableCertification } from '~/lib/certifications/schema';
+import type { LessonMeta } from '~/lib/lessons/schema';
+import DifficultyBadge from '~/components/learning/DifficultyBadge.astro';
+
+interface Props {
+  lesson: LessonMeta;
+  certification: AvailableCertification;
+}
+
+const { lesson, certification } = Astro.props;
+const domain = certification.domains.find((item) => item.id === lesson.domain);
+const reviewed = lesson.lastReviewed.toLocaleDateString('en-ZA', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<div class="lesson-header">
+  <dl class="meta">
+    <div>
+      <dt class="data-label">Exam domain</dt>
+      <dd>{domain ? `${domain.number}. ${domain.title}` : lesson.domain}</dd>
+    </div>
+    <div>
+      <dt class="data-label">Task</dt>
+      <dd>{lesson.taskStatements.join(', ')}</dd>
+    </div>
+    <div>
+      <dt class="data-label">Difficulty</dt>
+      <dd>
+        <DifficultyBadge level={lesson.difficulty} />
+      </dd>
+    </div>
+    <div>
+      <dt class="data-label">Time</dt>
+      <dd>{lesson.estimatedMinutes} min</dd>
+    </div>
+    <div>
+      <dt class="data-label">Scope</dt>
+      <dd class="scope">{lesson.scope}</dd>
+    </div>
+    <div>
+      <dt class="data-label">Reviewed</dt>
+      <dd>{reviewed}</dd>
+    </div>
+  </dl>
+
+  <div class="goals">
+    <div>
+      <h2 class="data-label">By the end you can</h2>
+      <ul>
+        {lesson.objectives.map((objective) => (
+          <li>{objective}</li>
+        ))}
+      </ul>
+    </div>
+    {lesson.prerequisites.length > 0 && (
+      <div>
+        <h2 class="data-label">Helpful to know first</h2>
+        <ul>
+          {lesson.prerequisites.map((prerequisite) => (
+            <li>{prerequisite}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .lesson-header {
+    margin-top: var(--space-5);
+  }
+
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    gap: var(--space-3) var(--space-5);
+    margin: 0;
+    padding-block: var(--space-4);
+    border-block: 1px solid var(--color-border);
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--color-text-strong);
+  }
+
+  .scope {
+    text-transform: capitalize;
+  }
+
+  .goals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+  }
+
+  h2.data-label {
+    margin: 0;
+    font-family: var(--font-data);
+    font-size: var(--sl-text-2xs);
+  }
+
+  ul {
+    margin: var(--space-2) 0 0;
+    padding-inline-start: var(--space-5);
+    color: var(--color-text);
+  }
+</style>

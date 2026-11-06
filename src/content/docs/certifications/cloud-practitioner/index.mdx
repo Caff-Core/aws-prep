@@ -1,8 +1,50 @@
 ---
 title: AWS Certified Cloud Practitioner
-description: Study path for the AWS Certified Cloud Practitioner exam.
+description: Free study path for the AWS Certified Cloud Practitioner (CLF-C02) exam, mapped to the official exam guide.
 sidebar:
   label: Overview
+  order: 0
 ---
 
-Course overview.
+import {
+  Curriculum,
+  DomainWeights,
+  ExamFacts,
+  StudyPlan,
+  StudyProgress,
+} from '~/components/course';
+
+export const certificationId = 'cloud-practitioner';
+
+The AWS Certified Cloud Practitioner exam checks that you understand what the AWS Cloud is, how it
+is secured, what its core services do, and how it is paid for. It suits people in technical and
+non-technical roles. AWS does not expect coding, architecture design, or troubleshooting skills at
+this level.
+
+This course is in production. New lessons appear here one topic at a time.
+
+<StudyProgress certificationId={certificationId} />
+
+## Who this course is for
+
+Anyone new to the cloud. AWS suggests up to 6 months of exposure to the AWS Cloud, but says this is
+not required, and this course starts from first principles.
+
+## Exam at a glance
+
+<ExamFacts certificationId={certificationId} />
+
+## Exam domains
+
+The exam is split across four domains. A higher weighting means more of your score comes from that
+domain.
+
+<DomainWeights certificationId={certificationId} />
+
+## Curriculum
+
+<Curriculum certificationId={certificationId} />
+
+## Suggested study plan
+
+<StudyPlan certificationId={certificationId} />

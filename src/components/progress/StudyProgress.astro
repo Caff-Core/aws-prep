@@ -1,0 +1,111 @@
+---
+import { getLessons } from '~/lib/lessons';
+
+interface Props {
+  certificationId: string;
+}
+
+const { certificationId } = Astro.props;
+const lessons = await getLessons(certificationId);
+const lessonIds = lessons.map((lesson) => lesson.meta.id);
+---
+
+<study-progress data-certification={certificationId} data-lesson-ids={JSON.stringify(lessonIds)}>
+  <div class="progress not-content">
+    <p class="summary">
+      <span data-completed>0</span> of {lessons.length} published lessons complete
+    </p>
+    <progress value="0" max={Math.max(lessons.length, 1)} aria-label="Lessons completed"></progress>
+    <p class="resume" data-resume hidden>
+      Continue with <a href="#"></a>
+    </p>
+    <p class="note">
+      Saved in this browser on this device. <a href="/progress/">Manage progress</a>
+    </p>
+  </div>
+</study-progress>
+
+<script>
+  import { PROGRESS_CHANGED_EVENT, progressRepository } from '~/lib/progress/client';
+
+  class StudyProgress extends HTMLElement {
+    connectedCallback() {
+      void this.render();
+      document.addEventListener(PROGRESS_CHANGED_EVENT, () => void this.render());
+    }
+
+    private async render() {
+      const state = await progressRepository.load();
+      const progress = state.certifications[this.dataset['certification'] ?? ''];
+      const lessonIds = JSON.parse(this.dataset['lessonIds'] ?? '[]') as string[];
+      const completed = lessonIds.filter((id) => progress?.completedLessons[id]).length;
+
+      this.querySelector('[data-completed]')!.textContent = String(completed);
+      this.querySelector('progress')!.value = completed;
+
+      const resume = this.querySelector<HTMLElement>('[data-resume]')!;
+      const link = resume.querySelector('a')!;
+      if (progress?.lastVisited) {
+        link.href = progress.lastVisited.url;
+        link.textContent = progress.lastVisited.title;
+        resume.hidden = false;
+      }
+    }
+  }
+  customElements.define('study-progress', StudyProgress);
+</script>
+
+<style>
+  .progress {
+    margin-block: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .summary {
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  progress {
+    display: block;
+    width: 100%;
+    height: 0.6rem;
+    margin-top: var(--space-2);
+    border: 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--color-surface-raised);
+    appearance: none;
+  }
+
+  progress::-webkit-progress-bar {
+    background: var(--color-surface-raised);
+  }
+
+  progress::-webkit-progress-value {
+    background: var(--color-accent);
+  }
+
+  progress::-moz-progress-bar {
+    background: var(--color-accent);
+  }
+
+  .resume,
+  .note {
+    margin: var(--space-3) 0 0;
+    font-size: var(--sl-text-sm);
+  }
+
+  .note {
+    color: var(--color-text-muted);
+  }
+
+  a {
+    color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,10 @@
+export { default as CostWarning } from './CostWarning.astro';
+export { default as DifficultyBadge } from './DifficultyBadge.astro';
+export { default as ExamTip } from './ExamTip.astro';
+export { default as ImportantConcept } from './ImportantConcept.astro';
+export { default as KeyTakeaways } from './KeyTakeaways.astro';
+export { default as LessonSummary } from './LessonSummary.astro';
+export { default as RealWorldExample } from './RealWorldExample.astro';
+export { default as ServiceComparison } from './ServiceComparison.astro';
+export { default as ArchitectureDiagram } from '../diagrams/ArchitectureDiagram.astro';
+export { default as KnowledgeCheck } from '../quizzes/KnowledgeCheck.astro';

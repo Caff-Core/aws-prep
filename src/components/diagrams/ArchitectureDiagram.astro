@@ -1,0 +1,309 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import { resolveConnection } from '~/lib/diagrams/geometry';
+import type { DiagramSpec } from '~/lib/diagrams/types';
+import DiagramIcon from './DiagramIcon.astro';
+
+interface Props {
+  spec: DiagramSpec;
+}
+
+const { spec } = Astro.props;
+const connections = spec.connections.map((connection) => resolveConnection(spec, connection));
+const markerId = `${spec.id}-arrow`;
+const titleId = `${spec.id}-title`;
+const descriptionId = `${spec.id}-description`;
+// Each step number is drawn once, on the first arrow that illustrates it.
+const labelledSteps = new Set<number>();
+const stepBadges = connections.flatMap(({ step, line }) => {
+  if (step === undefined || labelledSteps.has(step)) return [];
+  labelledSteps.add(step);
+  return [{ step, x: line.midX, y: line.midY }];
+});
+---
+
+<diagram-viewer>
+  <figure class="diagram not-content">
+    <div class="canvas" role="group" aria-label="Diagram, scrollable" tabindex="0">
+      <svg
+        viewBox={`0 0 ${spec.width} ${spec.height}`}
+        role="img"
+        aria-labelledby={`${titleId} ${descriptionId}`}
+      >
+        <title id={titleId}>{spec.title}</title>
+        <desc id={descriptionId}>{spec.description}</desc>
+        <defs>
+          <marker
+            id={markerId}
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M0 0 10 5 0 10z" class="arrow-head"></path>
+          </marker>
+        </defs>
+
+        {spec.boundaries.map((boundary) => (
+          <g class="boundary" data-kind={boundary.kind}>
+            <rect
+              x={boundary.x}
+              y={boundary.y}
+              width={boundary.width}
+              height={boundary.height}
+              rx="6"
+            />
+            {boundary.icon && (
+              <DiagramIcon icon={boundary.icon} x={boundary.x} y={boundary.y} size={30} />
+            )}
+            <text x={boundary.x + (boundary.icon ? 40 : 12)} y={boundary.y + 21}>
+              {boundary.label}
+            </text>
+          </g>
+        ))}
+
+        {connections.map(({ line, dashed, bidirectional }) => (
+          <line
+            class="connection"
+            data-dashed={dashed}
+            x1={line.x1}
+            y1={line.y1}
+            x2={line.x2}
+            y2={line.y2}
+            marker-end={`url(#${markerId})`}
+            marker-start={bidirectional ? `url(#${markerId})` : undefined}
+          />
+        ))}
+
+        {connections.map(
+          ({ label, line }) =>
+            label && (
+              <text class="connection-label" x={line.midX} y={line.midY - 16} text-anchor="middle">
+                {label}
+              </text>
+            ),
+        )}
+
+        {stepBadges.map(({ step, x, y }) => (
+          <g class="step-badge">
+            <circle cx={x} cy={y} r="13" />
+            <text x={x} y={y + 5} text-anchor="middle">
+              {step}
+            </text>
+          </g>
+        ))}
+
+        {spec.nodes.map((node) => (
+          <g class="node">
+            <DiagramIcon icon={node.icon} x={node.x - 26} y={node.y - 26} size={52} />
+            <text x={node.x} y={node.y + 46} text-anchor="middle">
+              {node.label}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+
+    <figcaption>
+      <div class="caption-head">
+        <strong>{spec.title}</strong>
+        <button type="button" class="button" data-variant="secondary" data-open hidden>
+          <Icon name="external" size="1rem" />
+          Enlarge
+        </button>
+      </div>
+      <ol class="steps">
+        {spec.steps.map((step) => (
+          <li>{step}</li>
+        ))}
+      </ol>
+      <details>
+        <summary>Text description of this diagram</summary>
+        <p>{spec.description}</p>
+      </details>
+    </figcaption>
+
+    <dialog aria-label={`Enlarged diagram: ${spec.title}`}>
+      <form method="dialog">
+        <button class="button" data-variant="secondary">
+          Close
+        </button>
+      </form>
+      <div data-enlarged></div>
+    </dialog>
+  </figure>
+</diagram-viewer>
+
+<script>
+  class DiagramViewer extends HTMLElement {
+    connectedCallback() {
+      const open = this.querySelector<HTMLButtonElement>('[data-open]');
+      const dialog = this.querySelector('dialog');
+      const target = this.querySelector('[data-enlarged]');
+      const svg = this.querySelector('.canvas svg');
+      if (!open || !dialog || !target || !svg) return;
+
+      // The button needs JavaScript, so it only appears once it can work.
+      open.hidden = false;
+      open.addEventListener('click', () => {
+        if (!target.firstChild) {
+          const copy = svg.cloneNode(true) as SVGElement;
+          copy.removeAttribute('aria-labelledby');
+          copy.setAttribute('aria-label', dialog.getAttribute('aria-label') ?? '');
+          copy.querySelectorAll('title, desc').forEach((element) => element.remove());
+          target.append(copy);
+        }
+        dialog.showModal();
+      });
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    }
+  }
+  customElements.define('diagram-viewer', DiagramViewer);
+</script>
+
+<style is:global>
+  .diagram {
+    margin-block: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .diagram .canvas {
+    overflow-x: auto;
+    padding: var(--space-3);
+  }
+
+  .diagram :is(.canvas, [data-enlarged]) > svg {
+    display: block;
+    width: 100%;
+    min-width: 42rem;
+    height: auto;
+  }
+
+  .diagram text {
+    fill: var(--color-text-strong);
+    font: 500 15px var(--font-body);
+  }
+
+  .diagram .boundary rect {
+    fill: none;
+    stroke: var(--color-diagram-boundary);
+    stroke-width: 1.5;
+  }
+
+  .diagram .boundary[data-kind='region'] rect {
+    stroke: var(--color-diagram-region);
+    stroke-width: 2;
+  }
+
+  .diagram .boundary[data-kind='availability-zone'] rect {
+    stroke: var(--color-diagram-region);
+    stroke-dasharray: 9 6;
+  }
+
+  .diagram .boundary[data-kind='external'] rect {
+    stroke-dasharray: 2 5;
+    stroke-linecap: round;
+  }
+
+  .diagram .boundary[data-kind='vpc'] rect {
+    stroke-dasharray: 14 5;
+  }
+
+  .diagram .boundary[data-kind='subnet'] rect {
+    stroke-dasharray: 4 4;
+  }
+
+  .diagram .boundary text {
+    font: 600 13px var(--font-data);
+  }
+
+  .diagram .connection {
+    stroke: var(--color-diagram-line);
+    stroke-width: 2;
+  }
+
+  .diagram .connection[data-dashed='true'] {
+    stroke-dasharray: 7 5;
+  }
+
+  .diagram .arrow-head {
+    fill: var(--color-diagram-line);
+  }
+
+  .diagram .step-badge circle {
+    fill: var(--color-accent);
+  }
+
+  .diagram .step-badge text {
+    fill: var(--color-on-accent);
+    font: 700 14px var(--font-data);
+  }
+
+  :root[data-theme='light'] .dark-theme-only,
+  :root:not([data-theme='light']) .light-theme-only {
+    display: none;
+  }
+
+  .diagram figcaption {
+    padding: var(--space-4) var(--space-5) var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .diagram .caption-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    color: var(--color-text-strong);
+  }
+
+  .diagram .steps {
+    margin: var(--space-3) 0;
+    padding-inline-start: var(--space-5);
+  }
+
+  .diagram .steps li + li {
+    margin-top: var(--space-1);
+  }
+
+  .diagram summary {
+    cursor: pointer;
+    color: var(--color-accent);
+  }
+
+  .diagram details p {
+    margin: var(--space-2) 0 0;
+  }
+
+  .diagram dialog {
+    width: min(96vw, 80rem);
+    max-width: none;
+    padding: var(--space-4);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .diagram dialog::backdrop {
+    background: rgb(0 0 0 / 0.65);
+  }
+
+  .diagram dialog form {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--space-3);
+  }
+
+  .diagram dialog [data-enlarged] {
+    overflow-x: auto;
+  }
+</style>
