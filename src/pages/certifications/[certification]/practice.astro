@@ -1,0 +1,383 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import QuestionForm from '~/components/quizzes/QuestionForm.astro';
+import { getPracticeQuestions } from '~/lib/assessment/bank';
+import {
+  certificationUrl,
+  getAvailableCertification,
+  getCertifications,
+} from '~/lib/certifications/registry';
+
+export function getStaticPaths() {
+  return getCertifications()
+    .filter(({ id, status }) => status === 'available' && getPracticeQuestions(id).length > 0)
+    .map(({ id }) => ({ params: { certification: id } }));
+}
+
+const { certification: certificationId } = Astro.params;
+const certification = getAvailableCertification(certificationId);
+const questions = getPracticeQuestions(certificationId);
+const session = questions.map(({ id, domainId }) => ({ id, domainId }));
+const domains = certification.domains.filter((domain) =>
+  questions.some((question) => question.domainId === domain.id),
+);
+const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-review').length;
+---
+
+<StarlightPage
+  frontmatter={{
+    title: `${certification.shortTitle} practice questions`,
+    description: `Original practice questions for the ${certification.title} exam, with explanations for every option.`,
+    pagefind: false,
+    tableOfContents: false,
+  }}
+>
+  <practice-session
+    data-certification={certificationId}
+    data-questions={JSON.stringify(session)}
+    class="not-content"
+  >
+    <p class="intro">
+      {questions.length} original questions, with feedback after each one. These are not real exam
+      questions, and your score is not an official AWS score.
+      {awaitingReview > 0 && ` ${awaitingReview} are still awaiting human review.`}
+    </p>
+    <noscript>
+      <p>Practice questions need JavaScript to check your answers.</p>
+    </noscript>
+
+    <nav aria-label="Questions">
+      <ol class="question-nav">
+        {questions.map((question, index) => (
+          <li>
+            <button type="button" data-goto={question.id}>
+              <span class="sr-only">Question </span>
+              {index + 1}
+              <span class="mark" data-mark />
+            </button>
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <div data-questions-area>
+      {questions.map((question, index) => (
+        <div class="question" data-question={question.id} hidden={index > 0} tabindex="-1">
+          <QuestionForm {question} number={index + 1} />
+        </div>
+      ))}
+      <div class="controls">
+        <button type="button" class="button" data-variant="secondary" data-prev>
+          Previous
+        </button>
+        <button type="button" class="button" data-variant="secondary" data-next>
+          Next
+        </button>
+        <button type="button" class="button" data-finish>
+          Finish and see results
+        </button>
+      </div>
+    </div>
+
+    <section class="results" data-results hidden tabindex="-1" aria-labelledby="results-title">
+      <h2 id="results-title">Your results</h2>
+      <p class="score" data-score></p>
+      <p data-unanswered hidden></p>
+      <div class="domains" role="region" aria-label="Results by exam domain" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Exam domain</th>
+              <th scope="col">Correct</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {domains.map((domain) => (
+              <tr data-domain={domain.id}>
+                <th scope="row">
+                  {domain.number}. {domain.title}
+                </th>
+                <td data-domain-correct />
+                <td data-domain-percent />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Practice feedback only. This is not an official AWS score.</p>
+      <div class="controls">
+        <button type="button" class="button" data-review>
+          Review questions
+        </button>
+        <button type="button" class="button" data-variant="secondary" data-restart>
+          Start again
+        </button>
+        <a class="button" data-variant="secondary" href={certificationUrl(certificationId)}>
+          Back to course
+        </a>
+      </div>
+    </section>
+  </practice-session>
+</StarlightPage>
+
+<script>
+  import { checkQuestionForm, resetQuestionForm } from '~/lib/assessment/question-form';
+  import { summarizeSession } from '~/lib/assessment/session';
+  import type { SessionQuestion } from '~/lib/assessment/session';
+  import { updateProgress } from '~/lib/progress/client';
+  import { recordQuizResult } from '~/lib/progress/state';
+
+  class PracticeSession extends HTMLElement {
+    private questions = JSON.parse(this.dataset['questions'] ?? '[]') as SessionQuestion[];
+    private outcomes: Record<string, boolean> = {};
+    private index = 0;
+
+    private get(selector: string) {
+      return this.querySelector<HTMLElement>(selector)!;
+    }
+
+    connectedCallback() {
+      this.querySelectorAll('form').forEach((form) => {
+        const id = form.dataset['questionId'] ?? '';
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const result = checkQuestionForm(form);
+          if (!result) return;
+          this.outcomes[id] = result.isCorrect;
+          this.renderNav();
+        });
+        form.querySelector('[data-retry]')?.addEventListener('click', () => {
+          delete this.outcomes[id];
+          resetQuestionForm(form);
+          this.renderNav();
+        });
+      });
+
+      this.querySelectorAll<HTMLElement>('[data-goto]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const position = this.questions.findIndex(({ id }) => id === button.dataset['goto']);
+          this.show(position);
+        });
+      });
+      this.get('[data-prev]').addEventListener('click', () => this.show(this.index - 1));
+      this.get('[data-next]').addEventListener('click', () => this.show(this.index + 1));
+      this.get('[data-finish]').addEventListener('click', () => void this.finish());
+      this.get('[data-review]').addEventListener('click', () => this.show(0));
+      this.get('[data-restart]').addEventListener('click', () => this.restart());
+      this.show(0, false);
+    }
+
+    private show(position: number, moveFocus = true) {
+      this.index = position;
+      this.get('[data-results]').hidden = true;
+      this.get('[data-questions-area]').hidden = false;
+
+      this.questions.forEach(({ id }, index) => {
+        this.get(`[data-question="${id}"]`).hidden = index !== position;
+      });
+      (this.get('[data-prev]') as HTMLButtonElement).disabled = position === 0;
+      (this.get('[data-next]') as HTMLButtonElement).disabled =
+        position === this.questions.length - 1;
+      this.renderNav();
+
+      const current = this.questions[position];
+      if (moveFocus && current) this.get(`[data-question="${current.id}"]`).focus();
+    }
+
+    private renderNav() {
+      this.questions.forEach(({ id }, index) => {
+        const button = this.get(`[data-goto="${id}"]`);
+        const outcome = this.outcomes[id];
+        if (index === this.index) button.setAttribute('aria-current', 'step');
+        else button.removeAttribute('aria-current');
+
+        button.dataset['state'] = outcome === undefined ? '' : outcome ? 'correct' : 'incorrect';
+        const mark = button.querySelector('[data-mark]')!;
+        mark.textContent = outcome === undefined ? '' : outcome ? ' ✓' : ' ✗';
+        mark.setAttribute(
+          'aria-label',
+          outcome === undefined ? '' : outcome ? 'correct' : 'incorrect',
+        );
+      });
+    }
+
+    private async finish() {
+      const summary = summarizeSession(this.questions, this.outcomes);
+      const { correct, total, percent } = summary.score;
+
+      this.get('[data-score]').textContent = `${correct} of ${total} correct (${percent}%)`;
+      const unanswered = this.get('[data-unanswered]');
+      unanswered.hidden = summary.unanswered === 0;
+      unanswered.textContent = `${summary.unanswered} not answered, counted as incorrect.`;
+
+      for (const domain of summary.domains) {
+        const row = this.get(`[data-domain="${domain.domainId}"]`);
+        row.querySelector('[data-domain-correct]')!.textContent =
+          `${domain.correct} of ${domain.total}`;
+        row.querySelector('[data-domain-percent]')!.textContent = `${domain.percent}%`;
+      }
+
+      this.get('[data-questions-area]').hidden = true;
+      const results = this.get('[data-results]');
+      results.hidden = false;
+      results.focus();
+
+      const certification = this.dataset['certification'] ?? '';
+      await updateProgress((state) =>
+        recordQuizResult(state, certification, `${certification}/practice`, {
+          correct,
+          total,
+          completedAt: new Date().toISOString(),
+        }),
+      );
+    }
+
+    private restart() {
+      this.outcomes = {};
+      this.querySelectorAll('form').forEach((form) => resetQuestionForm(form));
+      this.show(0);
+    }
+  }
+  customElements.define('practice-session', PracticeSession);
+</script>
+
+<style>
+  practice-session {
+    display: block;
+    color: var(--color-text);
+  }
+
+  .intro {
+    margin: 0;
+  }
+
+  .question-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .question-nav button {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding-inline: var(--space-2);
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text-strong);
+    font: 600 var(--sl-text-sm) / 1 var(--font-data);
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+  }
+
+  .question-nav button:hover {
+    border-color: var(--color-accent);
+  }
+
+  .question-nav button[aria-current] {
+    border-color: var(--color-accent);
+    box-shadow: inset 0 -3px 0 var(--color-accent);
+  }
+
+  .question-nav button[data-state='correct'] {
+    border-color: var(--color-success);
+    background: var(--color-success-soft);
+  }
+
+  .question-nav button[data-state='incorrect'] {
+    border-color: var(--color-danger);
+    background: var(--color-danger-soft);
+  }
+
+  .question {
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .question:focus {
+    outline: none;
+  }
+
+  .question :global(form) {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .results {
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .results:focus {
+    outline: none;
+  }
+
+  .results h2 {
+    margin: 0;
+    font-size: var(--sl-text-2xl);
+    color: var(--color-text-strong);
+  }
+
+  .results .score {
+    margin: var(--space-2) 0 0;
+    font: 700 var(--sl-text-2xl) / 1.3 var(--font-data);
+    color: var(--color-accent);
+  }
+
+  .results p {
+    margin-block: var(--space-2) 0;
+  }
+
+  .domains {
+    margin-top: var(--space-4);
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--sl-text-sm);
+  }
+
+  th,
+  td {
+    padding: var(--space-2) var(--space-3);
+    border-top: 1px solid var(--color-border);
+    text-align: start;
+  }
+
+  thead th {
+    border-top: 0;
+    font: 500 var(--sl-text-2xs) / 1.3 var(--font-data);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  tbody th {
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  .note {
+    font-size: var(--sl-text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

@@ -41,6 +41,15 @@ export function getQuestions(ids: readonly string[]): Question[] {
   });
 }
 
+/** Questions a learner may see for a certification. */
+export function getPracticeQuestions(certificationId: string): Question[] {
+  return [...bank.values()].filter(
+    (question) =>
+      question.certificationId === certificationId &&
+      (question.reviewStatus === 'in-review' || question.reviewStatus === 'approved'),
+  );
+}
+
 export function getAllQuestions(): Question[] {
   return [...bank.values()];
 }
