@@ -46,6 +46,10 @@ credit.
 Answers are present in page HTML. That is acceptable for free self-study, which has nothing to
 protect. Never reuse this approach for anything with stakes attached.
 
+`QuestionForm.astro` and `question-form.ts` are shared by `KnowledgeCheck` and practice mode, so all
+modes behave alike. `session.ts` holds pure practice-session scoring. Quiz markup is excluded from
+search, and the practice page is excluded from the index, so answers do not surface in results.
+
 `reviewStatus` controls use: `draft` and `retired` cannot be shown, `in-review` may appear in lessons,
 and only `approved` should enter mock exams.
 
@@ -67,7 +71,8 @@ The storage key is deliberately brand-neutral, so a rename does not orphan learn
 
 Starlight owns the toggle, persistence, system detection, and flash prevention. We supply tokens.
 Starlight shows the toggle only in the mobile menu, and pages without a sidebar have no menu, so
-`theme.css` keeps it in the header at all widths.
+`theme.css` keeps it in the header at all widths. At phone widths it is icon-only, so the site title stays readable; the
+native select keeps its label and 44px target.
 
 ## Future accounts
 

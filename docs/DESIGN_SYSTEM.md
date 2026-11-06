@@ -46,19 +46,20 @@ Spacing uses `--space-1` to `--space-9`.
 
 ## Components
 
-| Component                                                        | Use                 |
-| ---------------------------------------------------------------- | ------------------- |
-| `ExamTip`, `ImportantConcept`, `RealWorldExample`, `CostWarning` | Callouts in lessons |
-| `KeyTakeaways`, `LessonSummary`                                  | Closing lists       |
-| `ServiceComparison`                                              | Responsive tables   |
-| `ArchitectureDiagram`                                            | Typed SVG diagrams  |
-| `KnowledgeCheck`                                                 | In-lesson questions |
-| `DifficultyBadge`                                                | Difficulty          |
+| Component                                                        | Use                    |
+| ---------------------------------------------------------------- | ---------------------- |
+| `ExamTip`, `ImportantConcept`, `RealWorldExample`, `CostWarning` | Callouts in lessons    |
+| `KeyTakeaways`, `LessonSummary`                                  | Closing lists          |
+| `ServiceComparison`                                              | Responsive tables      |
+| `ArchitectureDiagram`                                            | Typed SVG diagrams     |
+| `KnowledgeCheck`                                                 | In-lesson questions    |
+| `QuestionForm`                                                   | One question, any mode |
+| `DifficultyBadge`                                                | Difficulty             |
 
 Import lesson components from `~/components/learning` and overview components from
 `~/components/course`.
 
 ## Review checklist
 
-Check light and dark, at 375, 800, and 1360 pixels wide, using only a keyboard. Include hover, focus,
+Check light and dark, at 320, 375, 800, and 1360 pixels wide, using only a keyboard. Include hover, focus,
 disabled, and selected states.

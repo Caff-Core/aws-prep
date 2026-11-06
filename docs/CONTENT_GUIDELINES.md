@@ -25,6 +25,9 @@ Include these where relevant, in order:
 
 Title, domain, objectives, prerequisites, and references come from frontmatter.
 
+Start from `docs/templates/lesson.mdx`. A lesson's id must match a topic in the curriculum. Keep a
+review sheet in `docs/reviews/` that links claims to sources and flags anything unsourced.
+
 ## Writing
 
 - Match language to the certification level.

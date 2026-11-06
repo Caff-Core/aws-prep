@@ -1,0 +1,79 @@
+---
+title: Lesson title
+description: One sentence stating what the learner gains.
+sidebar:
+  order: 1
+lesson:
+  # "<certification>/<topic slug>". The topic must exist in the certification's curriculum.
+  id: cloud-practitioner/topic-slug
+  certification: cloud-practitioner
+  module: module-slug
+  domain: domain-id
+  taskStatements: ['0.0']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 20
+  lastReviewed: YYYY-MM-DD
+  objectives:
+    - Describe what the learner can do afterwards.
+  prerequisites:
+    - Name what helps to know first.
+  references:
+    - title: Official page title
+      url: https://docs.aws.amazon.com/
+---
+
+import {
+  ArchitectureDiagram,
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+{/* Copy to src/content/docs/certifications/<id>/<module>/<topic-slug>.mdx. Remove unused sections. */}
+
+## The idea in plain language
+
+Start with an everyday comparison. Define each term before you use it.
+
+## How it works
+
+Add the technical detail the exam expects.
+
+<ImportantConcept>State the one idea the rest of the lesson depends on.</ImportantConcept>
+
+## A real-world example
+
+<RealWorldExample>Show a business using this to solve a problem.</RealWorldExample>
+
+## Comparing the options
+
+Add `ServiceComparison` when learners must choose between services.
+
+## What the exam expects
+
+<ExamTip>Show how to recognise this topic in a question.</ExamTip>
+
+## Common misconceptions
+
+- **"A common wrong belief."** The correction.
+
+## Try it yourself (optional)
+
+Follow the lab rules in `docs/CONTENT_GUIDELINES.md`. State any cost before the first step.
+
+## Knowledge check
+
+Add questions to `src/data/questions/<id>/`, then list their ids in `<KnowledgeCheck>`.
+
+## Summary
+
+<LessonSummary>
+
+- Keep a blank line after the opening tag, or this list renders as one paragraph.
+
+</LessonSummary>
