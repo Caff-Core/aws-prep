@@ -1,0 +1,115 @@
+/*
+ * Design tokens. Every colour in the project comes from here, so both themes
+ * stay in step. Dark values sit on :root because that is Starlight's base;
+ * light values override them under [data-theme='light'].
+ */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --color-bg: #0c1619;
+  --color-surface: #122125;
+  --color-surface-raised: #1a2e33;
+  --color-border: #2c454b;
+  --color-border-strong: #5b7c80;
+
+  /* Text */
+  --color-text: #d9e4e0;
+  --color-text-muted: #a3b8b3;
+  --color-text-strong: #f5f9f6;
+
+  /* Brand */
+  --color-accent: #6ee7bd;
+  --color-accent-strong: #a9f3d8;
+  --color-accent-soft: #143a35;
+  --color-on-accent: #06231d;
+
+  /* Meaning. Always paired with text or an icon, never colour alone. */
+  --color-success: #7ee2a8;
+  --color-success-soft: #123527;
+  --color-danger: #ffa59b;
+  --color-danger-soft: #43201e;
+  --color-warning: #f4d06f;
+  --color-warning-soft: #3a3014;
+  --color-info: #93cdf5;
+  --color-info-soft: #16324a;
+
+  /* Altitude strata for levels and exam domains */
+  --stratum-1: #2f7f73;
+  --stratum-2: #3a6f94;
+  --stratum-3: #6b64a8;
+  --stratum-4: #8f5f86;
+  --on-stratum: #ffffff;
+
+  /* Contour lines and diagram strokes */
+  --color-contour: rgb(110 231 189 / 0.1);
+  --color-diagram-line: #a3b8b3;
+  --color-diagram-boundary: #5b7c80;
+  --color-diagram-region: #4fc6b8;
+
+  /* Typography */
+  --font-display: 'Bricolage Grotesque Variable', 'Trebuchet MS', sans-serif;
+  --font-body: 'Figtree Variable', 'Segoe UI', sans-serif;
+  --font-data: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  /* Shape */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.22);
+
+  /* Interaction */
+  --focus-ring: 3px solid var(--color-accent);
+  --transition-fast: 140ms ease;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-bg: #f7f4eb;
+  --color-surface: #fffdf7;
+  --color-surface-raised: #eeeadc;
+  --color-border: #d6d0bd;
+  --color-border-strong: #7d857a;
+
+  --color-text: #22312f;
+  --color-text-muted: #4d5e5a;
+  --color-text-strong: #0d1c1b;
+
+  --color-accent: #0b6b56;
+  --color-accent-strong: #074d3e;
+  --color-accent-soft: #d6ece2;
+  --color-on-accent: #ffffff;
+
+  --color-success: #17663f;
+  --color-success-soft: #dcf0e3;
+  --color-danger: #a92d22;
+  --color-danger-soft: #fae1dd;
+  --color-warning: #765300;
+  --color-warning-soft: #f8ecc7;
+  --color-info: #1a5a8a;
+  --color-info-soft: #dcebf6;
+
+  --stratum-1: #1f6f63;
+  --stratum-2: #2c5f84;
+  --stratum-3: #5a5396;
+  --stratum-4: #7e4e75;
+
+  --color-contour: rgb(11 107 86 / 0.1);
+  --color-diagram-line: #4d5e5a;
+  --color-diagram-boundary: #7d857a;
+  --color-diagram-region: #0b7a70;
+
+  --shadow-card: 0 1px 2px rgb(44 40 24 / 0.08), 0 8px 24px rgb(44 40 24 / 0.08);
+}
