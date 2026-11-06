@@ -1,0 +1,116 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AltitudeCatalog from '~/components/catalog/AltitudeCatalog.astro';
+import { siteConfig } from '~/config/site';
+import { certificationUrl } from '~/lib/certifications/registry';
+
+const benefits = [
+  {
+    title: 'Explained, not summarised',
+    text: 'Lessons start from plain language and build to exam detail, with real business scenarios.',
+  },
+  {
+    title: 'Checked against the source',
+    text: 'Topics map to official exam guides. Every technical lesson shows its references and review date.',
+  },
+  {
+    title: 'Practice with reasons',
+    text: 'Original questions explain why each option is right or wrong, not only which one to pick.',
+  },
+  {
+    title: 'Yours, without an account',
+    text: 'Progress saves in your browser. Nothing to sign up for, and nothing behind a paywall.',
+  },
+];
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Free AWS certification study paths',
+    description: siteConfig.description,
+    template: 'splash',
+    hero: {
+      title: 'Climb the AWS certifications, one layer at a time.',
+      tagline: 'Clear lessons, original diagrams, and practice questions. Free, for everyone.',
+      actions: [
+        { text: 'Start Cloud Practitioner', link: certificationUrl('cloud-practitioner') },
+        { text: 'See all certifications', link: '#catalog', variant: 'secondary' },
+      ],
+    },
+  }}
+>
+  <section id="catalog" class="page-section not-content home-section">
+    <p class="data-label">Certification catalog</p>
+    <h2 class="section-title">Pick your altitude</h2>
+    <AltitudeCatalog />
+  </section>
+
+  <section class="page-section not-content home-section">
+    <p class="data-label">How it works</p>
+    <h2 class="section-title">Built for understanding</h2>
+    <ul class="benefits">
+      {benefits.map((benefit) => (
+        <li>
+          <h3>{benefit.title}</h3>
+          <p>{benefit.text}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="support-line">
+      Find this useful? You can <a href="/support/">support the project</a>, entirely optionally.
+    </p>
+  </section>
+</StarlightPage>
+
+<style>
+  .home-section {
+    padding-block: var(--space-6);
+    scroll-margin-top: calc(var(--sl-nav-height, 4rem) + var(--space-4));
+  }
+
+  .home-section .data-label {
+    margin: 0;
+  }
+
+  .section-title {
+    margin: var(--space-1) 0 var(--space-6);
+    font-size: clamp(1.9rem, 1.5rem + 1.8vw, 2.75rem);
+    font-weight: 800;
+    color: var(--color-text-strong);
+  }
+
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--space-5) var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .benefits li {
+    padding-top: var(--space-3);
+    border-top: 2px solid var(--color-accent);
+  }
+
+  .benefits h3 {
+    margin: 0;
+    font-size: var(--sl-text-lg);
+    color: var(--color-text-strong);
+  }
+
+  .benefits p {
+    margin: var(--space-2) 0 0;
+    color: var(--color-text);
+  }
+
+  .support-line {
+    margin: var(--space-7) 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .support-line a {
+    color: var(--color-accent);
+  }
+</style>

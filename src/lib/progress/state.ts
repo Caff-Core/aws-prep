@@ -64,6 +64,7 @@ export function recordQuizResult(
 }
 
 export function resetCertification(state: ProgressState, certificationId: string): ProgressState {
-  const { [certificationId]: _removed, ...certifications } = state.certifications;
+  const certifications = { ...state.certifications };
+  delete certifications[certificationId];
   return { ...state, certifications };
 }

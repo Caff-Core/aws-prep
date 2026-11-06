@@ -1,0 +1,32 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import SupportCard from '~/components/catalog/SupportCard.astro';
+import { siteConfig } from '~/config/site';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Support this project',
+    description: `${siteConfig.name} is free. Donations are optional and unlock nothing.`,
+    template: 'splash',
+  }}
+>
+  <div class="page-section narrow">
+    <p>
+      {siteConfig.name} is free and will stay free. There are no premium lessons, and a donation
+      unlocks nothing extra. Your learning experience is the same either way.
+    </p>
+    <SupportCard />
+    <p>
+      Other ways to help cost nothing: report a mistake or suggest a topic on
+      <a href={`${siteConfig.repositoryUrl}/issues`}>GitHub</a>.
+    </p>
+  </div>
+</StarlightPage>
+
+<style>
+  .narrow {
+    max-width: 44rem;
+    margin-inline: 0;
+  }
+</style>

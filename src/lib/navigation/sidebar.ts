@@ -3,6 +3,7 @@ import type { AvailableCertification } from '~/lib/certifications/schema';
 
 type SidebarEntry = StarlightRouteData['sidebar'][number];
 type SidebarLink = Extract<SidebarEntry, { type: 'link' }>;
+type SidebarGroup = Extract<SidebarEntry, { type: 'group' }>;
 type Pagination = StarlightRouteData['pagination'];
 
 const CERTIFICATION_PATH = /^\/certifications\/([a-z0-9-]+)(?:\/|$)/;
@@ -11,7 +12,7 @@ export function certificationIdFromPath(pathname: string): string | undefined {
   return CERTIFICATION_PATH.exec(pathname)?.[1];
 }
 
-function findGroup(entries: SidebarEntry[], label: string) {
+function findGroup(entries: SidebarEntry[], label: string): SidebarGroup | undefined {
   for (const entry of entries) {
     if (entry.type !== 'group') continue;
     if (entry.label === label) return entry;

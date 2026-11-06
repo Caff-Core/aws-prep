@@ -1,0 +1,125 @@
+---
+import DomainStrata from '~/components/course/DomainStrata.astro';
+
+const hero = Astro.locals.starlightRoute.entry.data.hero;
+const featured = 'cloud-practitioner';
+---
+
+<div class="hero not-content">
+  <div class="intro">
+    <p class="data-label eyebrow">Free · Independent · No account needed</p>
+    <h1 id="_top" set:html={hero?.title} />
+    {hero?.tagline && <p class="tagline" set:html={hero.tagline} />}
+    <div class="actions">
+      {hero?.actions.map((action) => (
+        <a class="button" data-variant={action.variant} href={action.link}>
+          {action.text}
+        </a>
+      ))}
+    </div>
+  </div>
+  <figure class="strip">
+    <figcaption>
+      <span class="data-label">First path · CLF-C02</span>
+      <span class="data-label">Scored content</span>
+    </figcaption>
+    <DomainStrata certificationId={featured} />
+  </figure>
+</div>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--space-7);
+    align-items: stretch;
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-block: var(--space-7);
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--color-accent);
+  }
+
+  h1 {
+    margin: var(--space-4) 0 0;
+    font-size: clamp(2.6rem, 1.6rem + 4.4vw, 4.75rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-text-strong);
+  }
+
+  .tagline {
+    max-width: 34rem;
+    margin: var(--space-5) 0 0;
+    font-size: var(--sl-text-xl);
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .strip {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .strip > :global(ol) {
+    flex: 1;
+  }
+
+  @media (max-width: 50rem) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      padding-block: var(--space-5);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .intro > *,
+    .strip {
+      animation: rise 500ms ease both;
+    }
+
+    .intro > :nth-child(2) {
+      animation-delay: 60ms;
+    }
+
+    .intro > :nth-child(3) {
+      animation-delay: 120ms;
+    }
+
+    .intro > :nth-child(4) {
+      animation-delay: 180ms;
+    }
+
+    .strip {
+      animation-delay: 200ms;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+    }
+  }
+</style>

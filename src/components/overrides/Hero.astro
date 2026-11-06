@@ -1,0 +1,9 @@
+---
+import Default from '@astrojs/starlight/components/Hero.astro';
+import HomeHero from '~/components/catalog/HomeHero.astro';
+
+// Only the homepage has the branded hero. The 404 page keeps Starlight's.
+const isHome = Astro.url.pathname === '/';
+---
+
+{isHome ? <HomeHero /> : <Default />}

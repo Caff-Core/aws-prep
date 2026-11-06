@@ -1,0 +1,27 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AltitudeCatalog from '~/components/catalog/AltitudeCatalog.astro';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Certifications',
+    description: 'Browse free study paths for AWS certification exams, by level.',
+    template: 'splash',
+  }}
+>
+  <section class="page-section not-content">
+    <p class="lede">
+      Paths are added one at a time. Exam details are checked against AWS before each course opens.
+    </p>
+    <AltitudeCatalog />
+  </section>
+</StarlightPage>
+
+<style>
+  .lede {
+    max-width: 40rem;
+    margin: 0 0 var(--space-6);
+    color: var(--color-text);
+  }
+</style>
