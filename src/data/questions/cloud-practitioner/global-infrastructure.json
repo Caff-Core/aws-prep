@@ -1,0 +1,133 @@
+[
+  {
+    "id": "clf-global-infra-az-definition",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.2",
+    "lessonId": "cloud-practitioner/global-infrastructure",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "Which statement best describes an Availability Zone?",
+    "options": [
+      {
+        "id": "discrete-data-centers",
+        "text": "One or more discrete data centers with redundant power, networking, and connectivity in a Region",
+        "explanation": "Correct. This is how AWS defines an Availability Zone."
+      },
+      {
+        "id": "group-of-regions",
+        "text": "A geographic grouping of several Regions",
+        "explanation": "The relationship is the other way round: a Region contains Availability Zones."
+      },
+      {
+        "id": "cache-site",
+        "text": "A site that caches content close to users",
+        "explanation": "That describes an edge location, which Amazon CloudFront uses to deliver content."
+      },
+      {
+        "id": "single-server",
+        "text": "A single server that AWS assigns to one customer",
+        "explanation": "An Availability Zone is data center infrastructure shared by many customers, not one server."
+      }
+    ],
+    "correctOptionIds": ["discrete-data-centers"],
+    "explanation": "A Region is a physical location where AWS clusters data centers. Each Availability Zone within it is one or more discrete data centers with redundant power, networking, and connectivity.",
+    "references": [
+      {
+        "title": "AWS Regions and Availability Zones",
+        "url": "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-global-infra-multi-az-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.2",
+    "lessonId": "cloud-practitioner/global-infrastructure",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "An online retailer runs its website on servers in one Availability Zone. A power failure in that Availability Zone takes the website offline. What is the most direct way to reduce the impact of a similar failure?",
+    "options": [
+      {
+        "id": "multi-az",
+        "text": "Run the website across multiple Availability Zones in the Region",
+        "explanation": "Correct. Availability Zones do not share single points of failure such as generators and cooling equipment, so the website can keep running in another zone."
+      },
+      {
+        "id": "bigger-server",
+        "text": "Move the website to a larger server in the same Availability Zone",
+        "explanation": "A larger server adds capacity, but it still depends on the same Availability Zone."
+      },
+      {
+        "id": "more-edge",
+        "text": "Add more edge locations to the Availability Zone",
+        "explanation": "Edge locations are not part of an Availability Zone, and customers do not add them."
+      },
+      {
+        "id": "support-plan",
+        "text": "Upgrade the AWS Support plan",
+        "explanation": "A support plan gives access to help. It does not change how the website is deployed."
+      }
+    ],
+    "correctOptionIds": ["multi-az"],
+    "explanation": "High availability comes from removing single points of failure. Running across multiple Availability Zones means a failure in one zone does not have to stop the application.",
+    "references": [
+      {
+        "title": "AWS Fault Isolation Boundaries: Availability Zones",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-global-infra-multi-region-reasons",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.2",
+    "lessonId": "cloud-practitioner/global-infrastructure",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO are valid reasons for a company to use more than one AWS Region?",
+    "options": [
+      {
+        "id": "disaster-recovery",
+        "text": "Disaster recovery and business continuity",
+        "explanation": "Correct. A second Region gives a company somewhere to recover if a whole Region is affected."
+      },
+      {
+        "id": "low-latency",
+        "text": "Lower latency for users in different parts of the world",
+        "explanation": "Correct. Selecting a Region close to users lowers network latency."
+      },
+      {
+        "id": "shared-responsibility",
+        "text": "Moving security responsibility for its data to AWS",
+        "explanation": "Customers remain responsible for security in the cloud, whichever Regions they use."
+      },
+      {
+        "id": "no-azs",
+        "text": "Avoiding the need for Availability Zones",
+        "explanation": "Every Region is made up of Availability Zones, so using more Regions does not remove them."
+      },
+      {
+        "id": "free-services",
+        "text": "Using AWS services without charge",
+        "explanation": "Using another Region does not make services free."
+      }
+    ],
+    "correctOptionIds": ["disaster-recovery", "low-latency"],
+    "explanation": "The exam guide lists disaster recovery, business continuity, low latency for end users, and data sovereignty as reasons to use multiple Regions.",
+    "references": [
+      {
+        "title": "CLF-C02 exam guide: Domain 3",
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
