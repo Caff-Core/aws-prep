@@ -98,24 +98,123 @@ export default {
       title: 'Cloud Concepts',
       description: 'Why organisations use the cloud, how it is designed, and how it changes costs.',
       domainIds: ['cloud-concepts'],
+      topics: [
+        {
+          slug: 'benefits-of-the-cloud',
+          title: 'Benefits of the AWS Cloud',
+          taskStatements: ['1.1'],
+        },
+        {
+          slug: 'well-architected-framework',
+          title: 'The AWS Well-Architected Framework',
+          taskStatements: ['1.2'],
+        },
+        {
+          slug: 'cloud-adoption-and-migration',
+          title: 'Cloud adoption and migration',
+          taskStatements: ['1.3'],
+        },
+        { slug: 'cloud-economics', title: 'Cloud economics', taskStatements: ['1.4'] },
+      ],
     },
     {
       slug: 'security-compliance',
       title: 'Security and Compliance',
       description: 'Who secures what, how access is controlled, and where to find security tools.',
       domainIds: ['security-compliance'],
+      topics: [
+        {
+          slug: 'shared-responsibility-model',
+          title: 'The AWS shared responsibility model',
+          taskStatements: ['2.1'],
+        },
+        {
+          slug: 'governance-and-compliance',
+          title: 'Governance and compliance',
+          taskStatements: ['2.2'],
+        },
+        {
+          slug: 'encryption-and-security-logging',
+          title: 'Encryption and security logging',
+          taskStatements: ['2.2'],
+        },
+        {
+          slug: 'identity-and-access-management',
+          title: 'Identity and access management',
+          taskStatements: ['2.3'],
+        },
+        {
+          slug: 'root-user-and-credentials',
+          title: 'Protecting the root user and credentials',
+          taskStatements: ['2.3'],
+        },
+        {
+          slug: 'security-services-and-resources',
+          title: 'Security services and resources',
+          taskStatements: ['2.4'],
+        },
+      ],
     },
     {
       slug: 'technology-services',
       title: 'Cloud Technology and Services',
       description: 'The global infrastructure and the core services built on top of it.',
       domainIds: ['technology-services'],
+      topics: [
+        {
+          slug: 'deploying-and-operating',
+          title: 'Deploying and operating in the cloud',
+          taskStatements: ['3.1'],
+        },
+        {
+          slug: 'global-infrastructure',
+          title: 'AWS global infrastructure',
+          taskStatements: ['3.2'],
+        },
+        { slug: 'compute-services', title: 'Compute services', taskStatements: ['3.3'] },
+        {
+          slug: 'containers-and-serverless',
+          title: 'Containers and serverless',
+          taskStatements: ['3.3'],
+        },
+        { slug: 'database-services', title: 'Database services', taskStatements: ['3.4'] },
+        { slug: 'network-services', title: 'Network services', taskStatements: ['3.5'] },
+        { slug: 'storage-services', title: 'Storage services', taskStatements: ['3.6'] },
+        {
+          slug: 'ai-ml-and-analytics',
+          title: 'AI, machine learning, and analytics',
+          taskStatements: ['3.7'],
+        },
+        {
+          slug: 'other-in-scope-services',
+          title: 'Integration, developer, and other services',
+          taskStatements: ['3.8'],
+        },
+      ],
     },
     {
       slug: 'billing-support',
       title: 'Billing, Pricing, and Support',
       description: 'How AWS charges, how to manage costs, and where to get help.',
       domainIds: ['billing-support'],
+      topics: [
+        { slug: 'pricing-models', title: 'AWS pricing models', taskStatements: ['4.1'] },
+        {
+          slug: 'billing-and-cost-management',
+          title: 'Billing and cost management',
+          taskStatements: ['4.2'],
+        },
+        {
+          slug: 'support-and-technical-resources',
+          title: 'AWS Support and technical resources',
+          taskStatements: ['4.3'],
+        },
+        {
+          slug: 'partners-and-marketplace',
+          title: 'AWS Partners and AWS Marketplace',
+          taskStatements: ['4.3'],
+        },
+      ],
     },
   ],
   mockExam: { durationMinutes: 90, questionCount: 65 },

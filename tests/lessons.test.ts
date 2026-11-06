@@ -34,6 +34,11 @@ describe('lesson content', () => {
     for (const id of lesson.taskStatements) expect(tasks).toContain(id);
 
     expect(file.startsWith(`${lesson.certification}/${lesson.module}/`)).toBe(true);
+
+    const module = certification.modules.find((item) => item.slug === lesson.module);
+    const topic = module?.topics.find((item) => lesson.id === `${certification.id}/${item.slug}`);
+    expect(topic, `${lesson.id} is not in the curriculum`).toBeDefined();
+    for (const id of lesson.taskStatements) expect(topic?.taskStatements).toContain(id);
   });
 
   it('has unique lesson ids', () => {
