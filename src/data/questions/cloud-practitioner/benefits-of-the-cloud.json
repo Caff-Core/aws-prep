@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-benefits-elasticity-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.1",
+    "lessonId": "cloud-practitioner/benefits-of-the-cloud",
+    "reviewStatus": "in-review",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "An online ticket seller has low traffic most of the year but very high traffic when popular events go on sale. It wants to run only the capacity it needs at any moment. Which cloud benefit does this describe?",
+    "options": [
+      {
+        "id": "elasticity",
+        "text": "Elasticity",
+        "explanation": "Correct. Elasticity means scaling resources up or down to match changing demand."
+      },
+      {
+        "id": "high-availability",
+        "text": "High availability",
+        "explanation": "High availability is about staying usable when part of a system fails, not about changing demand."
+      },
+      {
+        "id": "economies-of-scale",
+        "text": "Economies of scale",
+        "explanation": "Economies of scale explain why AWS can offer lower prices. They do not describe matching capacity to demand."
+      },
+      {
+        "id": "global-reach",
+        "text": "Global reach",
+        "explanation": "Global reach is about deploying close to users around the world."
+      }
+    ],
+    "correctOptionIds": ["elasticity"],
+    "explanation": "The clue is demand that changes. Elasticity avoids paying for peak capacity all year.",
+    "references": [
+      {
+        "title": "What is cloud computing?",
+        "url": "https://aws.amazon.com/what-is-cloud-computing/"
+      }
+    ]
+  },
+  {
+    "id": "clf-benefits-fixed-variable",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.1",
+    "lessonId": "cloud-practitioner/benefits-of-the-cloud",
+    "reviewStatus": "in-review",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A new company does not want to buy servers before it knows how many customers it will have. It prefers to pay only for what it uses. Which advantage of cloud computing does this match?",
+    "options": [
+      {
+        "id": "fixed-to-variable",
+        "text": "Trade fixed expense for variable expense",
+        "explanation": "Correct. The company avoids an upfront investment and pays for what it consumes."
+      },
+      {
+        "id": "go-global",
+        "text": "Go global in minutes",
+        "explanation": "This advantage is about deploying in multiple Regions, which the company has not asked for."
+      },
+      {
+        "id": "stop-maintaining",
+        "text": "Stop spending money running and maintaining data centers",
+        "explanation": "This is a related benefit, but the scenario focuses on how the company pays, not on upkeep."
+      },
+      {
+        "id": "speed-agility",
+        "text": "Increase speed and agility",
+        "explanation": "This advantage is about how quickly resources become available."
+      }
+    ],
+    "correctOptionIds": ["fixed-to-variable"],
+    "explanation": "Paying as you go instead of investing up front is the trade of fixed expense for variable expense.",
+    "references": [
+      {
+        "title": "Six advantages of cloud computing",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      }
+    ]
+  },
+  {
+    "id": "clf-benefits-six-advantages",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.1",
+    "lessonId": "cloud-practitioner/benefits-of-the-cloud",
+    "reviewStatus": "in-review",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "Which TWO are among the six advantages of cloud computing that AWS describes?",
+    "options": [
+      {
+        "id": "stop-guessing",
+        "text": "Stop guessing capacity",
+        "explanation": "Correct. You can scale up or down rather than predicting capacity in advance."
+      },
+      {
+        "id": "go-global",
+        "text": "Go global in minutes",
+        "explanation": "Correct. You can deploy in multiple Regions around the world."
+      },
+      {
+        "id": "no-security-duty",
+        "text": "Remove all customer security responsibilities",
+        "explanation": "Customers keep security responsibilities in the cloud. This is not one of the six advantages."
+      },
+      {
+        "id": "always-cheaper",
+        "text": "Guarantee a lower bill than any on-premises system",
+        "explanation": "Costs depend on how resources are used. AWS makes no such guarantee in the six advantages."
+      },
+      {
+        "id": "no-regions",
+        "text": "Avoid choosing where applications run",
+        "explanation": "Customers still choose which Regions to use."
+      }
+    ],
+    "correctOptionIds": ["stop-guessing", "go-global"],
+    "explanation": "The six advantages are about cost, scale, capacity, speed, focus, and global reach.",
+    "references": [
+      {
+        "title": "Six advantages of cloud computing",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      }
+    ]
+  },
+  {
+    "id": "clf-benefits-agility-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.1",
+    "lessonId": "cloud-practitioner/benefits-of-the-cloud",
+    "reviewStatus": "in-review",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A development team wants to test a new product idea. In the past, it waited weeks for hardware. Now it creates the resources it needs in minutes and removes them when the test ends. Which benefit does this show?",
+    "options": [
+      {
+        "id": "agility",
+        "text": "Agility",
+        "explanation": "Correct. Fast, low-cost access to resources lets teams experiment more often."
+      },
+      {
+        "id": "high-availability",
+        "text": "High availability",
+        "explanation": "Nothing in the scenario involves surviving a failure."
+      },
+      {
+        "id": "economies-of-scale",
+        "text": "Economies of scale",
+        "explanation": "This describes how AWS lowers prices through combined usage."
+      },
+      {
+        "id": "elasticity",
+        "text": "Elasticity",
+        "explanation": "Elasticity responds to changing demand. This scenario is about how quickly a team can start something new."
+      }
+    ],
+    "correctOptionIds": ["agility"],
+    "explanation": "Resources that are available in minutes rather than weeks lower the cost and time of experimenting.",
+    "references": [
+      {
+        "title": "Six advantages of cloud computing",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      }
+    ]
+  },
+  {
+    "id": "clf-benefits-availability-vs-elasticity",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.1",
+    "lessonId": "cloud-practitioner/benefits-of-the-cloud",
+    "reviewStatus": "in-review",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A hospital's booking system must stay usable even if one part of its infrastructure fails. Demand for the system is steady. Which benefit should the hospital focus on?",
+    "options": [
+      {
+        "id": "high-availability",
+        "text": "High availability",
+        "explanation": "Correct. The requirement is to stay usable when part of the system fails."
+      },
+      {
+        "id": "elasticity",
+        "text": "Elasticity",
+        "explanation": "Elasticity handles changing demand, and this demand is steady."
+      },
+      {
+        "id": "fixed-to-variable",
+        "text": "Trade fixed expense for variable expense",
+        "explanation": "This is about how costs are paid, not about surviving a failure."
+      },
+      {
+        "id": "go-global",
+        "text": "Go global in minutes",
+        "explanation": "The scenario does not mention reaching users around the world."
+      }
+    ],
+    "correctOptionIds": ["high-availability"],
+    "explanation": "The clue is failure rather than demand. High availability keeps a workload available for use when part of it fails.",
+    "references": [
+      {
+        "title": "Reliability Pillar: Availability",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/availability.html"
+      }
+    ]
+  }
+]
