@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-economics-fixed-variable",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.4",
+    "lessonId": "cloud-practitioner/cloud-economics",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company bought servers that sit mostly idle, but it paid for them in full. After moving to AWS, it pays only for what it uses. What changed?",
+    "options": [
+      {
+        "id": "fixed-to-variable",
+        "text": "A fixed cost became a variable cost",
+        "explanation": "Correct. Cost now rises and falls with use."
+      },
+      {
+        "id": "variable-to-fixed",
+        "text": "A variable cost became a fixed cost",
+        "explanation": "This is the wrong way round."
+      },
+      {
+        "id": "no-costs",
+        "text": "All IT costs were removed",
+        "explanation": "The company still pays for what it uses."
+      },
+      {
+        "id": "byol",
+        "text": "The company adopted Bring Your Own License",
+        "explanation": "Licensing is not part of this scenario."
+      }
+    ],
+    "correctOptionIds": ["fixed-to-variable"],
+    "explanation": "Paying only for what you consume is a variable cost.",
+    "references": [
+      {
+        "title": "Six advantages of cloud computing",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-economics-rightsizing",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.4",
+    "lessonId": "cloud-practitioner/cloud-economics",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company sees that a server rarely uses much of its capacity, so it moves the workload to a smaller size. What is this practice called?",
+    "options": [
+      {
+        "id": "rightsizing",
+        "text": "Rightsizing",
+        "explanation": "Correct. Rightsizing matches resources to what a workload actually needs."
+      },
+      {
+        "id": "rehosting",
+        "text": "Rehosting",
+        "explanation": "Rehosting is a migration strategy that moves an application without changes."
+      },
+      {
+        "id": "economies-of-scale",
+        "text": "Economies of scale",
+        "explanation": "This describes lower unit costs at large scale."
+      },
+      {
+        "id": "byol",
+        "text": "Bring Your Own License",
+        "explanation": "This is a licensing approach."
+      }
+    ],
+    "correctOptionIds": ["rightsizing"],
+    "explanation": "AWS Compute Optimizer can generate rightsizing recommendations.",
+    "references": [
+      {
+        "title": "What is AWS Compute Optimizer?",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-right-sizing/cost-optimization-right-sizing.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-economics-byol",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.4",
+    "lessonId": "cloud-practitioner/cloud-economics",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company already owns eligible server software licenses and wants to keep using them on AWS. Which approach fits?",
+    "options": [
+      {
+        "id": "byol",
+        "text": "Bring Your Own License",
+        "explanation": "Correct. BYOL uses licenses you already hold, subject to their terms."
+      },
+      {
+        "id": "license-included",
+        "text": "License included",
+        "explanation": "With license included, you pay for a license as part of the resource price."
+      },
+      {
+        "id": "rightsizing",
+        "text": "Rightsizing",
+        "explanation": "Rightsizing is about matching resource size to need."
+      },
+      {
+        "id": "spot",
+        "text": "Spot Instances",
+        "explanation": "Spot Instances are a compute purchasing option, not a licensing approach."
+      }
+    ],
+    "correctOptionIds": ["byol"],
+    "explanation": "BYOL applies when a company has licenses it is allowed to bring.",
+    "references": [
+      {
+        "title": "Microsoft on AWS licensing FAQ",
+        "url": "https://aws.amazon.com/windows/faq/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-economics-on-premises-costs",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.4",
+    "lessonId": "cloud-practitioner/cloud-economics",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO costs does a company stop carrying directly when it moves a workload from its own data center to AWS?",
+    "options": [
+      {
+        "id": "power-cooling",
+        "text": "Power and cooling for the data center",
+        "explanation": "Correct. AWS runs the facilities."
+      },
+      {
+        "id": "hardware",
+        "text": "Replacing failed physical servers",
+        "explanation": "Correct. AWS manages the hardware."
+      },
+      {
+        "id": "app-code",
+        "text": "Developing its own application code",
+        "explanation": "Customers still build and manage their applications."
+      },
+      {
+        "id": "data-classification",
+        "text": "Deciding how sensitive its data is",
+        "explanation": "Customers remain responsible for their data."
+      },
+      {
+        "id": "access",
+        "text": "Deciding which staff get access to its resources",
+        "explanation": "Customers still manage access."
+      }
+    ],
+    "correctOptionIds": ["power-cooling", "hardware"],
+    "explanation": "AWS takes on the physical side of running infrastructure. Customers keep responsibility for their applications and data.",
+    "references": [
+      {
+        "title": "What is Amazon RDS?",
+        "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-economics-scale",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.4",
+    "lessonId": "cloud-practitioner/cloud-economics",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Why can AWS offer lower pay-as-you-go prices than most organisations could achieve alone?",
+    "options": [
+      {
+        "id": "scale",
+        "text": "It combines usage from a very large number of customers",
+        "explanation": "Correct. This is the benefit of massive economies of scale."
+      },
+      {
+        "id": "no-hardware",
+        "text": "It does not need physical hardware",
+        "explanation": "AWS runs a great deal of physical hardware."
+      },
+      {
+        "id": "free-power",
+        "text": "It does not pay for power",
+        "explanation": "Nothing suggests this, and running data centers uses power."
+      },
+      {
+        "id": "reserved-only",
+        "text": "It requires every customer to sign a long-term contract",
+        "explanation": "Pay-as-you-go pricing requires no long-term contract."
+      }
+    ],
+    "correctOptionIds": ["scale"],
+    "explanation": "Combined usage across customers gives AWS economies of scale.",
+    "references": [
+      {
+        "title": "Six advantages of cloud computing",
+        "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

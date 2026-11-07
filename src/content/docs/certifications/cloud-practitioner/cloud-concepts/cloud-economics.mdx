@@ -1,0 +1,213 @@
+---
+title: Cloud economics
+description: How moving to the cloud changes costs, including fixed and variable costs, licensing, rightsizing, automation, and economies of scale.
+sidebar:
+  order: 4
+lesson:
+  id: cloud-practitioner/cloud-economics
+  certification: cloud-practitioner
+  module: cloud-concepts
+  domain: cloud-concepts
+  taskStatements: ['1.4']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 20
+  lastReviewed: 2026-11-07
+  objectives:
+    - Compare fixed costs with variable costs.
+    - Identify costs associated with on-premises environments.
+    - Compare Bring Your Own License with included licenses.
+    - Explain rightsizing, the benefits of automation, and economies of scale.
+  prerequisites:
+    - The six advantages from the Benefits of the AWS Cloud lesson.
+  references:
+    - title: The value of cloud (AWS Cloud Economics)
+      url: https://aws.amazon.com/economics/
+    - title: Six advantages of cloud computing
+      url: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html
+    - title: What is AWS Compute Optimizer?
+      url: https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-right-sizing/cost-optimization-right-sizing.html
+    - title: Microsoft on AWS licensing FAQ
+      url: https://aws.amazon.com/windows/faq/
+    - title: Amazon EC2 Dedicated Hosts
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
+    - title: 'CLF-C02 exam guide: Domain 1'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain1.md
+---
+
+import {
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+Buying a car means a large payment up front, then insurance and servicing whether you drive or not.
+Using e-hailing means paying for each trip. If you drive every day, one may suit you. If you travel
+occasionally, the other may. The total depends on how you use it.
+
+Cloud economics works the same way. It changes **when** you pay, **what** you pay for, and **who**
+carries the work of running the equipment.
+
+## Fixed costs and variable costs
+
+A **fixed cost** stays the same whether you use something or not. A **variable cost** changes with how
+much you use.
+
+Buying servers is a fixed cost. You pay for them even when they sit idle. The AWS Cloud lets you trade
+that for variable costs, so you pay for the IT you actually consume.
+
+<ImportantConcept>
+  Moving to variable costs lowers the risk of guessing wrong. If a project fails, you stop using the
+  resources instead of being left with equipment you bought.
+</ImportantConcept>
+
+## Costs of running on-premises
+
+The price of a server is only part of the cost of running your own environment. You also carry:
+
+- Data center space, power, and cooling.
+- Networking equipment.
+- Buying, installing, and replacing hardware.
+- Software installation and patching.
+- Staff time to do all of the above.
+
+When you use AWS, it takes on the physical side of this work. How much else it takes on depends on the
+service. For example, with Amazon Relational Database Service (Amazon RDS), AWS also handles database
+software patching and backups.
+
+<ServiceComparison
+  caption="Who carries which cost"
+  columns={['Cost', 'On-premises', 'AWS Cloud']}
+  rows={[
+    {
+      name: 'Buildings, power, and cooling',
+      cells: ['You pay directly', 'Included in service prices'],
+    },
+    { name: 'Hardware', cells: ['You buy and replace it', 'AWS buys and replaces it'] },
+    {
+      name: 'Spare capacity',
+      cells: ['You pay for it while it sits idle', 'You scale to match demand'],
+    },
+    { name: 'Your applications and data', cells: ['You manage them', 'You still manage them'] },
+  ]}
+/>
+
+## Economies of scale
+
+**Economies of scale** means that cost per unit falls as size grows. AWS combines usage from a very
+large number of customers, which lets it offer lower pay-as-you-go prices than most organisations could
+reach by themselves.
+
+## Licensing strategies
+
+Software often needs a license, and AWS offers two main approaches.
+
+<ServiceComparison
+  caption="Licensing strategies compared"
+  columns={['Model', 'How it works', 'Fits when']}
+  rows={[
+    {
+      name: 'Bring Your Own License (BYOL)',
+      cells: [
+        'You use licenses you already own, if their terms allow it. You manage them yourself.',
+        'You have already paid for eligible licenses',
+      ],
+    },
+    {
+      name: 'License included',
+      cells: [
+        'The license cost is part of the price of the AWS resource. AWS provides the license.',
+        'You want no separate license to manage',
+      ],
+    },
+  ]}
+/>
+
+Eligibility depends on the terms of your license. For example, Amazon EC2 **Dedicated Hosts** give you
+a physical server for your own use, which supports licenses tied to sockets or cores. Check your
+license terms before you plan to bring it.
+
+## Rightsizing
+
+**Rightsizing** means matching resources to what a workload actually needs. A server that rarely uses
+its capacity is costing more than necessary. Moving it to a smaller size reduces the bill without
+hurting the workload.
+
+**AWS Compute Optimizer** analyses configuration and usage data, then recommends rightsizing changes
+and identifies idle resources.
+
+<CostWarning title="Cost warning: savings are not automatic">
+  Moving to the cloud does not reduce costs by itself. Oversized or idle resources keep costing
+  money until someone changes them.
+</CostWarning>
+
+## The benefits of automation
+
+Automation means letting software do repeatable work. In cloud economics, its value comes from less
+manual effort and fewer mistakes. Examples from earlier lessons:
+
+- Amazon EC2 Auto Scaling adjusts capacity without anyone watching a dashboard.
+- AWS DMS manages the hardware and software that a migration needs.
+
+Staff time saved can go to work that helps the business. AWS lists staff productivity as part of the
+value of the cloud, alongside cost savings, operational resilience, business agility, and
+sustainability.
+
+<RealWorldExample title="Real-world example: a retailer's first year">
+  A Johannesburg retailer moves its online store to AWS. It no longer plans a hardware refresh,
+  which removes a large fixed cost. After a month, Compute Optimizer shows that several servers are
+  oversized, so the team rightsizes them. Staff who used to replace disks now work on the store
+  itself.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Paying for idle equipment** points to fixed costs. **Already owns licenses** points to BYOL.
+  **Oversized resources** points to rightsizing. **Lower prices because of many customers** points
+  to economies of scale.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Moving to AWS removes all IT costs."** You still pay for what you use, and you still manage your
+  applications and data.
+- **"Cloud cost only means the monthly bill."** A fair comparison includes on-premises costs such as
+  power, cooling, hardware replacement, and staff time.
+- **"Any license can move to AWS."** Eligibility depends on the license terms.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. List everything needed to run one server in an
+office for three years, including power, cooling, space, and staff time. Mark each item as a fixed or
+variable cost. Most people find more items than they expect.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/cloud-economics"
+  questionIds={[
+    'clf-economics-fixed-variable',
+    'clf-economics-rightsizing',
+    'clf-economics-byol',
+    'clf-economics-on-premises-costs',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- The cloud trades fixed costs for variable costs.
+- On-premises costs include space, power, cooling, hardware, and staff time.
+- Economies of scale let AWS offer lower pay-as-you-go prices.
+- BYOL uses eligible licenses you own. With license included, the price covers the license.
+- Rightsizing matches resources to real needs, and automation reduces manual effort.
+
+</LessonSummary>
