@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-billing-calculator",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.2",
+    "lessonId": "cloud-practitioner/billing-and-cost-management",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to estimate the cost of a new architecture before it builds anything. Which tool fits?",
+    "options": [
+      {
+        "id": "calculator",
+        "text": "AWS Pricing Calculator",
+        "explanation": "Correct. It estimates costs before you build."
+      },
+      {
+        "id": "cost-explorer",
+        "text": "AWS Cost Explorer",
+        "explanation": "Cost Explorer analyses existing costs."
+      },
+      {
+        "id": "trusted-advisor",
+        "text": "AWS Trusted Advisor",
+        "explanation": "Trusted Advisor checks an existing environment."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions."
+      }
+    ],
+    "correctOptionIds": ["calculator"],
+    "explanation": "Estimating in advance points to AWS Pricing Calculator.",
+    "references": [
+      {
+        "title": "What is AWS Pricing Calculator?",
+        "url": "https://docs.aws.amazon.com/pricing-calculator/latest/userguide/what-is-pricing-calculator.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-billing-budgets",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.2",
+    "lessonId": "cloud-practitioner/billing-and-cost-management",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants an alert when its monthly spending is forecast to pass a limit. Which tool fits?",
+    "options": [
+      {
+        "id": "budgets",
+        "text": "AWS Budgets",
+        "explanation": "Correct. Budgets alerts on actual or forecasted spend."
+      },
+      {
+        "id": "calculator",
+        "text": "AWS Pricing Calculator",
+        "explanation": "The calculator estimates before you build."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      },
+      {
+        "id": "config",
+        "text": "AWS Config",
+        "explanation": "AWS Config records configuration."
+      }
+    ],
+    "correctOptionIds": ["budgets"],
+    "explanation": "Alerts on spending point to AWS Budgets.",
+    "references": [
+      {
+        "title": "Managing your costs with AWS Budgets",
+        "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-billing-consolidated",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.2",
+    "lessonId": "cloud-practitioner/billing-and-cost-management",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO are benefits of consolidated billing in AWS Organizations?",
+    "options": [
+      {
+        "id": "one-bill",
+        "text": "One bill for multiple accounts",
+        "explanation": "Correct. The management account pays for all member accounts."
+      },
+      {
+        "id": "combined",
+        "text": "Combined usage that can share volume discounts",
+        "explanation": "Correct. Combined usage shares discounts."
+      },
+      {
+        "id": "free-support",
+        "text": "Free AWS Enterprise Support",
+        "explanation": "Consolidated billing does not include a support plan."
+      },
+      {
+        "id": "no-charges",
+        "text": "No charges for member accounts",
+        "explanation": "Usage is still charged."
+      },
+      {
+        "id": "auto-rightsize",
+        "text": "Automatic rightsizing of all instances",
+        "explanation": "Consolidated billing does not change resources."
+      }
+    ],
+    "correctOptionIds": ["one-bill", "combined"],
+    "explanation": "Consolidated billing gives one bill and combined usage at no extra fee.",
+    "references": [
+      {
+        "title": "Consolidated billing for AWS Organizations",
+        "url": "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-billing-tags",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.2",
+    "lessonId": "cloud-practitioner/billing-and-cost-management",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to see AWS costs for each project in its reports. What should it use?",
+    "options": [
+      {
+        "id": "tags",
+        "text": "Cost allocation tags",
+        "explanation": "Correct. Tags track costs by project, team, or similar."
+      },
+      {
+        "id": "sg",
+        "text": "Security groups",
+        "explanation": "Security groups are virtual firewalls."
+      },
+      {
+        "id": "iam",
+        "text": "IAM roles",
+        "explanation": "Roles provide temporary access."
+      },
+      {
+        "id": "regions",
+        "text": "A separate Region for each project",
+        "explanation": "Regions are not a cost tracking tool."
+      }
+    ],
+    "correctOptionIds": ["tags"],
+    "explanation": "Tracking cost by project points to cost allocation tags.",
+    "references": [
+      {
+        "title": "Cost allocation tags",
+        "url": "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-billing-cost-explorer",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.2",
+    "lessonId": "cloud-practitioner/billing-and-cost-management",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A finance team wants to view the past months of spending and see which services cost the most. Which tool fits?",
+    "options": [
+      {
+        "id": "cost-explorer",
+        "text": "AWS Cost Explorer",
+        "explanation": "Correct. It visualises and analyses costs and usage."
+      },
+      {
+        "id": "calculator",
+        "text": "AWS Pricing Calculator",
+        "explanation": "The calculator estimates future builds."
+      },
+      {
+        "id": "well-architected",
+        "text": "AWS Well-Architected Tool",
+        "explanation": "This reviews architecture."
+      },
+      {
+        "id": "waf",
+        "text": "AWS WAF",
+        "explanation": "AWS WAF filters web requests."
+      }
+    ],
+    "correctOptionIds": ["cost-explorer"],
+    "explanation": "Analysing past spending points to AWS Cost Explorer.",
+    "references": [
+      {
+        "title": "Analyzing your costs with AWS Cost Explorer",
+        "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
