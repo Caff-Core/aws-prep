@@ -1,0 +1,254 @@
+[
+  {
+    "id": "clf-secsvc-shield",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.4",
+    "lessonId": "cloud-practitioner/security-services-and-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants protection against distributed denial of service (DDoS) attacks. Which service provides this?",
+    "options": [
+      {
+        "id": "shield",
+        "text": "AWS Shield",
+        "explanation": "Correct. AWS Shield protects against DDoS attacks."
+      },
+      {
+        "id": "inspector",
+        "text": "Amazon Inspector",
+        "explanation": "Inspector scans for vulnerabilities."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance reports."
+      },
+      {
+        "id": "config",
+        "text": "AWS Config",
+        "explanation": "AWS Config records resource configuration."
+      }
+    ],
+    "correctOptionIds": ["shield"],
+    "explanation": "DDoS points to AWS Shield.",
+    "references": [
+      {
+        "title": "AWS Shield",
+        "url": "https://docs.aws.amazon.com/waf/latest/developerguide/shield-chapter.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-secsvc-waf",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.4",
+    "lessonId": "cloud-practitioner/security-services-and-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to block SQL injection attempts against its web application. Which service helps?",
+    "options": [
+      {
+        "id": "waf",
+        "text": "AWS WAF",
+        "explanation": "Correct. AWS WAF inspects web requests and can block SQL injection patterns."
+      },
+      {
+        "id": "shield",
+        "text": "AWS Shield",
+        "explanation": "AWS Shield focuses on DDoS attacks."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions."
+      },
+      {
+        "id": "kms",
+        "text": "AWS KMS",
+        "explanation": "AWS KMS manages encryption keys."
+      }
+    ],
+    "correctOptionIds": ["waf"],
+    "explanation": "Filtering web requests points to AWS WAF.",
+    "references": [
+      {
+        "title": "What is AWS WAF?",
+        "url": "https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-secsvc-guardduty-inspector",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.4",
+    "lessonId": "cloud-practitioner/security-services-and-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company wants a service that analyses account and network activity for signs of malicious behaviour. Which service fits?",
+    "options": [
+      {
+        "id": "guardduty",
+        "text": "Amazon GuardDuty",
+        "explanation": "Correct. GuardDuty is a threat detection service."
+      },
+      {
+        "id": "inspector",
+        "text": "Amazon Inspector",
+        "explanation": "Inspector scans software for vulnerabilities rather than watching activity for threats."
+      },
+      {
+        "id": "firewall-manager",
+        "text": "AWS Firewall Manager",
+        "explanation": "Firewall Manager applies protections centrally."
+      },
+      {
+        "id": "pricing",
+        "text": "AWS Pricing Calculator",
+        "explanation": "This tool estimates costs."
+      }
+    ],
+    "correctOptionIds": ["guardduty"],
+    "explanation": "GuardDuty detects threats. Inspector finds vulnerabilities.",
+    "references": [
+      {
+        "title": "What is Amazon GuardDuty?",
+        "url": "https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-secsvc-security-hub",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.4",
+    "lessonId": "cloud-practitioner/security-services-and-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A security team wants to view findings from Amazon GuardDuty and Amazon Inspector in one place across its accounts. Which service fits?",
+    "options": [
+      {
+        "id": "security-hub",
+        "text": "AWS Security Hub",
+        "explanation": "Correct. It aggregates findings and gives a view of security state across accounts."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance reports."
+      },
+      {
+        "id": "waf",
+        "text": "AWS WAF",
+        "explanation": "AWS WAF filters web requests."
+      },
+      {
+        "id": "secrets",
+        "text": "AWS Secrets Manager",
+        "explanation": "Secrets Manager stores secrets."
+      }
+    ],
+    "correctOptionIds": ["security-hub"],
+    "explanation": "A central view of findings points to AWS Security Hub.",
+    "references": [
+      {
+        "title": "What is AWS Security Hub CSPM?",
+        "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-secsvc-marketplace",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.4",
+    "lessonId": "cloud-practitioner/security-services-and-resources",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "Where can a company find third-party security products to use on AWS?",
+    "options": [
+      {
+        "id": "marketplace",
+        "text": "AWS Marketplace",
+        "explanation": "Correct. It is a catalog of third-party software, including security products."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides AWS compliance documents."
+      },
+      {
+        "id": "cloudwatch",
+        "text": "Amazon CloudWatch",
+        "explanation": "CloudWatch monitors resources."
+      },
+      {
+        "id": "iam",
+        "text": "AWS IAM",
+        "explanation": "IAM controls access."
+      }
+    ],
+    "correctOptionIds": ["marketplace"],
+    "explanation": "Third-party products point to AWS Marketplace.",
+    "references": [
+      {
+        "title": "Security in AWS Marketplace",
+        "url": "https://aws.amazon.com/marketplace/solutions/security"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-secsvc-shield-standard",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.4",
+    "lessonId": "cloud-practitioner/security-services-and-resources",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which statement about AWS Shield Standard is correct?",
+    "options": [
+      {
+        "id": "automatic",
+        "text": "It is included automatically at no extra cost",
+        "explanation": "Correct. Shield Standard is included for AWS customers."
+      },
+      {
+        "id": "subscribe",
+        "text": "Customers must subscribe and pay an additional fee",
+        "explanation": "This describes Shield Advanced."
+      },
+      {
+        "id": "response-team",
+        "text": "It includes access to the Shield Response Team",
+        "explanation": "This is a feature of Shield Advanced."
+      },
+      {
+        "id": "sql",
+        "text": "It is designed to block SQL injection",
+        "explanation": "That is a job for AWS WAF."
+      }
+    ],
+    "correctOptionIds": ["automatic"],
+    "explanation": "Shield Standard needs no activation.",
+    "references": [
+      {
+        "title": "AWS Shield",
+        "url": "https://docs.aws.amazon.com/waf/latest/developerguide/shield-chapter.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

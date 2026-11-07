@@ -1,0 +1,215 @@
+---
+title: Security services and resources
+description: How AWS WAF, AWS Shield, AWS Firewall Manager, Amazon GuardDuty, Amazon Inspector, AWS Security Hub, and AWS Trusted Advisor differ, and where to find security information.
+sidebar:
+  order: 6
+lesson:
+  id: cloud-practitioner/security-services-and-resources
+  certification: cloud-practitioner
+  module: security-compliance
+  domain: security-compliance
+  taskStatements: ['2.2', '2.4']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Match AWS security services to the problems they solve.
+    - Compare AWS Shield Standard and AWS Shield Advanced.
+    - Explain how AWS Trusted Advisor helps identify security issues.
+    - Locate AWS security information and third-party security products.
+  prerequisites:
+    - The AWS shared responsibility model.
+  references:
+    - title: What is AWS WAF?
+      url: https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html
+    - title: AWS Shield
+      url: https://docs.aws.amazon.com/waf/latest/developerguide/shield-chapter.html
+    - title: AWS Firewall Manager
+      url: https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html
+    - title: What is Amazon GuardDuty?
+      url: https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html
+    - title: What is Amazon Inspector?
+      url: https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html
+    - title: What is AWS Security Hub CSPM?
+      url: https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html
+    - title: AWS Trusted Advisor
+      url: https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html
+    - title: Security in AWS Marketplace
+      url: https://aws.amazon.com/marketplace/solutions/security
+    - title: AWS Cloud Security
+      url: https://aws.amazon.com/security/
+    - title: 'CLF-C02 exam guide: Domain 2'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain2.md
+---
+
+import {
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+A shopping centre uses several kinds of protection. Guards at the door turn away troublemakers. Crowd
+barriers stop a stampede. Cameras spot suspicious behaviour. Inspectors check for broken locks. A
+control room brings it all together.
+
+AWS security services divide the work in the same way. Each has a specific job, and the exam tests
+whether you can match the job to the service.
+
+## Keeping attacks out
+
+### AWS WAF
+
+**AWS WAF** is a web application firewall. It inspects HTTP and HTTPS requests and allows or blocks them
+according to your rules. Rules can look at things like IP addresses, countries, and patterns such as SQL
+injection and cross-site scripting, which are common attacks on web applications.
+
+### AWS Shield
+
+**AWS Shield** protects against distributed denial of service (DDoS) attacks, which try to overwhelm a
+system with traffic.
+
+<ServiceComparison
+  caption="AWS Shield Standard and Advanced compared"
+  columns={['Feature', 'Shield Standard', 'Shield Advanced']}
+  rows={[
+    { name: 'Cost', cells: ['Included at no extra cost', 'Additional cost'] },
+    { name: 'Activation', cells: ['Automatic', 'You subscribe'] },
+    {
+      name: 'Protection',
+      cells: [
+        'Common volumetric DDoS attacks',
+        'Adds application-layer mitigation and advanced visibility',
+      ],
+    },
+    { name: 'Expert help', cells: ['Not included', 'Access to the Shield Response Team'] },
+  ]}
+/>
+
+### AWS Firewall Manager
+
+**AWS Firewall Manager** manages protections centrally across accounts and resources, including AWS WAF
+rules, Shield Advanced, and security groups. New accounts and resources receive the protections
+automatically.
+
+## Finding problems
+
+### Amazon GuardDuty
+
+**Amazon GuardDuty** is a threat detection service. It analyses data sources such as AWS CloudTrail
+events, VPC Flow Logs, and DNS logs, looking for signs of malicious activity. It reports what it finds as
+findings.
+
+### Amazon Inspector
+
+**Amazon Inspector** is a vulnerability management service. It automatically scans Amazon EC2 instances,
+container images, and AWS Lambda functions for software vulnerabilities and unintended network exposure.
+
+<ImportantConcept>
+  GuardDuty looks for **active threats** in your activity. Inspector looks for **weaknesses** in
+  your software, before someone exploits them.
+</ImportantConcept>
+
+### AWS Security Hub
+
+**AWS Security Hub** gives you a view of your security state across accounts. It collects findings from
+services such as GuardDuty and Inspector, and it runs checks against security standards. Its documentation
+now uses the name AWS Security Hub CSPM for this capability, where CSPM stands for cloud security posture
+management.
+
+### AWS Trusted Advisor
+
+**AWS Trusted Advisor** inspects your environment and recommends improvements, including ways to close
+security gaps. Security is one of its check categories, along with areas like cost optimization and
+performance. Which checks you can use depends on your support plan.
+
+<ServiceComparison
+  caption="AWS security services compared"
+  columns={['Service', 'Job', 'Scenario clue']}
+  rows={[
+    { name: 'AWS WAF', cells: ['Filter web requests', 'Block SQL injection'] },
+    { name: 'AWS Shield', cells: ['Protect against DDoS', 'Traffic flood'] },
+    {
+      name: 'AWS Firewall Manager',
+      cells: ['Manage rules centrally', 'Many accounts, one set of rules'],
+    },
+    { name: 'Amazon GuardDuty', cells: ['Detect threats', 'Suspicious activity'] },
+    { name: 'Amazon Inspector', cells: ['Find vulnerabilities', 'Scan for software flaws'] },
+    { name: 'AWS Security Hub', cells: ['Bring findings together', 'One view across accounts'] },
+    { name: 'AWS Trusted Advisor', cells: ['Recommend improvements', 'Best-practice checks'] },
+  ]}
+/>
+
+<CostWarning>
+  Several of these services have their own charges, and some offer a limited free trial. AWS Shield
+  Standard is included at no extra cost. Check each service's pricing before you turn it on.
+</CostWarning>
+
+## Third-party products and security information
+
+**AWS Marketplace** is a catalog of third-party software, including security products such as firewalls
+and antivirus tools. You can buy and deploy them through it.
+
+To learn more about security on AWS, use these official resources:
+
+- **AWS Security Center**, the main landing page for AWS security information.
+- **AWS Security Blog**, for articles on current security topics.
+- **AWS Knowledge Center**, for answers to common questions.
+
+<RealWorldExample title="Real-world example: an online store under attack">
+  A Bloemfontein online store sees a sudden flood of traffic. AWS Shield Standard is already
+  protecting it against common network attacks. The team adds AWS WAF rules to block malicious web
+  requests. Amazon GuardDuty then flags unusual activity from one account, and AWS Security Hub
+  shows the team everything in one place.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **DDoS** points to AWS Shield. **SQL injection or web requests** points to AWS WAF. **Malicious
+  activity** points to Amazon GuardDuty. **Software vulnerabilities** points to Amazon Inspector.
+  **Central view of findings** points to AWS Security Hub.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Shield Standard needs to be turned on."** It is included automatically.
+- **"GuardDuty and Inspector do the same thing."** One detects threats, the other finds vulnerabilities.
+- **"AWS WAF stops every kind of attack."** It inspects HTTP and HTTPS requests. Other layers need other
+  protections.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Browse the
+[AWS Security Blog](https://aws.amazon.com/blogs/security/) and pick one recent post. Write down which
+service from this lesson it relates to, and what problem it addresses.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/security-services-and-resources"
+  questionIds={[
+    'clf-secsvc-shield',
+    'clf-secsvc-waf',
+    'clf-secsvc-guardduty-inspector',
+    'clf-secsvc-security-hub',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- AWS WAF filters web requests, and AWS Shield protects against DDoS attacks.
+- AWS Firewall Manager applies protections centrally.
+- Amazon GuardDuty detects threats, and Amazon Inspector finds vulnerabilities.
+- AWS Security Hub brings findings together, and Trusted Advisor recommends improvements.
+- AWS Marketplace offers third-party security products.
+
+</LessonSummary>
