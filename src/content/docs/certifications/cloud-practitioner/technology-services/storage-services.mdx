@@ -1,0 +1,221 @@
+---
+title: Storage services
+description: Object, block, and file storage on AWS, Amazon S3 storage classes and lifecycle policies, and hybrid and backup services.
+sidebar:
+  order: 7
+lesson:
+  id: cloud-practitioner/storage-services
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.6']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 30
+  lastReviewed: 2026-11-07
+  objectives:
+    - Tell object, block, and file storage apart.
+    - Compare Amazon S3 storage classes and explain lifecycle policies.
+    - Identify Amazon EBS, instance store, Amazon EFS, and Amazon FSx.
+    - Describe AWS Storage Gateway and AWS Backup.
+  prerequisites:
+    - Compute services.
+  references:
+    - title: What is Amazon S3?
+      url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+    - title: Amazon S3 storage classes
+      url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
+    - title: Managing the lifecycle of objects
+      url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html
+    - title: What is Amazon EBS?
+      url: https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html
+    - title: Instance store temporary block storage
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    - title: Data persistence for instance store volumes
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-lifetime.html
+    - title: What is Amazon EFS?
+      url: https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html
+    - title: Amazon FSx
+      url: https://aws.amazon.com/fsx/
+    - title: What is AWS Storage Gateway?
+      url: https://docs.aws.amazon.com/storagegateway/latest/vgw/WhatIsStorageGateway.html
+    - title: What is AWS Backup?
+      url: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+Think about three ways to store things. A warehouse hands over whole boxes by label. A hard drive plugged
+into one computer lets it change any small part quickly. A shared office cabinet lets many people open
+the same folders.
+
+These match the three types of cloud storage: **object**, **block**, and **file**.
+
+<ServiceComparison
+  caption="Types of storage compared"
+  columns={['Type', 'How it works', 'AWS services']}
+  rows={[
+    { name: 'Object', cells: ['Whole objects, stored with a key', 'Amazon S3'] },
+    { name: 'Block', cells: ['A disk attached to a server', 'Amazon EBS, instance store'] },
+    { name: 'File', cells: ['Shared folders over a network', 'Amazon EFS, Amazon FSx'] },
+  ]}
+/>
+
+## Amazon S3: object storage
+
+**Amazon Simple Storage Service (Amazon S3)** stores objects in **buckets**, each identified by a key.
+Uses include data lakes, websites, backup and restore, and archives. Buckets and objects are private by
+default.
+
+### Storage classes
+
+Different data needs different handling. S3 storage classes trade access speed and resilience against
+cost.
+
+<ServiceComparison
+  caption="Amazon S3 storage classes compared"
+  columns={['Class', 'Fits', 'Note']}
+  rows={[
+    { name: 'S3 Standard', cells: ['Frequently accessed data', 'The default class'] },
+    {
+      name: 'S3 Intelligent-Tiering',
+      cells: ['Unknown or changing access patterns', 'Moves objects between tiers automatically'],
+    },
+    {
+      name: 'S3 Standard-IA',
+      cells: [
+        'Infrequent access, needed quickly',
+        'Multiple Availability Zones, with retrieval fees',
+      ],
+    },
+    {
+      name: 'S3 One Zone-IA',
+      cells: ['Infrequent access, can be recreated', 'One Availability Zone, so less resilient'],
+    },
+    {
+      name: 'S3 Express One Zone',
+      cells: [
+        'Latency-sensitive workloads',
+        'One Availability Zone, single-digit millisecond access',
+      ],
+    },
+    {
+      name: 'S3 Glacier Instant Retrieval',
+      cells: ['Archives accessed about once a quarter', 'Millisecond retrieval'],
+    },
+    {
+      name: 'S3 Glacier Flexible Retrieval',
+      cells: ['Archives accessed about once a year', 'Retrieval takes minutes to hours'],
+    },
+    {
+      name: 'S3 Glacier Deep Archive',
+      cells: ['Archives accessed less than once a year', 'Retrieval takes hours'],
+    },
+  ]}
+/>
+
+### Lifecycle policies
+
+An **S3 Lifecycle** configuration automates what happens to objects over time. **Transition** actions
+move objects to a cheaper class, and **expiration** actions delete them. For example, you might move logs
+to S3 Standard-IA after 30 days and archive them after a year.
+
+## Block storage
+
+**Amazon Elastic Block Store (Amazon EBS)** provides volumes that attach to EC2 instances and work like a
+local disk. **Snapshots** are point-in-time backups of a volume.
+
+**Instance store** is temporary block storage on disks physically attached to the host. It suits buffers,
+caches, and scratch data. Data survives a reboot, but it is lost when the instance stops, hibernates, or
+terminates, or if the disk fails.
+
+<ImportantConcept>
+  EBS volumes persist separately from an instance. Instance store is temporary, so never keep the
+  only copy of important data there.
+</ImportantConcept>
+
+## File storage
+
+**Amazon Elastic File System (Amazon EFS)** is serverless, elastic file storage using the Network File
+System (NFS) protocol. It scales automatically and can be shared by many instances. Its documentation
+says it is not supported with Windows EC2 instances.
+
+**Amazon FSx** provides fully managed file systems built on popular technologies: FSx for Windows File
+Server, FSx for Lustre (for high-performance workloads), FSx for NetApp ONTAP, and FSx for OpenZFS.
+
+## Hybrid storage and backup
+
+**AWS Storage Gateway** connects on-premises environments to AWS storage. Cached volumes keep frequently
+used data locally and store the rest in Amazon S3, which is why the exam calls this a cached file system
+option.
+
+**AWS Backup** is a centralised, policy-based backup service across AWS services. It suits organisations
+that want one place to manage backups for resources such as Amazon EBS, Amazon RDS, and Amazon EFS.
+
+<CostWarning>
+  Cheaper storage classes can add retrieval fees and minimum storage durations, so the lowest
+  storage price is not always the lowest total cost. Lifecycle transitions also carry request
+  charges.
+</CostWarning>
+
+<RealWorldExample title="Real-world example: a medical imaging company">
+  A Bloemfontein imaging company keeps new scans in S3 Standard, because doctors view them often. A
+  lifecycle policy moves them to S3 Glacier Instant Retrieval later, because they are rarely needed
+  but must open quickly. AWS Backup manages backups of its databases from one place.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Unknown access patterns** points to S3 Intelligent-Tiering. **Long-term archive** points to S3
+  Glacier classes. **Disk for one EC2 instance** points to Amazon EBS. **Shared Linux file system**
+  points to Amazon EFS. **Windows file shares** points to FSx for Windows File Server. **On-premises
+  access to cloud storage** points to AWS Storage Gateway.
+</ExamTip>
+
+## Common misconceptions
+
+- **"S3 is a disk for my server."** It is object storage. Amazon EBS is the disk.
+- **"Instance store data survives a stop."** It does not.
+- **"One Zone-IA is as resilient as Standard-IA."** It keeps data in a single Availability Zone.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Sort your own files into groups: used daily,
+used rarely, and kept for years. Pick an S3 storage class for each group from the table above.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/storage-services"
+  questionIds={[
+    'clf-storage-object',
+    'clf-storage-intelligent',
+    'clf-storage-instance-store',
+    'clf-storage-lifecycle',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Amazon S3 is object storage, with classes for different access needs.
+- Lifecycle policies move or delete objects automatically.
+- Amazon EBS is persistent block storage, and instance store is temporary.
+- Amazon EFS and Amazon FSx provide file storage.
+- AWS Storage Gateway connects on-premises systems to AWS storage, and AWS Backup centralises backups.
+
+</LessonSummary>

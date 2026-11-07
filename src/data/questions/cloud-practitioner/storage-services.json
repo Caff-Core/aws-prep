@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-storage-object",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.6",
+    "lessonId": "cloud-practitioner/storage-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to store millions of images and access them by key. Which type of storage fits, and which service provides it?",
+    "options": [
+      {
+        "id": "s3",
+        "text": "Object storage with Amazon S3",
+        "explanation": "Correct. Amazon S3 stores objects in buckets, identified by keys."
+      },
+      {
+        "id": "ebs",
+        "text": "Block storage with Amazon EBS",
+        "explanation": "Amazon EBS is a disk attached to an instance."
+      },
+      {
+        "id": "efs",
+        "text": "File storage with Amazon EFS",
+        "explanation": "Amazon EFS provides shared file systems."
+      },
+      {
+        "id": "elasticache",
+        "text": "In-memory storage with Amazon ElastiCache",
+        "explanation": "ElastiCache is a cache."
+      }
+    ],
+    "correctOptionIds": ["s3"],
+    "explanation": "Objects with keys point to Amazon S3.",
+    "references": [
+      {
+        "title": "What is Amazon S3?",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-storage-intelligent",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.6",
+    "lessonId": "cloud-practitioner/storage-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company stores data but cannot predict how often it will be accessed. Which S3 storage class fits?",
+    "options": [
+      {
+        "id": "intelligent",
+        "text": "S3 Intelligent-Tiering",
+        "explanation": "Correct. It suits unknown or changing access patterns."
+      },
+      {
+        "id": "deep-archive",
+        "text": "S3 Glacier Deep Archive",
+        "explanation": "This suits data accessed less than once a year."
+      },
+      {
+        "id": "one-zone",
+        "text": "S3 One Zone-IA",
+        "explanation": "This suits infrequently accessed data that can be recreated."
+      },
+      {
+        "id": "express",
+        "text": "S3 Express One Zone",
+        "explanation": "This suits latency-sensitive workloads."
+      }
+    ],
+    "correctOptionIds": ["intelligent"],
+    "explanation": "Unknown access patterns point to S3 Intelligent-Tiering.",
+    "references": [
+      {
+        "title": "Amazon S3 storage classes",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-storage-instance-store",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.6",
+    "lessonId": "cloud-practitioner/storage-services",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "What happens to data on an instance store volume when its EC2 instance is stopped?",
+    "options": [
+      {
+        "id": "lost",
+        "text": "The data is lost",
+        "explanation": "Correct. Instance store data does not survive a stop."
+      },
+      {
+        "id": "kept",
+        "text": "The data is kept until the instance starts again",
+        "explanation": "That describes persistent storage such as Amazon EBS."
+      },
+      {
+        "id": "s3",
+        "text": "The data moves to Amazon S3 automatically",
+        "explanation": "Nothing moves automatically."
+      },
+      {
+        "id": "snapshot",
+        "text": "A snapshot is created automatically",
+        "explanation": "Snapshots are a feature of Amazon EBS."
+      }
+    ],
+    "correctOptionIds": ["lost"],
+    "explanation": "Instance store is temporary. Data survives a reboot but not a stop.",
+    "references": [
+      {
+        "title": "Data persistence for instance store volumes",
+        "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-lifetime.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-storage-lifecycle",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.6",
+    "lessonId": "cloud-practitioner/storage-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants logs moved automatically to a cheaper storage class after 30 days. What should it use?",
+    "options": [
+      {
+        "id": "lifecycle",
+        "text": "An S3 Lifecycle configuration",
+        "explanation": "Correct. Transition actions move objects after a set time."
+      },
+      {
+        "id": "iam",
+        "text": "An IAM policy",
+        "explanation": "IAM policies define permissions."
+      },
+      {
+        "id": "sg",
+        "text": "A security group",
+        "explanation": "A security group is a virtual firewall."
+      },
+      {
+        "id": "budget",
+        "text": "An AWS Budgets alert",
+        "explanation": "Budgets tracks spending."
+      }
+    ],
+    "correctOptionIds": ["lifecycle"],
+    "explanation": "Automatic transitions point to S3 Lifecycle.",
+    "references": [
+      {
+        "title": "Managing the lifecycle of objects",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-storage-efs",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.6",
+    "lessonId": "cloud-practitioner/storage-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "Many Linux EC2 instances need to share the same files at the same time. Which service fits?",
+    "options": [
+      {
+        "id": "efs",
+        "text": "Amazon EFS",
+        "explanation": "Correct. Amazon EFS is shared file storage using NFS."
+      },
+      {
+        "id": "instance-store",
+        "text": "Instance store",
+        "explanation": "Instance store is temporary storage on one host."
+      },
+      {
+        "id": "glacier",
+        "text": "S3 Glacier Flexible Retrieval",
+        "explanation": "This is archive storage."
+      },
+      {
+        "id": "sqs",
+        "text": "Amazon SQS",
+        "explanation": "Amazon SQS is a message queue."
+      }
+    ],
+    "correctOptionIds": ["efs"],
+    "explanation": "Shared files for Linux instances point to Amazon EFS.",
+    "references": [
+      {
+        "title": "What is Amazon EFS?",
+        "url": "https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
