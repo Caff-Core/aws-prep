@@ -9,6 +9,12 @@ Work is tracked in [GitHub issues](https://github.com/Caff-Core/aws-prep/issues)
 4. **Assessment and revision.** Mock exams, dashboards, weak-area analysis, and optional accounts.
 5. **Additional certifications.** New paths on the shared framework.
 
+## Status
+
+- Phases 1 and 2 are merged.
+- Phase 3: first editions exist for all 23 Cloud Practitioner topics, with 117 `in-review` questions.
+  Each has a review sheet in `docs/reviews/`. Human review is the remaining step.
+
 ## Open decisions
 
 - Donation provider (#14)
