@@ -1,0 +1,184 @@
+---
+title: Identity and access management
+description: How AWS Identity and Access Management controls access through users, groups, roles, and policies, and how least privilege and federation work.
+sidebar:
+  order: 4
+lesson:
+  id: cloud-practitioner/identity-and-access-management
+  certification: cloud-practitioner
+  module: security-compliance
+  domain: security-compliance
+  taskStatements: ['2.3']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Define users, groups, roles, and policies.
+    - Compare AWS managed, customer managed, and inline policies.
+    - Apply the principle of least privilege.
+    - Describe IAM Identity Center and federated identity.
+  prerequisites:
+    - The AWS shared responsibility model.
+  references:
+    - title: What is IAM?
+      url: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
+    - title: IAM identities
+      url: https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html
+    - title: Managed policies and inline policies
+      url: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html
+    - title: Security best practices in IAM
+      url: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
+    - title: What is IAM Identity Center?
+      url: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
+    - title: Identity providers and federation
+      url: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html
+    - title: 'CLF-C02 exam guide: Domain 2'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain2.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+An office building gives each person an access card. A cleaner's card opens the storerooms. A finance
+manager's opens the finance floor. Nobody needs a card that opens everything, and a visiting contractor
+gets a temporary pass that stops working when the job ends.
+
+**AWS Identity and Access Management (IAM)** does this for your AWS account. It controls who can sign in
+and what they are allowed to do. There is no charge for IAM itself.
+
+Two words matter here. **Authentication** proves who you are. **Authorization** decides what you may do.
+
+## The building blocks
+
+<ServiceComparison
+  caption="IAM building blocks"
+  columns={['Item', 'What it is', 'Office comparison']}
+  rows={[
+    { name: 'User', cells: ['An identity for one person or application', 'A named staff member'] },
+    { name: 'Group', cells: ['A collection of users', 'The finance department'] },
+    {
+      name: 'Role',
+      cells: ['An identity not tied to one person, used temporarily', 'A visitor pass'],
+    },
+    {
+      name: 'Policy',
+      cells: ['A document listing allowed actions on resources', 'The rules on an access card'],
+    },
+  ]}
+/>
+
+Attaching a policy to a group gives those permissions to every user in it. This is easier to manage
+than setting permissions person by person.
+
+**Roles** provide temporary credentials. AWS recommends roles for workloads, and federation with
+temporary credentials for people. A **cross-account IAM role** lets an identity in one AWS account work
+in another account without a separate user there.
+
+## Types of policy
+
+<ServiceComparison
+  caption="Types of IAM policy"
+  columns={['Type', 'Created by', 'Reusable?', 'Fits when']}
+  rows={[
+    {
+      name: 'AWS managed',
+      cells: ['AWS', 'Yes, but you cannot edit it', 'You want a quick starting point'],
+    },
+    {
+      name: 'Customer managed',
+      cells: ['You', 'Yes, and you can update it', 'You want precise control'],
+    },
+    {
+      name: 'Inline',
+      cells: ['You', 'No, it belongs to one identity', 'A strict one-to-one link is needed'],
+    },
+  ]}
+/>
+
+## The principle of least privilege
+
+**Least privilege** means granting only the permissions needed to perform a task. If an account is
+compromised, narrow permissions limit the damage.
+
+In practice:
+
+- Start with AWS managed policies, then move to customer managed policies that fit your needs.
+- Review access regularly and remove unused users, roles, and credentials.
+- Use last accessed information to find permissions nobody uses.
+
+<ImportantConcept>
+  Give people what they need for their job, and no more. "Administrator access for everyone" is
+  convenient and dangerous.
+</ImportantConcept>
+
+## Federation and IAM Identity Center
+
+**Federated identity** means people sign in with an identity they already have, such as a company
+account, instead of a separate IAM user. They receive temporary credentials. AWS recommends federation
+for human users.
+
+**AWS IAM Identity Center** connects your workforce to multiple AWS accounts and applications. It can
+use your existing identity provider, or you can create users in it directly. It is the successor to AWS
+Single Sign-On.
+
+<RealWorldExample title="Real-world example: a growing software company">
+  A Stellenbosch software company has several AWS accounts. Staff sign in through IAM Identity
+  Center with their company login. Developers receive permissions for the development account only.
+  A monitoring tool uses a role, so no long-term password sits in its configuration. When someone
+  leaves, disabling their company login removes access.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Only the permissions needed** means least privilege. **Same permissions for a team** points to
+  groups. **Temporary access, or access for an application** points to roles. **Sign in with
+  existing company accounts across AWS accounts** points to IAM Identity Center.
+</ExamTip>
+
+## Common misconceptions
+
+- **"A role belongs to one person."** A role is not tied to a specific person. It is assumed when
+  needed.
+- **"Groups can sign in."** A group is a collection of users. It is not an identity you sign in with.
+- **"Everyone needs an IAM user."** AWS recommends federation with temporary credentials for people.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Pick three jobs at a company, such as accountant,
+developer, and auditor. For each, write the smallest set of permissions the person needs. Then decide
+whether a group or a role fits best.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/identity-and-access-management"
+  questionIds={[
+    'clf-iam-least-privilege',
+    'clf-iam-groups',
+    'clf-iam-role-application',
+    'clf-iam-identity-center',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- IAM controls who can sign in and what they can do.
+- Users are identities, groups collect users, roles give temporary access, and policies list
+  permissions.
+- Policies can be AWS managed, customer managed, or inline.
+- Least privilege grants only the permissions a task needs.
+- IAM Identity Center and federation let people use existing identities.
+
+</LessonSummary>

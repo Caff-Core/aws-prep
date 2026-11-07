@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-iam-least-privilege",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.3",
+    "lessonId": "cloud-practitioner/identity-and-access-management",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "What does the principle of least privilege mean?",
+    "options": [
+      {
+        "id": "minimum",
+        "text": "Grant only the permissions needed to perform a task",
+        "explanation": "Correct. This limits the damage if an identity is compromised."
+      },
+      {
+        "id": "all-admin",
+        "text": "Give all staff administrator access",
+        "explanation": "This is the opposite of least privilege."
+      },
+      {
+        "id": "no-access",
+        "text": "Give nobody any permissions",
+        "explanation": "People need permissions to do their work."
+      },
+      {
+        "id": "root-only",
+        "text": "Use the root user for all tasks",
+        "explanation": "AWS advises against using the root user for everyday tasks."
+      }
+    ],
+    "correctOptionIds": ["minimum"],
+    "explanation": "Grant only what a task needs.",
+    "references": [
+      {
+        "title": "Security best practices in IAM",
+        "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-iam-groups",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.3",
+    "lessonId": "cloud-practitioner/identity-and-access-management",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "Ten developers need the same permissions. What is the simplest way to manage this in IAM?",
+    "options": [
+      {
+        "id": "group",
+        "text": "Add them to a group and attach a policy to the group",
+        "explanation": "Correct. A group applies permissions to all its users."
+      },
+      {
+        "id": "root",
+        "text": "Share the root user",
+        "explanation": "Root credentials must never be shared."
+      },
+      {
+        "id": "shared-user",
+        "text": "Have them share one IAM user",
+        "explanation": "Shared users make it impossible to tell who did what."
+      },
+      {
+        "id": "artifact",
+        "text": "Use AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      }
+    ],
+    "correctOptionIds": ["group"],
+    "explanation": "Groups collect users so that permissions are easier to manage.",
+    "references": [
+      {
+        "title": "IAM identities",
+        "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-iam-role-application",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.3",
+    "lessonId": "cloud-practitioner/identity-and-access-management",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "An application running on Amazon EC2 needs access to an Amazon S3 bucket. What does AWS recommend?",
+    "options": [
+      {
+        "id": "role",
+        "text": "Use an IAM role",
+        "explanation": "Correct. AWS recommends roles for workloads because they provide temporary credentials."
+      },
+      {
+        "id": "hardcode",
+        "text": "Store an access key in the application code",
+        "explanation": "Access keys must not be stored in code."
+      },
+      {
+        "id": "root-key",
+        "text": "Use the root user's access keys",
+        "explanation": "AWS advises against creating root access keys."
+      },
+      {
+        "id": "public",
+        "text": "Make the bucket public",
+        "explanation": "This would expose the data to everyone."
+      }
+    ],
+    "correctOptionIds": ["role"],
+    "explanation": "Roles give workloads temporary credentials.",
+    "references": [
+      {
+        "title": "Security best practices in IAM",
+        "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-iam-identity-center",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.3",
+    "lessonId": "cloud-practitioner/identity-and-access-management",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company wants staff to use their existing company sign-in to reach several AWS accounts. Which service fits?",
+    "options": [
+      {
+        "id": "identity-center",
+        "text": "AWS IAM Identity Center",
+        "explanation": "Correct. It connects your workforce to multiple AWS accounts and applications."
+      },
+      {
+        "id": "kms",
+        "text": "AWS KMS",
+        "explanation": "AWS KMS manages encryption keys."
+      },
+      {
+        "id": "waf",
+        "text": "AWS WAF",
+        "explanation": "AWS WAF filters web requests."
+      },
+      {
+        "id": "config",
+        "text": "AWS Config",
+        "explanation": "AWS Config records resource configuration."
+      }
+    ],
+    "correctOptionIds": ["identity-center"],
+    "explanation": "Workforce access across accounts points to IAM Identity Center.",
+    "references": [
+      {
+        "title": "What is IAM Identity Center?",
+        "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-iam-policy-types",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.3",
+    "lessonId": "cloud-practitioner/identity-and-access-management",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which type of IAM policy is created and updated by AWS, and cannot be edited by customers?",
+    "options": [
+      {
+        "id": "aws-managed",
+        "text": "AWS managed policy",
+        "explanation": "Correct. AWS creates and updates these policies."
+      },
+      {
+        "id": "customer-managed",
+        "text": "Customer managed policy",
+        "explanation": "You create and update these yourself."
+      },
+      {
+        "id": "inline",
+        "text": "Inline policy",
+        "explanation": "Inline policies are embedded in a single identity by you."
+      },
+      {
+        "id": "password",
+        "text": "Password policy",
+        "explanation": "A password policy sets password rules, not permissions."
+      }
+    ],
+    "correctOptionIds": ["aws-managed"],
+    "explanation": "AWS managed policies are a good starting point.",
+    "references": [
+      {
+        "title": "Managed policies and inline policies",
+        "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
