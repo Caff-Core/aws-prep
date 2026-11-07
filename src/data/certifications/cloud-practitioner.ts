@@ -151,7 +151,7 @@ export default {
         {
           slug: 'security-services-and-resources',
           title: 'Security services and resources',
-          taskStatements: ['2.4'],
+          taskStatements: ['2.2', '2.4'],
         },
       ],
     },
