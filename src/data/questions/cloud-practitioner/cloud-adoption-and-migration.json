@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-migration-caf-purpose",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.3",
+    "lessonId": "cloud-practitioner/cloud-adoption-and-migration",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "What is the main purpose of the AWS Cloud Adoption Framework (AWS CAF)?",
+    "options": [
+      {
+        "id": "guide-adoption",
+        "text": "To help organisations identify capabilities and plan their move to the cloud",
+        "explanation": "Correct. AWS CAF is guidance for cloud transformation and business outcomes."
+      },
+      {
+        "id": "review-workload",
+        "text": "To review a single workload against architectural best practices",
+        "explanation": "That describes a Well-Architected review."
+      },
+      {
+        "id": "estimate-cost",
+        "text": "To estimate the monthly cost of AWS services",
+        "explanation": "That describes the AWS Pricing Calculator."
+      },
+      {
+        "id": "replicate-data",
+        "text": "To replicate data between databases",
+        "explanation": "That describes AWS Database Migration Service."
+      }
+    ],
+    "correctOptionIds": ["guide-adoption"],
+    "explanation": "AWS CAF works at the level of the organisation, not a single workload.",
+    "references": [
+      {
+        "title": "AWS Cloud Adoption Framework",
+        "url": "https://aws.amazon.com/cloud-adoption-framework/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-migration-rehost-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.3",
+    "lessonId": "cloud-practitioner/cloud-adoption-and-migration",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to move an application to AWS quickly, without changing the application. Which migration strategy is this?",
+    "options": [
+      {
+        "id": "rehost",
+        "text": "Rehost",
+        "explanation": "Correct. Rehosting, or lift and shift, moves an application without changes."
+      },
+      {
+        "id": "refactor",
+        "text": "Refactor",
+        "explanation": "Refactoring redesigns the application to use cloud-native features."
+      },
+      {
+        "id": "repurchase",
+        "text": "Repurchase",
+        "explanation": "Repurchasing replaces the application with a different product."
+      },
+      {
+        "id": "retire",
+        "text": "Retire",
+        "explanation": "Retiring decommissions the application."
+      }
+    ],
+    "correctOptionIds": ["rehost"],
+    "explanation": "The clue is moving without changes.",
+    "references": [
+      {
+        "title": "Migration strategies (AWS Prescriptive Guidance)",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-migration-repurchase-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.3",
+    "lessonId": "cloud-practitioner/cloud-adoption-and-migration",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company decides to stop running its own customer management application and to subscribe to a software as a service product instead. Which migration strategy is this?",
+    "options": [
+      {
+        "id": "repurchase",
+        "text": "Repurchase",
+        "explanation": "Correct. Repurchasing replaces an application with a different product, such as software as a service."
+      },
+      {
+        "id": "replatform",
+        "text": "Replatform",
+        "explanation": "Replatforming moves the same application with some optimisation."
+      },
+      {
+        "id": "retain",
+        "text": "Retain",
+        "explanation": "Retaining keeps the application where it is."
+      },
+      {
+        "id": "rehost",
+        "text": "Rehost",
+        "explanation": "Rehosting moves the same application without changes."
+      }
+    ],
+    "correctOptionIds": ["repurchase"],
+    "explanation": "The application is replaced rather than moved, which is repurchase.",
+    "references": [
+      {
+        "title": "Migration strategies (AWS Prescriptive Guidance)",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-migration-dms-replication",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.3",
+    "lessonId": "cloud-practitioner/cloud-adoption-and-migration",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company must move a production database to AWS. The source database has to stay in use until the switch, and changes must keep flowing to the new database. Which AWS service supports this?",
+    "options": [
+      {
+        "id": "dms",
+        "text": "AWS Database Migration Service",
+        "explanation": "Correct. AWS DMS can keep replicating changes so that source and target stay in sync."
+      },
+      {
+        "id": "cloudfront",
+        "text": "Amazon CloudFront",
+        "explanation": "CloudFront delivers content to users."
+      },
+      {
+        "id": "well-architected",
+        "text": "AWS Well-Architected Tool",
+        "explanation": "This tool reviews workloads against best practices."
+      },
+      {
+        "id": "compute-optimizer",
+        "text": "AWS Compute Optimizer",
+        "explanation": "Compute Optimizer recommends rightsizing changes."
+      }
+    ],
+    "correctOptionIds": ["dms"],
+    "explanation": "Ongoing replication is the clue that points to AWS DMS.",
+    "references": [
+      {
+        "title": "What is AWS Database Migration Service?",
+        "url": "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-migration-caf-perspectives",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.3",
+    "lessonId": "cloud-practitioner/cloud-adoption-and-migration",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO are perspectives of the AWS Cloud Adoption Framework?",
+    "options": [
+      {
+        "id": "governance",
+        "text": "Governance",
+        "explanation": "Correct. Governance is one of the six perspectives."
+      },
+      {
+        "id": "people",
+        "text": "People",
+        "explanation": "Correct. People is one of the six perspectives."
+      },
+      {
+        "id": "reliability",
+        "text": "Reliability",
+        "explanation": "Reliability is a Well-Architected pillar, not an AWS CAF perspective."
+      },
+      {
+        "id": "sustainability",
+        "text": "Sustainability",
+        "explanation": "Sustainability is a Well-Architected pillar, not an AWS CAF perspective."
+      },
+      {
+        "id": "elasticity",
+        "text": "Elasticity",
+        "explanation": "Elasticity is a benefit of the cloud."
+      }
+    ],
+    "correctOptionIds": ["governance", "people"],
+    "explanation": "The perspectives are business, people, governance, platform, security, and operations.",
+    "references": [
+      {
+        "title": "AWS Cloud Adoption Framework",
+        "url": "https://aws.amazon.com/cloud-adoption-framework/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
