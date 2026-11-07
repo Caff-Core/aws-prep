@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-encryption-at-rest",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/encryption-and-security-logging",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "What does encryption at rest protect?",
+    "options": [
+      {
+        "id": "stored",
+        "text": "Data that is stored",
+        "explanation": "Correct. Encryption at rest protects stored data."
+      },
+      {
+        "id": "moving",
+        "text": "Data moving between systems",
+        "explanation": "That is encryption in transit."
+      },
+      {
+        "id": "passwords-only",
+        "text": "Only IAM passwords",
+        "explanation": "It applies to stored data in general."
+      },
+      {
+        "id": "physical",
+        "text": "The physical data center",
+        "explanation": "Physical security is a separate control."
+      }
+    ],
+    "correctOptionIds": ["stored"],
+    "explanation": "At rest means stored. In transit means moving.",
+    "references": [
+      {
+        "title": "Protecting data with encryption (Amazon S3)",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-encryption-kms",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/encryption-and-security-logging",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to create and control the keys that encrypt its data. Which service should it use?",
+    "options": [
+      {
+        "id": "kms",
+        "text": "AWS Key Management Service",
+        "explanation": "Correct. AWS KMS creates and controls encryption keys."
+      },
+      {
+        "id": "acm",
+        "text": "AWS Certificate Manager",
+        "explanation": "ACM manages SSL/TLS certificates."
+      },
+      {
+        "id": "secrets",
+        "text": "AWS Secrets Manager",
+        "explanation": "Secrets Manager stores secrets such as database credentials."
+      },
+      {
+        "id": "iam",
+        "text": "AWS IAM",
+        "explanation": "IAM controls access, but it is not where encryption keys are created."
+      }
+    ],
+    "correctOptionIds": ["kms"],
+    "explanation": "Encryption keys point to AWS KMS.",
+    "references": [
+      {
+        "title": "AWS Key Management Service",
+        "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-encryption-acm",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/encryption-and-security-logging",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company needs a public SSL/TLS certificate that renews automatically for its website. Which service helps?",
+    "options": [
+      {
+        "id": "acm",
+        "text": "AWS Certificate Manager",
+        "explanation": "Correct. ACM creates, stores, and renews SSL/TLS certificates."
+      },
+      {
+        "id": "kms",
+        "text": "AWS Key Management Service",
+        "explanation": "AWS KMS manages encryption keys, not website certificates."
+      },
+      {
+        "id": "shield",
+        "text": "AWS Shield",
+        "explanation": "AWS Shield protects against DDoS attacks."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance reports."
+      }
+    ],
+    "correctOptionIds": ["acm"],
+    "explanation": "SSL/TLS certificates point to AWS Certificate Manager.",
+    "references": [
+      {
+        "title": "What is AWS Certificate Manager?",
+        "url": "https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-encryption-logs",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/encryption-and-security-logging",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Where can a company keep AWS CloudTrail logs for longer than the event history provides?",
+    "options": [
+      {
+        "id": "s3-trail",
+        "text": "In an Amazon S3 bucket, by creating a trail",
+        "explanation": "Correct. A trail delivers logs to Amazon S3."
+      },
+      {
+        "id": "artifact",
+        "text": "In AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      },
+      {
+        "id": "iam",
+        "text": "In an IAM policy",
+        "explanation": "Policies define permissions."
+      },
+      {
+        "id": "kms",
+        "text": "In an AWS KMS key",
+        "explanation": "Keys are used for encryption and do not store logs."
+      }
+    ],
+    "correctOptionIds": ["s3-trail"],
+    "explanation": "Event history covers the last 90 days of management events. Trails deliver logs to Amazon S3.",
+    "references": [
+      {
+        "title": "What is AWS CloudTrail?",
+        "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-encryption-transit-https",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/encryption-and-security-logging",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company's users connect to its website, and their details must be protected as they cross the internet. Which protection applies?",
+    "options": [
+      {
+        "id": "in-transit",
+        "text": "Encryption in transit",
+        "explanation": "Correct. Data moving across a network is protected in transit, typically with TLS."
+      },
+      {
+        "id": "at-rest",
+        "text": "Encryption at rest",
+        "explanation": "That protects stored data."
+      },
+      {
+        "id": "mfa",
+        "text": "Multi-factor authentication",
+        "explanation": "MFA strengthens sign-in. It does not encrypt traffic."
+      },
+      {
+        "id": "rightsizing",
+        "text": "Rightsizing",
+        "explanation": "Rightsizing is a cost practice."
+      }
+    ],
+    "correctOptionIds": ["in-transit"],
+    "explanation": "Data crossing a network needs encryption in transit.",
+    "references": [
+      {
+        "title": "Protecting data with encryption (Amazon S3)",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

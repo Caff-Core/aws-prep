@@ -1,0 +1,189 @@
+---
+title: Encryption and security logging
+description: The benefits of encryption, the difference between encryption at rest and in transit, and where to capture and find security logs on AWS.
+sidebar:
+  order: 3
+lesson:
+  id: cloud-practitioner/encryption-and-security-logging
+  certification: cloud-practitioner
+  module: security-compliance
+  domain: security-compliance
+  taskStatements: ['2.2']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 20
+  lastReviewed: 2026-11-07
+  objectives:
+    - Tell encryption at rest and encryption in transit apart.
+    - Describe what AWS Key Management Service and AWS Certificate Manager do.
+    - Identify where security logs are captured and stored.
+  prerequisites:
+    - The AWS shared responsibility model.
+    - Governance and compliance.
+  references:
+    - title: Protecting data with encryption (Amazon S3)
+      url: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html
+    - title: Protecting data at rest (Security Pillar)
+      url: https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/protecting-data-at-rest.html
+    - title: Protecting data in transit (Security Pillar)
+      url: https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/protecting-data-in-transit.html
+    - title: AWS Key Management Service
+      url: https://docs.aws.amazon.com/kms/latest/developerguide/overview.html
+    - title: What is AWS Certificate Manager?
+      url: https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html
+    - title: What is AWS CloudTrail?
+      url: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html
+    - title: 'CLF-C02 exam guide: Domain 2'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain2.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+Think about valuables and money. In a safe at home, they are protected while they sit still. In an
+armoured van, they are protected while they move. You need both, because a thief can strike at either
+point.
+
+Data is the same. **Encryption** scrambles data so that it can be read only with a secret key. Even if
+someone gets hold of encrypted data, they cannot understand it without the key. That is the benefit of
+encryption: it protects data even when another safeguard fails.
+
+## Encryption at rest and in transit
+
+**Encryption at rest** protects stored data, such as files on a disk or objects in a storage service.
+
+**Encryption in transit** protects data while it moves between systems. On the web, this usually means
+Transport Layer Security (TLS), the technology behind the padlock in your browser. It is often still
+called SSL/TLS.
+
+<ServiceComparison
+  caption="Encryption at rest and in transit compared"
+  columns={['Type', 'Protects', 'AWS example']}
+  rows={[
+    {
+      name: 'At rest',
+      cells: ['Stored data', 'Amazon S3 encrypts new objects automatically'],
+    },
+    {
+      name: 'In transit',
+      cells: ['Data moving between systems', 'Connecting to a service over SSL/TLS'],
+    },
+  ]}
+/>
+
+Amazon S3 shows how far this has become the default. Since January 2023, all new uploads to Amazon S3 are
+encrypted automatically at no additional cost. Amazon DynamoDB also encrypts data at rest by default.
+
+<ImportantConcept>
+  Under the shared responsibility model, AWS provides encryption features. For many services, the
+  customer chooses the encryption options and controls who can use the keys.
+</ImportantConcept>
+
+## Services that manage keys and certificates
+
+### AWS Key Management Service
+
+**AWS Key Management Service (AWS KMS)** lets you create and control the keys that encrypt your data.
+Key policies decide who can use each key. Services that use KMS keys record each use in AWS CloudTrail,
+so that you can audit it.
+
+### AWS Certificate Manager
+
+**AWS Certificate Manager (ACM)** creates, stores, and renews the public and private SSL/TLS
+certificates that secure connections. A website uses a certificate to prove its identity and to encrypt
+traffic. ACM certificates carry no extra charge.
+
+<ServiceComparison
+  caption="AWS KMS and ACM compared"
+  columns={['Service', 'Manages', 'Mostly used for']}
+  rows={[
+    { name: 'AWS KMS', cells: ['Encryption keys', 'Data at rest'] },
+    { name: 'AWS Certificate Manager', cells: ['SSL/TLS certificates', 'Data in transit'] },
+  ]}
+/>
+
+## Where to find security logs
+
+A **log** is a record of events. Logs show what happened during an investigation or an audit. Know
+where each kind is captured.
+
+<ServiceComparison
+  caption="Security logs on AWS"
+  columns={['Source', 'What it records', 'Where to find it']}
+  rows={[
+    {
+      name: 'AWS CloudTrail',
+      cells: ['Actions taken in your account', 'Event history, or a trail delivered to Amazon S3'],
+    },
+    {
+      name: 'Amazon CloudWatch Logs',
+      cells: ['Log data from resources and applications', 'Log groups in CloudWatch'],
+    },
+    {
+      name: 'AWS Config',
+      cells: ['Configuration history', 'An Amazon S3 bucket you specify'],
+    },
+    {
+      name: 'VPC Flow Logs',
+      cells: ['Network traffic information for a virtual network', 'A log destination you choose'],
+    },
+  ]}
+/>
+
+<RealWorldExample title="Real-world example: a payment provider">
+  A Cape Town payment provider stores transaction records in Amazon S3, encrypted at rest with a key
+  in AWS KMS. Its website uses a certificate from ACM, so customer details are encrypted in transit.
+  When auditors ask who used the key, AWS CloudTrail has the record.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Stored data** means at rest. **Data moving across a network** means in transit. **Encryption
+  keys** point to AWS KMS. **SSL/TLS certificates** point to AWS Certificate Manager.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Encryption at rest also protects data on the network."** It protects stored data. Data moving
+  across a network needs encryption in transit.
+- **"Encryption replaces access control."** It adds protection. You still need to control who can reach
+  your data and keys.
+- **"AWS KMS stores my files."** It manages keys. Your data lives in storage services.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Visit a website over HTTPS and open the padlock
+or site information in your browser. Find who issued its certificate and when it expires. You are looking
+at encryption in transit at work.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/encryption-and-security-logging"
+  questionIds={[
+    'clf-encryption-at-rest',
+    'clf-encryption-kms',
+    'clf-encryption-acm',
+    'clf-encryption-logs',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Encryption protects data even if someone gets hold of it.
+- Encryption at rest protects stored data. Encryption in transit protects moving data.
+- AWS KMS manages encryption keys. AWS Certificate Manager manages SSL/TLS certificates.
+- AWS CloudTrail, CloudWatch Logs, AWS Config, and VPC Flow Logs capture security-related records.
+
+</LessonSummary>
