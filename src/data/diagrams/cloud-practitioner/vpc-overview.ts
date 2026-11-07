@@ -1,0 +1,78 @@
+import type { DiagramSpec } from '~/lib/diagrams/types';
+
+export const vpcOverview: DiagramSpec = {
+  id: 'vpc-overview',
+  title: 'A VPC with public and private subnets',
+  description:
+    'A virtual private cloud in an AWS Region contains a public subnet and a private subnet. Internet users reach a web server in the public subnet through an internet gateway. The web server connects to a database in the private subnet, which has no direct route from the internet. A corporate data center connects to the VPC through AWS Site-to-Site VPN.',
+  width: 960,
+  height: 480,
+  boundaries: [
+    { kind: 'external', label: 'Internet', x: 16, y: 110, width: 180, height: 150 },
+    {
+      kind: 'external',
+      label: 'Company office',
+      icon: 'group-corporate-data-center',
+      x: 16,
+      y: 290,
+      width: 180,
+      height: 150,
+    },
+    {
+      kind: 'region',
+      label: 'AWS Region',
+      icon: 'group-region',
+      x: 226,
+      y: 16,
+      width: 718,
+      height: 448,
+    },
+    {
+      kind: 'vpc',
+      label: 'VPC',
+      icon: 'group-vpc',
+      x: 246,
+      y: 56,
+      width: 678,
+      height: 388,
+    },
+    {
+      kind: 'subnet',
+      label: 'Public subnet',
+      icon: 'group-public-subnet',
+      x: 420,
+      y: 100,
+      width: 220,
+      height: 170,
+    },
+    {
+      kind: 'subnet',
+      label: 'Private subnet',
+      icon: 'group-private-subnet',
+      x: 680,
+      y: 100,
+      width: 224,
+      height: 170,
+    },
+  ],
+  nodes: [
+    { id: 'users', icon: 'users', label: 'Users', x: 100, y: 185 },
+    { id: 'office', icon: 'server', label: 'Office network', x: 100, y: 365 },
+    { id: 'igw', icon: 'internet-gateway', label: 'Internet gateway', x: 325, y: 185 },
+    { id: 'vpn', icon: 'aws-site-to-site-vpn', label: 'Site-to-Site VPN', x: 325, y: 365 },
+    { id: 'web', icon: 'amazon-ec2', label: 'Web server', x: 530, y: 185 },
+    { id: 'db', icon: 'amazon-rds', label: 'Database', x: 790, y: 185 },
+  ],
+  connections: [
+    { from: 'users', to: 'igw', step: 1, bidirectional: true },
+    { from: 'igw', to: 'web', bidirectional: true },
+    { from: 'web', to: 'db', step: 2, bidirectional: true },
+    { from: 'office', to: 'vpn', step: 3, bidirectional: true },
+    { from: 'vpn', to: 'db', dashed: true, bidirectional: true },
+  ],
+  steps: [
+    'Users reach the web server through the internet gateway, which connects the VPC to the internet.',
+    'The web server talks to the database in the private subnet. The database has no direct route from the internet.',
+    'The company office connects privately to the VPC over an encrypted VPN (dashed line).',
+  ],
+};

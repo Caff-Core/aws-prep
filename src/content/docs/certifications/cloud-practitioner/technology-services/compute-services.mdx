@@ -1,0 +1,185 @@
+---
+title: Compute services
+description: Amazon EC2 and its instance families, auto scaling, load balancers, and simpler ways to run applications on AWS.
+sidebar:
+  order: 3
+lesson:
+  id: cloud-practitioner/compute-services
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.3']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Describe Amazon EC2 and its main building blocks.
+    - Choose an EC2 instance family for a workload.
+    - Explain how auto scaling provides elasticity.
+    - Identify the purpose of load balancers.
+  prerequisites:
+    - Benefits of the AWS Cloud.
+  references:
+    - title: What is Amazon EC2?
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html
+    - title: Amazon EC2 instance types
+      url: https://aws.amazon.com/ec2/instance-types/
+    - title: What is Amazon EC2 Auto Scaling?
+      url: https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html
+    - title: What is Elastic Load Balancing?
+      url: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html
+    - title: What is AWS Elastic Beanstalk?
+      url: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html
+    - title: What is Amazon Lightsail?
+      url: https://docs.aws.amazon.com/lightsail/latest/userguide/what-is-amazon-lightsail.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+Vehicles come in many types. A delivery van, a sports car, and a bus are all useful, but for different
+jobs. You pick the one that suits the load.
+
+**Compute** is the processing power that runs your applications. AWS offers it in many shapes, and
+choosing well means matching the shape to the job.
+
+## Amazon EC2
+
+**Amazon Elastic Compute Cloud (Amazon EC2)** provides virtual servers on demand. Each virtual server is
+called an **instance**. You choose its size and operating system, and you can start and stop it when you
+need to.
+
+Key terms:
+
+- An **Amazon Machine Image (AMI)** is a preconfigured template for launching instances.
+- An **instance type** sets the amount of CPU, memory, storage, and networking.
+- A **security group** acts as a virtual firewall for instances.
+
+## EC2 instance families
+
+Instance types are grouped into families for different workloads.
+
+<ServiceComparison
+  caption="EC2 instance families compared"
+  columns={['Family', 'Strength', 'Example uses']}
+  rows={[
+    {
+      name: 'General purpose',
+      cells: ['Balance of compute, memory, and networking', 'Web servers, code repositories'],
+    },
+    {
+      name: 'Compute optimized',
+      cells: ['High-performance processors', 'Batch processing, media transcoding, game servers'],
+    },
+    {
+      name: 'Memory optimized',
+      cells: ['Large data sets in memory', 'In-memory databases, real-time analytics'],
+    },
+    {
+      name: 'Accelerated computing',
+      cells: ['Hardware accelerators', 'Graphics, floating-point calculations'],
+    },
+    {
+      name: 'Storage optimized',
+      cells: ['High read and write access to local storage', 'High-throughput databases'],
+    },
+    { name: 'HPC optimized', cells: ['High performance computing at scale', 'Large simulations'] },
+  ]}
+/>
+
+## Scaling and load balancing
+
+### Auto scaling provides elasticity
+
+**Amazon EC2 Auto Scaling** keeps the right number of instances running for the current load. It launches
+instances as demand rises and terminates them as it falls, which gives you **elasticity**. It also
+replaces unhealthy instances.
+
+### Load balancers
+
+**Elastic Load Balancing** distributes incoming traffic across multiple targets, such as instances in
+different Availability Zones. This prevents one server from being overwhelmed and improves availability.
+Current types are the Application Load Balancer, Network Load Balancer, and Gateway Load Balancer.
+
+<ImportantConcept>
+  Auto scaling changes **how many** servers you run. A load balancer decides **which** server gets
+  each request. They are often used together.
+</ImportantConcept>
+
+## Simpler ways to run applications
+
+Not everyone wants to manage servers directly.
+
+**AWS Elastic Beanstalk** deploys web applications for you. You upload your code, and it provisions and
+configures resources such as instances, load balancing, and scaling. The underlying resources stay
+visible in your account.
+
+**Amazon Lightsail** is a simple service with predictable pricing for websites and small applications. It
+bundles servers, storage, and networking, and offers prebuilt images such as WordPress.
+
+<CostWarning>
+  Stopped or running, resources can still cost money. For example, storage attached to a stopped
+  instance may continue to be charged. Elastic Beanstalk has no extra charge of its own, but you pay
+  for the resources it creates.
+</CostWarning>
+
+<RealWorldExample title="Real-world example: a video platform">
+  A Kimberley e-learning company converts lecture videos into several formats. Conversion is heavy
+  processing, so it uses compute optimized instances. Its website runs on general purpose instances
+  behind a load balancer, with Auto Scaling adding capacity at exam time.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  Match the workload word to the family. **Batch processing or transcoding** means compute
+  optimized. **In-memory** means memory optimized. **High read and write to local storage** means
+  storage optimized. **Elasticity** points to auto scaling, and **distributing traffic** to load
+  balancers.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Load balancers add servers."** They share traffic. Auto scaling adds servers.
+- **"Bigger instances are always better."** Oversized instances cost more than necessary.
+- **"Elastic Beanstalk hides everything."** Resources remain visible in your account.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. List three applications you use. For each, decide
+which instance family would suit it and explain why, using the table above.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/compute-services"
+  questionIds={[
+    'clf-compute-family',
+    'clf-compute-memory',
+    'clf-compute-elasticity',
+    'clf-compute-load-balancer',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Amazon EC2 provides virtual servers called instances.
+- Instance families suit different workloads.
+- Auto scaling provides elasticity, and load balancers distribute traffic.
+- Elastic Beanstalk and Lightsail reduce the amount you need to manage.
+
+</LessonSummary>

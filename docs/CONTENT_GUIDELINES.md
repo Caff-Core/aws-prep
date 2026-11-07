@@ -50,6 +50,7 @@ safeguards.
 - Write original questions. Never reproduce leaked or proprietary exam content.
 - Explain every option, including wrong ones.
 - Do not pad banks to look complete.
+- Do not worry about option order. `orderOptions` shuffles it at build time.
 - New questions start as `in-review`. A person must verify them before `approved`.
 - Never present practice scores as official AWS scores.
 

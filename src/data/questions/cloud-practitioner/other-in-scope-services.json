@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-other-sns",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.8",
+    "lessonId": "cloud-practitioner/other-in-scope-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to send one alert to many subscribers, including by email and SMS. Which service fits?",
+    "options": [
+      {
+        "id": "sns",
+        "text": "Amazon SNS",
+        "explanation": "Correct. SNS delivers a published message to all subscribers."
+      },
+      {
+        "id": "sqs",
+        "text": "Amazon SQS",
+        "explanation": "SQS queues messages for a consumer to process."
+      },
+      {
+        "id": "glue",
+        "text": "AWS Glue",
+        "explanation": "Glue prepares data."
+      },
+      {
+        "id": "x-ray",
+        "text": "AWS X-Ray",
+        "explanation": "X-Ray traces requests."
+      }
+    ],
+    "correctOptionIds": ["sns"],
+    "explanation": "Alerts to many subscribers point to Amazon SNS.",
+    "references": [
+      {
+        "title": "What is Amazon SNS?",
+        "url": "https://docs.aws.amazon.com/sns/latest/dg/welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-other-sqs",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.8",
+    "lessonId": "cloud-practitioner/other-in-scope-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "An application must hold orders until workers can process them, so that a busy period does not lose any. Which service fits?",
+    "options": [
+      {
+        "id": "sqs",
+        "text": "Amazon SQS",
+        "explanation": "Correct. SQS holds messages in a queue and decouples components."
+      },
+      {
+        "id": "sns",
+        "text": "Amazon SNS",
+        "explanation": "SNS pushes messages to subscribers rather than holding them for workers."
+      },
+      {
+        "id": "connect",
+        "text": "Amazon Connect",
+        "explanation": "Amazon Connect is a contact center."
+      },
+      {
+        "id": "workspaces",
+        "text": "Amazon WorkSpaces",
+        "explanation": "WorkSpaces provides virtual desktops."
+      }
+    ],
+    "correctOptionIds": ["sqs"],
+    "explanation": "A queue that decouples components points to Amazon SQS.",
+    "references": [
+      {
+        "title": "What is Amazon SQS?",
+        "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-other-workspaces",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.8",
+    "lessonId": "cloud-practitioner/other-in-scope-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to give remote staff virtual desktops in the cloud. Which service fits?",
+    "options": [
+      {
+        "id": "workspaces",
+        "text": "Amazon WorkSpaces",
+        "explanation": "Correct. It provides cloud virtual desktops."
+      },
+      {
+        "id": "amplify",
+        "text": "AWS Amplify",
+        "explanation": "Amplify builds web and mobile apps."
+      },
+      {
+        "id": "iot",
+        "text": "AWS IoT Core",
+        "explanation": "IoT Core connects devices."
+      },
+      {
+        "id": "ses",
+        "text": "Amazon SES",
+        "explanation": "Amazon SES handles email."
+      }
+    ],
+    "correctOptionIds": ["workspaces"],
+    "explanation": "Virtual desktops point to Amazon WorkSpaces.",
+    "references": [
+      {
+        "title": "Amazon WorkSpaces",
+        "url": "https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-other-xray",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.8",
+    "lessonId": "cloud-practitioner/other-in-scope-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "Developers want to trace requests through their application to find bottlenecks. Which service fits?",
+    "options": [
+      {
+        "id": "x-ray",
+        "text": "AWS X-Ray",
+        "explanation": "Correct. X-Ray traces requests and helps find performance issues."
+      },
+      {
+        "id": "codebuild",
+        "text": "AWS CodeBuild",
+        "explanation": "CodeBuild compiles code and runs tests."
+      },
+      {
+        "id": "codepipeline",
+        "text": "AWS CodePipeline",
+        "explanation": "CodePipeline automates release stages."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records account actions."
+      }
+    ],
+    "correctOptionIds": ["x-ray"],
+    "explanation": "Tracing requests points to AWS X-Ray.",
+    "references": [
+      {
+        "title": "What is AWS X-Ray?",
+        "url": "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-other-connect",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.8",
+    "lessonId": "cloud-practitioner/other-in-scope-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants a cloud contact center for its customer service team. Which service fits?",
+    "options": [
+      {
+        "id": "connect",
+        "text": "Amazon Connect",
+        "explanation": "Correct. It is a cloud contact center."
+      },
+      {
+        "id": "ses",
+        "text": "Amazon SES",
+        "explanation": "Amazon SES sends and receives email."
+      },
+      {
+        "id": "sns",
+        "text": "Amazon SNS",
+        "explanation": "Amazon SNS publishes notifications."
+      },
+      {
+        "id": "lightsail",
+        "text": "Amazon Lightsail",
+        "explanation": "Lightsail runs simple websites and apps."
+      }
+    ],
+    "correctOptionIds": ["connect"],
+    "explanation": "Contact center points to Amazon Connect.",
+    "references": [
+      {
+        "title": "What is Amazon Connect?",
+        "url": "https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

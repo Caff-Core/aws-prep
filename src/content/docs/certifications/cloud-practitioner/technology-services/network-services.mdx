@@ -1,0 +1,167 @@
+---
+title: Network services
+description: The components of a VPC, security groups and network ACLs, Amazon Route 53, and options for connecting to AWS.
+sidebar:
+  order: 6
+lesson:
+  id: cloud-practitioner/network-services
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.5']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Identify the components of a VPC.
+    - Compare security groups and network ACLs.
+    - Explain the purpose of Amazon Route 53.
+    - Compare AWS VPN and AWS Direct Connect.
+  prerequisites:
+    - AWS global infrastructure.
+  references:
+    - title: What is Amazon VPC?
+      url: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    - title: Infrastructure security in Amazon VPC
+      url: https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html
+    - title: What is Amazon Route 53?
+      url: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html
+    - title: What is AWS Site-to-Site VPN?
+      url: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
+    - title: What is AWS Direct Connect?
+      url: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html
+    - title: What is Amazon Inspector?
+      url: https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  ArchitectureDiagram,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+import { vpcOverview } from '~/data/diagrams/cloud-practitioner/vpc-overview';
+
+## The idea in plain language
+
+A gated housing estate has its own private roads. A main gate connects it to the public road. Some houses
+face the entrance, and others sit deep inside with no direct access from outside. Guards check people at
+the gate, and each house has its own lock.
+
+A **virtual private cloud (VPC)** is your private estate on AWS.
+
+## Components of a VPC
+
+**Amazon Virtual Private Cloud (Amazon VPC)** gives you a logically isolated virtual network.
+
+- A **subnet** is a range of IP addresses within one Availability Zone.
+- A **route table** controls where network traffic goes.
+- An **internet gateway** connects a VPC to the internet.
+- A **public subnet** has a route to an internet gateway. A **private subnet** does not.
+- A **NAT gateway** can give resources in private subnets outbound internet access.
+
+<ArchitectureDiagram spec={vpcOverview} />
+
+## Security in a VPC
+
+Two firewall features protect VPC traffic.
+
+<ServiceComparison
+  caption="Security groups and network ACLs compared"
+  columns={['Feature', 'Security group', 'Network ACL']}
+  rows={[
+    { name: 'Applies to', cells: ['Instances', 'Subnets'] },
+    { name: 'Rules', cells: ['Allow only', 'Allow and deny'] },
+    { name: 'Rule evaluation', cells: ['All rules are evaluated', 'In order, until a match'] },
+    {
+      name: 'Return traffic',
+      cells: ['Allowed automatically (stateful)', 'Must be allowed explicitly (stateless)'],
+    },
+  ]}
+/>
+
+AWS recommends security groups as your primary control, with network ACLs as a secondary layer.
+
+<ImportantConcept>
+  A network ACL is the estate gate, for the whole subnet. A security group is the lock on each
+  house, for each instance.
+</ImportantConcept>
+
+**Amazon Inspector** also helps here. It scans for unintended network exposure as well as software
+vulnerabilities.
+
+## Amazon Route 53
+
+**Amazon Route 53** is a highly available Domain Name System (DNS) service. DNS translates names such as
+example.com into the addresses that computers use. Route 53 has three main functions: domain
+registration, DNS routing, and health checks.
+
+## Connecting to AWS
+
+An office or data center can connect to a VPC in two main ways.
+
+<ServiceComparison
+  caption="AWS VPN and AWS Direct Connect compared"
+  columns={['Feature', 'AWS Site-to-Site VPN', 'AWS Direct Connect']}
+  rows={[
+    {
+      name: 'Path',
+      cells: ['Encrypted tunnels over the internet', 'A dedicated private connection'],
+    },
+    { name: 'Uses internet service providers in the path', cells: ['Yes', 'No'] },
+    {
+      name: 'Fits when',
+      cells: ['You want a connection set up quickly', 'You need a consistent private link'],
+    },
+  ]}
+/>
+
+<RealWorldExample title="Real-world example: a bank's branch system">
+  A Sandton bank puts its customer-facing website in a public subnet and its database in a private
+  subnet. Staff at head office reach internal systems over AWS Direct Connect, with a Site-to-Site
+  VPN as a backup. Route 53 sends customers to the website.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Instance-level firewall** means security group. **Subnet-level firewall, or explicit deny**
+  means network ACL. **DNS** means Amazon Route 53. **Dedicated private connection** means AWS
+  Direct Connect. **Encrypted over the internet** means VPN.
+</ExamTip>
+
+## Common misconceptions
+
+- **"A subnet can span Availability Zones."** A subnet sits within a single Availability Zone.
+- **"Security groups can deny traffic."** They only allow. Anything not allowed is blocked.
+- **"Direct Connect runs over the public internet."** It is a dedicated private connection.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Sketch a website with a web server and a database.
+Decide which belongs in a public subnet and which in a private subnet, and explain why.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/network-services"
+  questionIds={['clf-net-igw', 'clf-net-sg-nacl', 'clf-net-route53', 'clf-net-direct-connect']}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- A VPC is a logically isolated virtual network, divided into subnets.
+- An internet gateway connects a VPC to the internet.
+- Security groups protect instances and are stateful. Network ACLs protect subnets and are stateless.
+- Amazon Route 53 provides DNS.
+- AWS VPN runs over the internet. AWS Direct Connect is a dedicated private connection.
+
+</LessonSummary>

@@ -1,0 +1,245 @@
+---
+title: Benefits of the AWS Cloud
+description: What cloud computing is, the six advantages AWS describes, and how elasticity, high availability, and agility differ.
+sidebar:
+  order: 1
+lesson:
+  id: cloud-practitioner/benefits-of-the-cloud
+  certification: cloud-practitioner
+  module: cloud-concepts
+  domain: cloud-concepts
+  taskStatements: ['1.1']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Explain what cloud computing is and why organisations use it.
+    - Describe the six advantages of cloud computing.
+    - Tell elasticity, high availability, and agility apart.
+    - Explain how global infrastructure supports speed of deployment and global reach.
+  references:
+    - title: What is cloud computing?
+      url: https://aws.amazon.com/what-is-cloud-computing/
+    - title: Six advantages of cloud computing
+      url: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html
+    - title: What is Amazon EC2 Auto Scaling?
+      url: https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html
+    - title: 'Reliability Pillar: Availability'
+      url: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/availability.html
+    - title: 'CLF-C02 exam guide: Domain 1'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain1.md
+---
+
+import {
+  ArchitectureDiagram,
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+import { elasticWebApp } from '~/data/diagrams/cloud-practitioner/elastic-web-app';
+
+## The idea in plain language
+
+Imagine you need electricity at home. You could buy a generator, store fuel, and repair it yourself.
+Most people plug into the grid instead. They use what they need and pay for what they used.
+
+Cloud computing applies that idea to IT. **Cloud computing** is the on-demand delivery of IT resources
+over the internet, with pay-as-you-go pricing. Instead of buying and maintaining your own servers, you
+use computing power, storage, and databases from a provider such as AWS when you need them.
+
+The alternative is **on-premises** computing, where an organisation owns and runs its own equipment,
+usually in its own building or a rented data center.
+
+## The six advantages of cloud computing
+
+AWS describes six advantages. The names are worth learning, because exam questions often describe a
+situation and expect you to recognise which one it shows.
+
+### Trade fixed expense for variable expense
+
+Building a data center means paying a large amount before you know how much you will use. With the
+cloud, you pay only for what you consume. A **fixed expense** stays the same however much you use. A
+**variable expense** rises and falls with use.
+
+### Benefit from massive economies of scale
+
+AWS combines the usage of a very large number of customers. That scale lets it offer lower
+pay-as-you-go prices than most organisations could achieve alone.
+
+### Stop guessing capacity
+
+**Capacity** is how much work your systems can handle. On-premises, you must predict it in advance.
+Guess too high and expensive equipment sits idle. Guess too low and your systems struggle. In the
+cloud, you can scale up or down as demand changes.
+
+### Increase speed and agility
+
+New IT resources are available in minutes rather than weeks. This lowers the cost and time of trying
+out new ideas, so teams can experiment more often.
+
+### Stop spending money running and maintaining data centers
+
+Time spent racking and powering servers is time not spent on your customers. The cloud lets
+organisations focus on their own business.
+
+### Go global in minutes
+
+You can deploy an application in multiple AWS Regions around the world, which puts it closer to your
+users and lowers latency. The [AWS global infrastructure](/certifications/cloud-practitioner/technology-services/global-infrastructure/)
+lesson explains how this works.
+
+## Three words the exam separates
+
+Three terms sound similar but answer different questions.
+
+### Elasticity
+
+**Elasticity** is the ability to match resources to demand as it changes. You provision what you need
+now, then scale up or down, rather than paying for your busiest day all year.
+
+### High availability
+
+**Availability** is the percentage of time a workload is available for use. **High availability**
+means designing a system so that it stays usable even when part of it fails, for example by running
+across multiple Availability Zones.
+
+### Agility
+
+**Agility** is how quickly an organisation can act. Easy access to a wide range of technology means
+teams can build and test ideas sooner, and drop the ones that do not work at little cost.
+
+<ImportantConcept>
+  Elasticity handles changing **demand**. High availability handles **failure**. Agility is about
+  how fast your **organisation** can move.
+</ImportantConcept>
+
+<ServiceComparison
+  caption="Elasticity, high availability, and agility compared"
+  columns={['Term', 'Question it answers', 'Example']}
+  rows={[
+    {
+      name: 'Elasticity',
+      cells: [
+        'What happens when demand changes?',
+        'A website adds servers during a sale and removes them afterwards',
+      ],
+    },
+    {
+      name: 'High availability',
+      cells: [
+        'What happens when something fails?',
+        'A website keeps running after one Availability Zone has a fault',
+      ],
+    },
+    {
+      name: 'Agility',
+      cells: [
+        'How quickly can we try something new?',
+        'A team tests a new idea today instead of waiting weeks for hardware',
+      ],
+    },
+  ]}
+/>
+
+## Elasticity in practice
+
+<ArchitectureDiagram spec={elasticWebApp} />
+
+**Amazon EC2 Auto Scaling** keeps the right number of servers running for the current load. You set a
+minimum and a maximum, and it launches or terminates servers as demand rises and falls. Amazon Elastic
+Compute Cloud (Amazon EC2) is the AWS service that provides these virtual servers.
+
+<RealWorldExample title="Real-world example: selling concert tickets">
+  A Cape Town ticketing company sees quiet traffic most days, then a huge rush when a popular show
+  goes on sale. On-premises, it would need enough servers for that rush, and they would sit idle the
+  rest of the year. On AWS, it runs a small number of servers normally and lets Auto Scaling add
+  more during the rush. It pays for the extra capacity only while it is running.
+</RealWorldExample>
+
+<CostWarning>
+  Pay-as-you-go means resources you leave running keep costing money, even if nobody uses them. Auto
+  Scaling has no extra charge of its own, but you pay for the resources it launches.
+</CostWarning>
+
+## Cloud and on-premises compared
+
+<ServiceComparison
+  caption="On-premises and cloud computing compared"
+  columns={['Area', 'On-premises', 'AWS Cloud']}
+  rows={[
+    {
+      name: 'Paying',
+      cells: ['Large investment before use', 'Pay for what you consume'],
+    },
+    {
+      name: 'Capacity',
+      cells: ['Predicted in advance', 'Scaled up or down with demand'],
+    },
+    {
+      name: 'New resources',
+      cells: ['Can take weeks', 'Available in minutes'],
+    },
+    {
+      name: 'Going global',
+      cells: ['Requires facilities in each location', 'Deploy to Regions around the world'],
+    },
+    {
+      name: 'Data center upkeep',
+      cells: ['Your responsibility', 'Handled by AWS'],
+    },
+  ]}
+/>
+
+## What the exam expects
+
+<ExamTip>
+  Look for the clue in the scenario. **Unpredictable traffic** points to elasticity or stop guessing
+  capacity. **No upfront investment** points to trading fixed expense for variable expense. **Weeks
+  reduced to minutes** points to speed and agility. **Surviving a failure** points to high
+  availability, not elasticity.
+</ExamTip>
+
+## Common misconceptions
+
+- **"The cloud is always cheaper."** You pay for what you use, so costs depend on how you use it.
+  Resources left running are still billed.
+- **"Elasticity and high availability are the same."** A system can scale perfectly and still go down
+  if everything runs in one place. They solve different problems.
+- **"Moving to the cloud means AWS handles everything."** AWS runs the data centers, but customers
+  still have responsibilities. The
+  [shared responsibility model](/certifications/cloud-practitioner/security-compliance/shared-responsibility-model/)
+  lesson covers this.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Think of a business you know, such as a shop or
+a clinic. On paper, write down which of the six advantages would matter most to it, and why. Then
+decide whether its demand is steady or changes sharply. That tells you how much elasticity would help.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/benefits-of-the-cloud"
+  questionIds={[
+    'clf-benefits-elasticity-scenario',
+    'clf-benefits-fixed-variable',
+    'clf-benefits-six-advantages',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Cloud computing is on-demand IT over the internet with pay-as-you-go pricing.
+- The six advantages cover cost, scale, capacity, speed, focus, and global reach.
+- Elasticity matches resources to changing demand.
+- High availability keeps a system usable when part of it fails.
+- Agility lets organisations try ideas quickly and cheaply.
+
+</LessonSummary>

@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-pricing-spot",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.1",
+    "lessonId": "cloud-practitioner/pricing-models",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company runs batch jobs that can restart if interrupted, and it wants the lowest cost. Which option fits?",
+    "options": [
+      {
+        "id": "spot",
+        "text": "Spot Instances",
+        "explanation": "Correct. Spot Instances suit interruptible work at a large discount."
+      },
+      {
+        "id": "on-demand",
+        "text": "On-Demand Instances",
+        "explanation": "On-Demand has no discount for interruptible work."
+      },
+      {
+        "id": "dedicated",
+        "text": "Dedicated Hosts",
+        "explanation": "Dedicated Hosts are for dedicated hardware needs."
+      },
+      {
+        "id": "capacity",
+        "text": "Capacity Reservations",
+        "explanation": "These guarantee capacity and carry no discount of their own."
+      }
+    ],
+    "correctOptionIds": ["spot"],
+    "explanation": "Interruptible and low cost point to Spot Instances.",
+    "references": [
+      {
+        "title": "Spot Instances",
+        "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-pricing-on-demand",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.1",
+    "lessonId": "cloud-practitioner/pricing-models",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company will run a short project with unpredictable usage and wants no long-term commitment. Which option fits?",
+    "options": [
+      {
+        "id": "on-demand",
+        "text": "On-Demand Instances",
+        "explanation": "Correct. On-Demand has no upfront payment or long-term commitment."
+      },
+      {
+        "id": "three-year",
+        "text": "A three-year Reserved Instance",
+        "explanation": "This requires a long commitment."
+      },
+      {
+        "id": "savings",
+        "text": "A Savings Plan",
+        "explanation": "This requires a one or three year commitment."
+      },
+      {
+        "id": "dedicated",
+        "text": "Dedicated Hosts",
+        "explanation": "Nothing in the scenario calls for dedicated hardware."
+      }
+    ],
+    "correctOptionIds": ["on-demand"],
+    "explanation": "Short and unpredictable points to On-Demand.",
+    "references": [
+      {
+        "title": "Amazon EC2 pricing",
+        "url": "https://aws.amazon.com/ec2/pricing/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-pricing-savings",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.1",
+    "lessonId": "cloud-practitioner/pricing-models",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company has steady compute use across several instance families and Regions, and also uses AWS Lambda. It can commit for a year. Which option fits?",
+    "options": [
+      {
+        "id": "compute-sp",
+        "text": "Compute Savings Plans",
+        "explanation": "Correct. They apply across families and Regions, and to Fargate and Lambda."
+      },
+      {
+        "id": "spot",
+        "text": "Spot Instances",
+        "explanation": "These can be interrupted and do not cover this steady need."
+      },
+      {
+        "id": "zonal",
+        "text": "A zonal Reserved Instance",
+        "explanation": "This is tied to one Availability Zone."
+      },
+      {
+        "id": "on-demand",
+        "text": "On-Demand Instances",
+        "explanation": "These offer no discount for a commitment."
+      }
+    ],
+    "correctOptionIds": ["compute-sp"],
+    "explanation": "Compute Savings Plans offer the most flexibility.",
+    "references": [
+      {
+        "title": "What are Savings Plans?",
+        "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-pricing-transfer",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.1",
+    "lessonId": "cloud-practitioner/pricing-models",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which type of data transfer has no charge?",
+    "options": [
+      {
+        "id": "inbound",
+        "text": "Inbound data from the internet to AWS",
+        "explanation": "Correct. Inbound transfer has no charge."
+      },
+      {
+        "id": "outbound",
+        "text": "Outbound data to the internet",
+        "explanation": "Outbound internet transfer is charged."
+      },
+      {
+        "id": "cross-region",
+        "text": "Data between Regions",
+        "explanation": "Cross-Region transfer is charged."
+      },
+      {
+        "id": "cross-az",
+        "text": "Data between Availability Zones",
+        "explanation": "Cross-AZ transfer is charged."
+      }
+    ],
+    "correctOptionIds": ["inbound"],
+    "explanation": "Data coming in is free. Data going out or across boundaries is usually charged.",
+    "references": [
+      {
+        "title": "Overview of data transfer costs",
+        "url": "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-pricing-ri",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.1",
+    "lessonId": "cloud-practitioner/pricing-models",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "What is a Reserved Instance?",
+    "options": [
+      {
+        "id": "discount",
+        "text": "A billing discount applied to matching usage",
+        "explanation": "Correct. It is not a physical instance."
+      },
+      {
+        "id": "server",
+        "text": "A physical server set aside for the customer",
+        "explanation": "That is closer to a Dedicated Host."
+      },
+      {
+        "id": "backup",
+        "text": "A backup copy of an instance",
+        "explanation": "Reserved Instances are not backups."
+      },
+      {
+        "id": "free",
+        "text": "A free instance for new customers",
+        "explanation": "Reserved Instances are paid commitments."
+      }
+    ],
+    "correctOptionIds": ["discount"],
+    "explanation": "Reserved Instances give a discount in return for a one or three year term.",
+    "references": [
+      {
+        "title": "Reserved Instances",
+        "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

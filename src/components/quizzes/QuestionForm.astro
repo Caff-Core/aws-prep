@@ -1,4 +1,5 @@
 ---
+import { orderOptions } from '~/lib/assessment/option-order';
 import type { Question } from '~/lib/assessment/schema';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { question, number } = Astro.props;
+const options = orderOptions(question.id, question.options);
 const numberWords = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
 ---
 
@@ -24,7 +26,7 @@ const numberWords = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
       )}
     </legend>
     <ul class="options">
-      {question.options.map((option) => (
+      {options.map((option) => (
         <li data-option={option.id}>
           <label>
             <input

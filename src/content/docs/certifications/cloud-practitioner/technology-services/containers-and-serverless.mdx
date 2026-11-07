@@ -1,0 +1,157 @@
+---
+title: Containers and serverless
+description: What containers and serverless computing are, and when to use Amazon ECS, Amazon EKS, AWS Fargate, and AWS Lambda.
+sidebar:
+  order: 4
+lesson:
+  id: cloud-practitioner/containers-and-serverless
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.3']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 20
+  lastReviewed: 2026-11-07
+  objectives:
+    - Explain what containers and serverless computing are.
+    - Compare Amazon ECS and Amazon EKS.
+    - Choose between AWS Fargate and AWS Lambda.
+  prerequisites:
+    - Compute services.
+  references:
+    - title: What is Amazon ECS?
+      url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html
+    - title: What is Amazon EKS?
+      url: https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html
+    - title: AWS Fargate for Amazon ECS
+      url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+    - title: What is AWS Lambda?
+      url: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+Shipping containers changed trade. Goods are packed once and move on any ship, train, or truck, because
+the box is standard.
+
+A software **container** packages an application with everything it needs, so that it runs the same way
+wherever it goes. Running many containers needs coordination, which is called **orchestration**.
+
+**Serverless** goes further. There are still servers, but you do not manage them. You provide the code or
+the container, and AWS deals with the rest.
+
+## Running containers
+
+### Amazon ECS
+
+**Amazon Elastic Container Service (Amazon ECS)** is a fully managed AWS service for orchestrating
+containers. It can run containers on EC2 instances or on AWS Fargate.
+
+### Amazon EKS
+
+**Amazon Elastic Kubernetes Service (Amazon EKS)** runs **Kubernetes**, a popular open-source container
+orchestration system. AWS manages the Kubernetes control plane for you. It suits teams already using
+Kubernetes.
+
+<ServiceComparison
+  caption="Amazon ECS and Amazon EKS compared"
+  columns={['Service', 'Orchestrator', 'Fits when']}
+  rows={[
+    { name: 'Amazon ECS', cells: ['The AWS orchestrator', 'You want a managed AWS approach'] },
+    { name: 'Amazon EKS', cells: ['Kubernetes', 'You already use, or want, Kubernetes'] },
+  ]}
+/>
+
+## Serverless compute
+
+### AWS Fargate
+
+**AWS Fargate** is serverless compute for containers. You set the CPU and memory for a task, and there
+are no clusters of EC2 instances for you to manage.
+
+### AWS Lambda
+
+**AWS Lambda** runs your code without you managing servers. AWS handles scaling and patching. Code is
+commonly triggered by events, such as a file arriving in Amazon S3. You are billed for requests and for
+the time your code runs.
+
+Lambda's event-driven functions run for up to 15 minutes by default, so they suit short tasks. Lambda's
+documentation now also describes other function types for longer-running work.
+
+<ImportantConcept>
+  Containers on Fargate suit packaged applications. Lambda suits short pieces of code that react to
+  events. In both cases, you do not manage servers.
+</ImportantConcept>
+
+<ServiceComparison
+  caption="Ways to run an application compared"
+  columns={['Option', 'You provide', 'You manage servers?']}
+  rows={[
+    { name: 'Amazon EC2', cells: ['An instance and everything on it', 'Yes'] },
+    { name: 'Amazon ECS or EKS on EC2', cells: ['Containers and the instances', 'Yes'] },
+    { name: 'AWS Fargate', cells: ['Containers', 'No'] },
+    { name: 'AWS Lambda', cells: ['Code', 'No'] },
+  ]}
+/>
+
+<RealWorldExample title="Real-world example: processing receipts">
+  A Polokwane accounting firm lets clients upload receipt photos to Amazon S3. Each upload triggers
+  a Lambda function that creates a thumbnail, so nothing runs while no receipts arrive. Its main web
+  application runs in containers on AWS Fargate, so nobody on the team patches servers.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Kubernetes** points to Amazon EKS. **Containers without managing servers** points to AWS
+  Fargate. **Run code in response to events** points to AWS Lambda. **Full control of the operating
+  system** points to Amazon EC2.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Serverless means there are no servers."** Servers exist. AWS manages them.
+- **"Fargate competes with ECS."** Fargate is a way to run ECS tasks without managing instances.
+- **"Containers are virtual machines."** A container packages an application and its dependencies. It is
+  not a full virtual server.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Think of a task that happens only occasionally,
+such as sending a birthday message. Explain why paying only when the task runs would suit it better than
+keeping a server on all year.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/containers-and-serverless"
+  questionIds={[
+    'clf-containers-eks',
+    'clf-containers-fargate',
+    'clf-containers-lambda',
+    'clf-containers-serverless-meaning',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Containers package an application with what it needs.
+- Amazon ECS and Amazon EKS orchestrate containers. EKS uses Kubernetes.
+- AWS Fargate runs containers without servers to manage.
+- AWS Lambda runs code in response to events.
+
+</LessonSummary>

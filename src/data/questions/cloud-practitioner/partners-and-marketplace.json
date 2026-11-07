@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-partner-marketplace",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/partners-and-marketplace",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to buy third-party software and have the charges appear on its AWS bill. Where should it look?",
+    "options": [
+      {
+        "id": "marketplace",
+        "text": "AWS Marketplace",
+        "explanation": "Correct. It is a catalog of third-party software, and charges appear on the AWS bill."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      },
+      {
+        "id": "health",
+        "text": "AWS Health Dashboard",
+        "explanation": "This reports events."
+      },
+      {
+        "id": "cloudformation",
+        "text": "AWS CloudFormation",
+        "explanation": "CloudFormation provisions resources."
+      }
+    ],
+    "correctOptionIds": ["marketplace"],
+    "explanation": "Third-party software on the AWS bill points to AWS Marketplace.",
+    "references": [
+      {
+        "title": "What is AWS Marketplace?",
+        "url": "https://docs.aws.amazon.com/marketplace/latest/buyerguide/what-is-marketplace.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-partner-isv",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/partners-and-marketplace",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "What does an independent software vendor do?",
+    "options": [
+      {
+        "id": "sells",
+        "text": "Builds and sells its own software",
+        "explanation": "Correct."
+      },
+      {
+        "id": "audits",
+        "text": "Audits AWS data centers",
+        "explanation": "This is not what ISVs do."
+      },
+      {
+        "id": "support",
+        "text": "Runs AWS Support plans",
+        "explanation": "AWS runs its own support plans."
+      },
+      {
+        "id": "regions",
+        "text": "Operates AWS Regions",
+        "explanation": "AWS operates its Regions."
+      }
+    ],
+    "correctOptionIds": ["sells"],
+    "explanation": "ISVs build and sell software, often through AWS Marketplace.",
+    "references": [
+      {
+        "title": "AWS Partner Network",
+        "url": "https://aws.amazon.com/partners/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-partner-si",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/partners-and-marketplace",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company needs outside experts to design and build its cloud solution. Which type of AWS Partner fits?",
+    "options": [
+      {
+        "id": "si",
+        "text": "A system integrator",
+        "explanation": "Correct. System integrators help customers design and build solutions."
+      },
+      {
+        "id": "isv",
+        "text": "An independent software vendor",
+        "explanation": "An ISV sells software products."
+      },
+      {
+        "id": "trust-safety",
+        "text": "The AWS Trust and Safety team",
+        "explanation": "This team handles abuse reports."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact is a compliance document portal."
+      }
+    ],
+    "correctOptionIds": ["si"],
+    "explanation": "Help building a solution points to a system integrator.",
+    "references": [
+      {
+        "title": "CLF-C02 exam guide: Domain 4",
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain4.md"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-partner-benefits",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/partners-and-marketplace",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO are benefits of being an AWS Partner, according to the exam guide?",
+    "options": [
+      {
+        "id": "training",
+        "text": "Partner training and certification",
+        "explanation": "Correct. The exam guide lists this."
+      },
+      {
+        "id": "events",
+        "text": "Partner events",
+        "explanation": "Correct. The exam guide lists this."
+      },
+      {
+        "id": "free-services",
+        "text": "Free use of all AWS services",
+        "explanation": "This is not a listed benefit."
+      },
+      {
+        "id": "own-region",
+        "text": "Operating a private AWS Region",
+        "explanation": "This is not a listed benefit."
+      },
+      {
+        "id": "no-security",
+        "text": "Exemption from security responsibilities",
+        "explanation": "This is not a listed benefit."
+      }
+    ],
+    "correctOptionIds": ["training", "events"],
+    "explanation": "The exam guide also lists partner volume discounts.",
+    "references": [
+      {
+        "title": "CLF-C02 exam guide: Domain 4",
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain4.md"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-partner-marketplace-pricing",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/partners-and-marketplace",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which is a pricing option in AWS Marketplace?",
+    "options": [
+      {
+        "id": "byol",
+        "text": "Bring Your Own License",
+        "explanation": "Correct. Marketplace pricing options include BYOL, free trials, and hourly and annual pricing."
+      },
+      {
+        "id": "spot-only",
+        "text": "Spot pricing only",
+        "explanation": "Marketplace offers several pricing options."
+      },
+      {
+        "id": "no-pricing",
+        "text": "All products are free",
+        "explanation": "Many products are paid."
+      },
+      {
+        "id": "cash",
+        "text": "Cash on delivery",
+        "explanation": "This is not an option."
+      }
+    ],
+    "correctOptionIds": ["byol"],
+    "explanation": "AWS Marketplace offers a range of pricing options.",
+    "references": [
+      {
+        "title": "What is AWS Marketplace?",
+        "url": "https://docs.aws.amazon.com/marketplace/latest/buyerguide/what-is-marketplace.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

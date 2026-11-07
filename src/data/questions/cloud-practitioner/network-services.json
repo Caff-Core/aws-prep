@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-net-igw",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.5",
+    "lessonId": "cloud-practitioner/network-services",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "Which VPC component connects a VPC to the internet?",
+    "options": [
+      {
+        "id": "igw",
+        "text": "Internet gateway",
+        "explanation": "Correct. An internet gateway connects a VPC to the internet."
+      },
+      {
+        "id": "subnet",
+        "text": "Subnet",
+        "explanation": "A subnet is a range of IP addresses."
+      },
+      {
+        "id": "sg",
+        "text": "Security group",
+        "explanation": "A security group is a virtual firewall."
+      },
+      {
+        "id": "route53",
+        "text": "Amazon Route 53",
+        "explanation": "Route 53 provides DNS."
+      }
+    ],
+    "correctOptionIds": ["igw"],
+    "explanation": "Internet gateways connect VPCs to the internet.",
+    "references": [
+      {
+        "title": "What is Amazon VPC?",
+        "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-net-sg-nacl",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.5",
+    "lessonId": "cloud-practitioner/network-services",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which statement about security groups and network ACLs is correct?",
+    "options": [
+      {
+        "id": "levels",
+        "text": "Security groups apply to instances, and network ACLs apply to subnets",
+        "explanation": "Correct. They work at different levels."
+      },
+      {
+        "id": "swapped",
+        "text": "Security groups apply to subnets, and network ACLs apply to instances",
+        "explanation": "This is the wrong way round."
+      },
+      {
+        "id": "sg-deny",
+        "text": "Security groups support explicit deny rules",
+        "explanation": "Security groups only allow."
+      },
+      {
+        "id": "nacl-stateful",
+        "text": "Network ACLs are stateful",
+        "explanation": "Network ACLs are stateless."
+      }
+    ],
+    "correctOptionIds": ["levels"],
+    "explanation": "Security groups are instance-level and stateful. Network ACLs are subnet-level and stateless.",
+    "references": [
+      {
+        "title": "Infrastructure security in Amazon VPC",
+        "url": "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-net-route53",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.5",
+    "lessonId": "cloud-practitioner/network-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to register a domain name and route users to its website. Which service fits?",
+    "options": [
+      {
+        "id": "route53",
+        "text": "Amazon Route 53",
+        "explanation": "Correct. Route 53 provides domain registration and DNS routing."
+      },
+      {
+        "id": "direct-connect",
+        "text": "AWS Direct Connect",
+        "explanation": "Direct Connect is a private network link."
+      },
+      {
+        "id": "vpc",
+        "text": "Amazon VPC",
+        "explanation": "Amazon VPC provides a virtual network."
+      },
+      {
+        "id": "ses",
+        "text": "Amazon SES",
+        "explanation": "Amazon SES handles email."
+      }
+    ],
+    "correctOptionIds": ["route53"],
+    "explanation": "DNS and domains point to Amazon Route 53.",
+    "references": [
+      {
+        "title": "What is Amazon Route 53?",
+        "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-net-direct-connect",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.5",
+    "lessonId": "cloud-practitioner/network-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company needs a dedicated private network connection between its data center and AWS that does not use the public internet. Which service fits?",
+    "options": [
+      {
+        "id": "dx",
+        "text": "AWS Direct Connect",
+        "explanation": "Correct. It is a dedicated private connection."
+      },
+      {
+        "id": "vpn",
+        "text": "AWS Site-to-Site VPN",
+        "explanation": "A VPN runs encrypted tunnels over the internet."
+      },
+      {
+        "id": "igw",
+        "text": "An internet gateway",
+        "explanation": "This connects to the internet."
+      },
+      {
+        "id": "cloudfront",
+        "text": "Amazon CloudFront",
+        "explanation": "CloudFront delivers content to users."
+      }
+    ],
+    "correctOptionIds": ["dx"],
+    "explanation": "Dedicated and private point to AWS Direct Connect.",
+    "references": [
+      {
+        "title": "What is AWS Direct Connect?",
+        "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-net-private-subnet",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.5",
+    "lessonId": "cloud-practitioner/network-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company wants its database to have no direct route from the internet. Where should it be placed?",
+    "options": [
+      {
+        "id": "private",
+        "text": "In a private subnet",
+        "explanation": "Correct. A private subnet has no route to an internet gateway."
+      },
+      {
+        "id": "public",
+        "text": "In a public subnet",
+        "explanation": "A public subnet has a route to an internet gateway."
+      },
+      {
+        "id": "edge",
+        "text": "In an edge location",
+        "explanation": "Edge locations deliver content to users."
+      },
+      {
+        "id": "igw",
+        "text": "Inside an internet gateway",
+        "explanation": "An internet gateway is a connection, not a place for a database."
+      }
+    ],
+    "correctOptionIds": ["private"],
+    "explanation": "Keep databases away from direct internet access.",
+    "references": [
+      {
+        "title": "What is Amazon VPC?",
+        "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

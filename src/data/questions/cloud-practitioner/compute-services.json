@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-compute-family",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/compute-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company runs media transcoding, which needs a lot of processing power. Which EC2 instance family fits best?",
+    "options": [
+      {
+        "id": "compute",
+        "text": "Compute optimized",
+        "explanation": "Correct. Compute optimized instances suit compute-bound work such as transcoding."
+      },
+      {
+        "id": "memory",
+        "text": "Memory optimized",
+        "explanation": "This family suits large data sets in memory."
+      },
+      {
+        "id": "storage",
+        "text": "Storage optimized",
+        "explanation": "This family suits heavy access to local storage."
+      },
+      {
+        "id": "general",
+        "text": "General purpose",
+        "explanation": "This family balances resources, and it is not the best match for compute-bound work."
+      }
+    ],
+    "correctOptionIds": ["compute"],
+    "explanation": "Batch processing and transcoding point to compute optimized.",
+    "references": [
+      {
+        "title": "Amazon EC2 instance types",
+        "url": "https://aws.amazon.com/ec2/instance-types/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-compute-memory",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/compute-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A workload processes a very large data set held in memory. Which EC2 instance family fits best?",
+    "options": [
+      {
+        "id": "memory",
+        "text": "Memory optimized",
+        "explanation": "Correct. This family suits large in-memory data sets."
+      },
+      {
+        "id": "compute",
+        "text": "Compute optimized",
+        "explanation": "This family focuses on processors."
+      },
+      {
+        "id": "storage",
+        "text": "Storage optimized",
+        "explanation": "This family focuses on local storage."
+      },
+      {
+        "id": "accelerated",
+        "text": "Accelerated computing",
+        "explanation": "This family uses hardware accelerators."
+      }
+    ],
+    "correctOptionIds": ["memory"],
+    "explanation": "In-memory work points to memory optimized.",
+    "references": [
+      {
+        "title": "Amazon EC2 instance types",
+        "url": "https://aws.amazon.com/ec2/instance-types/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-compute-elasticity",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/compute-services",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "Which AWS capability adds and removes EC2 instances as demand changes?",
+    "options": [
+      {
+        "id": "asg",
+        "text": "Amazon EC2 Auto Scaling",
+        "explanation": "Correct. It launches and terminates instances as demand changes."
+      },
+      {
+        "id": "elb",
+        "text": "Elastic Load Balancing",
+        "explanation": "Load balancers distribute traffic. They do not add instances."
+      },
+      {
+        "id": "route53",
+        "text": "Amazon Route 53",
+        "explanation": "Route 53 provides DNS."
+      },
+      {
+        "id": "ebs",
+        "text": "Amazon EBS",
+        "explanation": "Amazon EBS provides block storage."
+      }
+    ],
+    "correctOptionIds": ["asg"],
+    "explanation": "Auto scaling provides elasticity.",
+    "references": [
+      {
+        "title": "What is Amazon EC2 Auto Scaling?",
+        "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-compute-load-balancer",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/compute-services",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "What is the main purpose of a load balancer?",
+    "options": [
+      {
+        "id": "distribute",
+        "text": "To distribute incoming traffic across multiple targets",
+        "explanation": "Correct. This prevents one server from being overwhelmed."
+      },
+      {
+        "id": "backup",
+        "text": "To back up instances",
+        "explanation": "AWS Backup handles backups."
+      },
+      {
+        "id": "encrypt",
+        "text": "To store encryption keys",
+        "explanation": "AWS KMS manages encryption keys."
+      },
+      {
+        "id": "bill",
+        "text": "To combine bills across accounts",
+        "explanation": "Consolidated billing does this."
+      }
+    ],
+    "correctOptionIds": ["distribute"],
+    "explanation": "Load balancers share traffic between targets.",
+    "references": [
+      {
+        "title": "What is Elastic Load Balancing?",
+        "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-compute-beanstalk",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/compute-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A developer wants to upload web application code and have AWS provision the instances, load balancing, and scaling. Which service fits?",
+    "options": [
+      {
+        "id": "beanstalk",
+        "text": "AWS Elastic Beanstalk",
+        "explanation": "Correct. It deploys web applications and sets up the supporting resources."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions."
+      },
+      {
+        "id": "s3",
+        "text": "Amazon S3",
+        "explanation": "Amazon S3 stores objects."
+      },
+      {
+        "id": "rds",
+        "text": "Amazon RDS",
+        "explanation": "Amazon RDS is a managed database."
+      }
+    ],
+    "correctOptionIds": ["beanstalk"],
+    "explanation": "Upload code and let AWS set up the rest: Elastic Beanstalk.",
+    "references": [
+      {
+        "title": "What is AWS Elastic Beanstalk?",
+        "url": "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

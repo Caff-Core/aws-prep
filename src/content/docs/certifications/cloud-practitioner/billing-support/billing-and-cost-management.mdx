@@ -1,0 +1,191 @@
+---
+title: Billing and cost management
+description: AWS Budgets, AWS Cost Explorer, AWS Pricing Calculator, AWS Organizations consolidated billing, and cost allocation tags.
+sidebar:
+  order: 2
+lesson:
+  id: cloud-practitioner/billing-and-cost-management
+  certification: cloud-practitioner
+  module: billing-support
+  domain: billing-support
+  taskStatements: ['4.2']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Choose between AWS Budgets, AWS Cost Explorer, and AWS Pricing Calculator.
+    - Explain AWS Organizations consolidated billing.
+    - Describe cost allocation tags and their link to billing reports.
+  prerequisites:
+    - AWS pricing models.
+  references:
+    - title: Managing your costs with AWS Budgets
+      url: https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html
+    - title: Analyzing your costs with AWS Cost Explorer
+      url: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html
+    - title: What is AWS Pricing Calculator?
+      url: https://docs.aws.amazon.com/pricing-calculator/latest/userguide/what-is-pricing-calculator.html
+    - title: Consolidated billing for AWS Organizations
+      url: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+    - title: What is AWS Organizations?
+      url: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    - title: Cost allocation tags
+      url: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    - title: What are AWS Cost and Usage Reports?
+      url: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
+    - title: AWS Free Tier
+      url: https://aws.amazon.com/free/
+    - title: 'CLF-C02 exam guide: Domain 4'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain4.md
+---
+
+import {
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+Managing household money takes three habits. You estimate costs before a big purchase. You set a limit
+and get warned when you near it. You look back at your statements to see where the money went.
+
+AWS has a tool for each habit.
+
+## Three tools, three moments in time
+
+<ServiceComparison
+  caption="AWS cost tools compared"
+  columns={['Tool', 'When', 'What it does']}
+  rows={[
+    {
+      name: 'AWS Pricing Calculator',
+      cells: ['Before you build', 'Estimates the cost of AWS services'],
+    },
+    {
+      name: 'AWS Budgets',
+      cells: ['While you run', 'Sends alerts against cost and usage targets'],
+    },
+    {
+      name: 'AWS Cost Explorer',
+      cells: ['After you spend', 'Visualises and analyses costs and usage'],
+    },
+  ]}
+/>
+
+### AWS Pricing Calculator
+
+**AWS Pricing Calculator** is a free web tool for estimating the cost of services and architectures before
+you build them. You can share estimates or export them.
+
+### AWS Budgets
+
+**AWS Budgets** tracks cost and usage against targets you set. Alerts can fire on actual or forecasted
+spend, and they arrive by email or through Amazon SNS. Budget actions can respond automatically, such as
+applying an IAM policy when a threshold is reached.
+
+### AWS Cost Explorer
+
+**AWS Cost Explorer** lets you view and analyse your costs. You can look back up to 13 months, forecast
+future spend, and receive Reserved Instance recommendations.
+
+<ImportantConcept>
+  Budgets **warns** you. Cost Explorer **explains** what happened. Pricing Calculator **estimates**
+  before you start.
+</ImportantConcept>
+
+## AWS Organizations and consolidated billing
+
+**AWS Organizations** centrally manages many AWS accounts, grouped into organizational units. Service
+control policies provide guardrails across accounts.
+
+**Consolidated billing** means the management account pays the charges of all member accounts. Its
+benefits are:
+
+- **One bill** for all accounts.
+- **Combined usage**, which shares volume pricing discounts, Reserved Instance discounts, and Savings
+  Plans benefits.
+- **No extra fee** for the feature.
+
+## Cost allocation tags
+
+A **tag** is a key and value pair attached to a resource, such as `Project=Website`. **Cost allocation
+tags** let you track costs by project, team, or anything else that matters to you.
+
+<ServiceComparison
+  caption="Types of cost allocation tag compared"
+  columns={['Type', 'Applied by', 'Prefix']}
+  rows={[
+    { name: 'AWS-generated', cells: ['AWS', 'aws:'] },
+    { name: 'User-defined', cells: ['You', 'user:'] },
+  ]}
+/>
+
+Both types must be activated before they appear in cost tools. Do not put sensitive information in tags.
+
+## Billing reports
+
+**AWS Cost and Usage Reports** are the most comprehensive cost and usage data, delivered to an Amazon S3
+bucket and able to include your tags. AWS Data Exports now offers a newer version, CUR 2.0, which AWS
+recommends. Reports can be queried with Amazon Athena.
+
+<RealWorldExample title="Real-world example: a marketing agency">
+  A Pretoria agency runs each client's website in a separate account under AWS Organizations, so it
+  receives one bill. It tags resources by client and reviews costs in Cost Explorer. A budget alert
+  warns the team when any client approaches its monthly limit.
+</RealWorldExample>
+
+<CostWarning title="Cost warning: set a budget before you experiment">
+  Before trying AWS, create a budget alert. New accounts choose a free plan with credits or a paid
+  plan, and the terms change, so read the current AWS Free Tier page. Never assume a service is
+  free.
+</CostWarning>
+
+## What the exam expects
+
+<ExamTip>
+  **Estimate before building** means Pricing Calculator. **Alert when spending passes a threshold**
+  means AWS Budgets. **Analyse past spending** means Cost Explorer. **One bill for many accounts**
+  means consolidated billing. **Track cost by project** means cost allocation tags.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Budgets stops spending automatically."** By default, it alerts you. Budget actions must be set up.
+- **"Tags work in reports immediately."** They must be activated first.
+- **"Consolidated billing costs extra."** It has no additional fee.
+
+## Try it yourself (optional)
+
+You can do this without an AWS account, and it costs nothing. Open
+[AWS Pricing Calculator](https://calculator.aws/) and estimate a small website with one server. Change
+the Region and see how the estimate moves. Estimates exclude taxes.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/billing-and-cost-management"
+  questionIds={[
+    'clf-billing-calculator',
+    'clf-billing-budgets',
+    'clf-billing-consolidated',
+    'clf-billing-tags',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- AWS Pricing Calculator estimates, AWS Budgets alerts, and AWS Cost Explorer analyses.
+- AWS Organizations manages many accounts, and consolidated billing gives one bill.
+- Combined usage shares discounts across accounts.
+- Cost allocation tags track costs and must be activated.
+- Cost and Usage Reports give the most detailed data.
+
+</LessonSummary>

@@ -1,0 +1,191 @@
+---
+title: Governance and compliance
+description: Where to find AWS compliance information, how compliance needs vary, and the services that support monitoring, auditing, and reporting.
+sidebar:
+  order: 2
+lesson:
+  id: cloud-practitioner/governance-and-compliance
+  certification: cloud-practitioner
+  module: security-compliance
+  domain: security-compliance
+  taskStatements: ['2.2']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Find AWS compliance information with AWS Artifact.
+    - Explain why compliance needs vary by location, industry, and service.
+    - Match Amazon CloudWatch, AWS CloudTrail, and AWS Config to their purposes.
+    - Identify IAM access reports used for governance.
+  prerequisites:
+    - The AWS shared responsibility model.
+  references:
+    - title: What is AWS Artifact?
+      url: https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html
+    - title: AWS Compliance Programs
+      url: https://aws.amazon.com/compliance/programs/
+    - title: What is Amazon CloudWatch?
+      url: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+    - title: What is AWS CloudTrail?
+      url: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html
+    - title: What is AWS Config?
+      url: https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html
+    - title: IAM credential reports
+      url: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
+    - title: IAM last accessed information
+      url: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed.html
+    - title: 'CLF-C02 exam guide: Domain 2'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain2.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+A restaurant has to show a health inspector that it follows the rules. It keeps certificates on the
+wall, records fridge temperatures, and logs who received each delivery.
+
+Organisations in the cloud have similar duties. **Compliance** means meeting the laws, regulations, and
+standards that apply to you. **Governance** means the rules and oversight an organisation uses to run
+its systems responsibly. AWS provides documents and services that support both.
+
+## Finding compliance information
+
+**AWS Artifact** gives you on-demand access to AWS security and compliance documents, such as ISO
+certifications, Payment Card Industry (PCI) reports, and System and Organization Controls (SOC) reports.
+You can also review and track agreements with AWS. The documents are free to download.
+
+If an auditor asks for proof of how AWS controls its side of the shared responsibility model, AWS
+Artifact is where to go.
+
+## Why compliance needs vary
+
+Requirements depend on where you operate, your industry, and the services you use. AWS groups its
+compliance programs into three areas.
+
+<ServiceComparison
+  caption="AWS compliance program areas"
+  columns={['Area', 'What it means', 'Examples']}
+  rows={[
+    {
+      name: 'Certifications and attestations',
+      cells: ['Audited by independent third parties', 'ISO 27001, SOC 1, 2, and 3, PCI DSS'],
+    },
+    {
+      name: 'Laws and regulations',
+      cells: ['AWS offers features and agreements, with no formal certification', 'HIPAA, GDPR'],
+    },
+    {
+      name: 'Alignments and frameworks',
+      cells: ['Published requirements that AWS aligns to', 'NIST frameworks'],
+    },
+  ]}
+/>
+
+A health company in the United States considers the Health Insurance Portability and Accountability Act
+(HIPAA). A company handling data about people in the European Union considers the General Data
+Protection Regulation (GDPR). Compliance requirements also vary among AWS services, so check that the
+services you plan to use are covered by the programs you need.
+
+<ImportantConcept>
+  AWS certifications cover the AWS side. Customers remain responsible for their own compliance with
+  the laws that apply to them. AWS Artifact does not produce your company's compliance documents.
+</ImportantConcept>
+
+## Monitoring, auditing, and reporting
+
+The exam guide names these services by role. Learn each by the question it answers.
+
+### Amazon CloudWatch: monitoring
+
+**Amazon CloudWatch** monitors AWS resources and applications through metrics, alarms, dashboards, and
+logs. It answers the question "How is my system performing right now?"
+
+### AWS CloudTrail: auditing actions
+
+**AWS CloudTrail** records actions taken by users, roles, and services as events. It answers the
+question "Who did what, and when?" You can view the last 90 days of management events in event history,
+and you can create a trail to deliver logs to Amazon S3 for longer storage.
+
+### AWS Config: auditing configuration
+
+**AWS Config** records how your resources are configured over time, and how they relate to each other.
+Its rules flag resources that do not comply with the settings you want. It answers the question "What
+did this resource look like, and does it follow our rules?"
+
+<ServiceComparison
+  caption="Monitoring and auditing services compared"
+  columns={['Service', 'Role', 'Question it answers']}
+  rows={[
+    { name: 'Amazon CloudWatch', cells: ['Monitoring', 'How is it performing?'] },
+    { name: 'AWS CloudTrail', cells: ['Auditing actions', 'Who did what, and when?'] },
+    { name: 'AWS Config', cells: ['Auditing configuration', 'What changed, and is it compliant?'] },
+  ]}
+/>
+
+### Access reports
+
+Two reports support least-privilege reviews:
+
+- An **IAM credential report** lists users and the status of their passwords, access keys, and
+  multi-factor authentication devices.
+- **IAM last accessed information** helps you find permissions that are not being used, so that you can
+  remove them.
+
+<RealWorldExample title="Real-world example: an insurer's audit">
+  An insurer in Sandton prepares for an audit. Staff download AWS reports from AWS Artifact to show
+  the controls on the AWS side. They use AWS CloudTrail to show who changed a sensitive setting, and
+  AWS Config to show that storage settings stayed compliant over the year.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **AWS compliance reports** point to AWS Artifact. **Who made this API call** points to AWS
+  CloudTrail. **Resource configuration history** points to AWS Config. **Metrics and alarms** point
+  to Amazon CloudWatch.
+</ExamTip>
+
+## Common misconceptions
+
+- **"CloudTrail and CloudWatch do the same job."** CloudTrail records actions. CloudWatch monitors
+  performance and resources.
+- **"Using a certified provider makes me compliant."** Customers still have their own duties.
+- **"Every AWS service meets every standard."** Requirements vary among services.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Read the
+[AWS Compliance Programs](https://aws.amazon.com/compliance/programs/) page and find one program that
+applies to your country or industry. Note whether it is a certification, a law, or a framework.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/governance-and-compliance"
+  questionIds={[
+    'clf-governance-artifact',
+    'clf-governance-cloudtrail',
+    'clf-governance-config',
+    'clf-governance-customer-duty',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- AWS Artifact provides AWS compliance reports and agreements on demand.
+- Compliance needs vary by location, industry, and service.
+- Amazon CloudWatch monitors, AWS CloudTrail records actions, and AWS Config tracks configuration.
+- IAM credential reports and last accessed information support access reviews.
+
+</LessonSummary>

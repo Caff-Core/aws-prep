@@ -46,13 +46,28 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
       <p>Practice questions need JavaScript to check your answers.</p>
     </noscript>
 
+    {domains.length > 1 && (
+      <p class="filter">
+        <label for="practice-domain">Practise</label>
+        <select id="practice-domain" data-filter>
+          <option value="">All domains ({questions.length} questions)</option>
+          {domains.map((domain) => (
+            <option value={domain.id}>
+              {domain.number}. {domain.title} (
+              {questions.filter((question) => question.domainId === domain.id).length})
+            </option>
+          ))}
+        </select>
+      </p>
+    )}
+
     <nav aria-label="Questions">
       <ol class="question-nav">
         {questions.map((question, index) => (
           <li>
             <button type="button" data-goto={question.id}>
               <span class="sr-only">Question </span>
-              {index + 1}
+              <span data-number>{index + 1}</span>
               <span class="mark" data-mark />
             </button>
           </li>
@@ -130,6 +145,7 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
 
   class PracticeSession extends HTMLElement {
     private questions = JSON.parse(this.dataset['questions'] ?? '[]') as SessionQuestion[];
+    private active = this.questions;
     private outcomes: Record<string, boolean> = {};
     private index = 0;
 
@@ -156,15 +172,28 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
 
       this.querySelectorAll<HTMLElement>('[data-goto]').forEach((button) => {
         button.addEventListener('click', () => {
-          const position = this.questions.findIndex(({ id }) => id === button.dataset['goto']);
-          this.show(position);
+          this.show(this.active.findIndex(({ id }) => id === button.dataset['goto']));
         });
       });
+      this.querySelector<HTMLSelectElement>('[data-filter]')?.addEventListener(
+        'change',
+        (event) => {
+          const domainId = (event.target as HTMLSelectElement).value;
+          this.active = domainId
+            ? this.questions.filter((question) => question.domainId === domainId)
+            : this.questions;
+          this.clearAnswers();
+          this.show(0, false);
+        },
+      );
       this.get('[data-prev]').addEventListener('click', () => this.show(this.index - 1));
       this.get('[data-next]').addEventListener('click', () => this.show(this.index + 1));
       this.get('[data-finish]').addEventListener('click', () => void this.finish());
       this.get('[data-review]').addEventListener('click', () => this.show(0));
-      this.get('[data-restart]').addEventListener('click', () => this.restart());
+      this.get('[data-restart]').addEventListener('click', () => {
+        this.clearAnswers();
+        this.show(0);
+      });
       this.show(0, false);
     }
 
@@ -173,25 +202,32 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
       this.get('[data-results]').hidden = true;
       this.get('[data-questions-area]').hidden = false;
 
-      this.questions.forEach(({ id }, index) => {
-        this.get(`[data-question="${id}"]`).hidden = index !== position;
+      const current = this.active[position];
+      this.questions.forEach(({ id }) => {
+        this.get(`[data-question="${id}"]`).hidden = id !== current?.id;
       });
       (this.get('[data-prev]') as HTMLButtonElement).disabled = position === 0;
-      (this.get('[data-next]') as HTMLButtonElement).disabled =
-        position === this.questions.length - 1;
+      (this.get('[data-next]') as HTMLButtonElement).disabled = position === this.active.length - 1;
       this.renderNav();
 
-      const current = this.questions[position];
       if (moveFocus && current) this.get(`[data-question="${current.id}"]`).focus();
     }
 
     private renderNav() {
-      this.questions.forEach(({ id }, index) => {
+      this.questions.forEach(({ id }) => {
         const button = this.get(`[data-goto="${id}"]`);
-        const outcome = this.outcomes[id];
-        if (index === this.index) button.setAttribute('aria-current', 'step');
+        const position = this.active.findIndex((question) => question.id === id);
+        button.parentElement!.hidden = position === -1;
+        if (position === -1) return;
+
+        const number = String(position + 1);
+        button.querySelector('[data-number]')!.textContent = number;
+        this.get(`[data-question="${id}"] .question-number`).textContent = `Question ${number}`;
+
+        if (position === this.index) button.setAttribute('aria-current', 'step');
         else button.removeAttribute('aria-current');
 
+        const outcome = this.outcomes[id];
         button.dataset['state'] = outcome === undefined ? '' : outcome ? 'correct' : 'incorrect';
         const mark = button.querySelector('[data-mark]')!;
         mark.textContent = outcome === undefined ? '' : outcome ? ' ✓' : ' ✗';
@@ -203,7 +239,7 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
     }
 
     private async finish() {
-      const summary = summarizeSession(this.questions, this.outcomes);
+      const summary = summarizeSession(this.active, this.outcomes);
       const { correct, total, percent } = summary.score;
 
       this.get('[data-score]').textContent = `${correct} of ${total} correct (${percent}%)`;
@@ -211,12 +247,14 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
       unanswered.hidden = summary.unanswered === 0;
       unanswered.textContent = `${summary.unanswered} not answered, counted as incorrect.`;
 
-      for (const domain of summary.domains) {
-        const row = this.get(`[data-domain="${domain.domainId}"]`);
+      this.querySelectorAll<HTMLElement>('[data-domain]').forEach((row) => {
+        const domain = summary.domains.find((item) => item.domainId === row.dataset['domain']);
+        row.hidden = !domain;
+        if (!domain) return;
         row.querySelector('[data-domain-correct]')!.textContent =
           `${domain.correct} of ${domain.total}`;
         row.querySelector('[data-domain-percent]')!.textContent = `${domain.percent}%`;
-      }
+      });
 
       this.get('[data-questions-area]').hidden = true;
       const results = this.get('[data-results]');
@@ -233,10 +271,12 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
       );
     }
 
-    private restart() {
+    private clearAnswers() {
+      for (const id of Object.keys(this.outcomes)) {
+        const form = this.querySelector<HTMLFormElement>(`form[data-question-id="${id}"]`);
+        if (form) resetQuestionForm(form);
+      }
       this.outcomes = {};
-      this.querySelectorAll('form').forEach((form) => resetQuestionForm(form));
-      this.show(0);
     }
   }
   customElements.define('practice-session', PracticeSession);
@@ -250,6 +290,30 @@ const awaitingReview = questions.filter((item) => item.reviewStatus === 'in-revi
 
   .intro {
     margin: 0;
+  }
+
+  .filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    margin: var(--space-4) 0 0;
+  }
+
+  .filter label {
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  .filter select {
+    max-width: 100%;
+    min-height: 2.75rem;
+    padding-inline: var(--space-3);
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text-strong);
+    font: inherit;
   }
 
   .question-nav {

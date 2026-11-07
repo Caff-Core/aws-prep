@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
@@ -49,5 +49,22 @@ describe('lesson content', () => {
   it('links every question to a real lesson', () => {
     const ids = new Set(lessons.map(({ lesson }) => lesson.id));
     for (const question of getAllQuestions()) expect(ids).toContain(question.lessonId);
+  });
+});
+
+describe('internal links', () => {
+  const sources = readdirSync(docsRoot, { recursive: true, encoding: 'utf8' }).filter((file) =>
+    file.endsWith('.mdx'),
+  );
+
+  it.each(sources)('%s links only to pages that exist', (file) => {
+    const source = readFileSync(join(docsRoot, file), 'utf8');
+    const links = source.matchAll(/\]\((\/certifications\/[^)#]*?)\/?\)/g);
+    for (const [, path] of links) {
+      if (path?.endsWith('/practice')) continue;
+      const target = join('src/content/docs', `${path}.mdx`);
+      const index = join('src/content/docs', `${path}/index.mdx`);
+      expect(existsSync(target) || existsSync(index), `${file} -> ${path}`).toBe(true);
+    }
   });
 });

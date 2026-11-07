@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { buildBank, getAllQuestions, getQuestions } from '~/lib/assessment/bank';
+import {
+  buildBank,
+  getAllQuestions,
+  getPracticeQuestions,
+  getQuestions,
+} from '~/lib/assessment/bank';
+import { orderOptions } from '~/lib/assessment/option-order';
 import { questionSchema } from '~/lib/assessment/schema';
 
 const [sample] = getAllQuestions();
@@ -38,11 +44,45 @@ describe('question bank', () => {
   });
 
   it('rejects a task statement outside the domain', () => {
-    expect(() => buildBank({ f: [{ ...sample, taskStatementId: '1.1' }] })).toThrow(/not in/);
+    const invalid = { ...sample, domainId: 'cloud-concepts', taskStatementId: '3.2' };
+    expect(() => buildBank({ f: [invalid] })).toThrow(/not in/);
   });
 
   it('rejects duplicate question ids', () => {
     expect(() => buildBank({ f: [sample, sample] })).toThrow(/Duplicate/);
+  });
+
+  it('serves practice questions in curriculum order', () => {
+    const domains = getPracticeQuestions('cloud-practitioner').map((item) => item.domainId);
+    expect([...new Set(domains)]).toEqual([
+      'cloud-concepts',
+      'security-compliance',
+      'technology-services',
+      'billing-support',
+    ]);
+  });
+
+  it('covers every task statement with at least two questions', () => {
+    const tasks = getPracticeQuestions('cloud-practitioner').map((item) => item.taskStatementId);
+    const counts = Object.groupBy(tasks, (task) => task);
+    expect(Object.keys(counts)).toHaveLength(19);
+    for (const items of Object.values(counts)) expect(items?.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('does not reveal answers through option position', () => {
+    const questions = getAllQuestions();
+    const firstIsCorrect = questions.filter((question) => {
+      const [first] = orderOptions(question.id, question.options);
+      return first && question.correctOptionIds.includes(first.id);
+    });
+    // Random order puts a correct answer first in roughly 30% of this bank.
+    expect(firstIsCorrect.length / questions.length).toBeLessThan(0.45);
+  });
+
+  it('orders options the same way on every build, and keeps them all', () => {
+    const ordered = orderOptions(sample.id, sample.options);
+    expect(orderOptions(sample.id, sample.options)).toEqual(ordered);
+    expect(ordered).toHaveLength(sample.options.length);
   });
 
   it('refuses to serve unknown questions', () => {

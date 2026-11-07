@@ -1,0 +1,190 @@
+---
+title: The AWS Well-Architected Framework
+description: What the AWS Well-Architected Framework is, what each of its six pillars focuses on, and how to tell the pillars apart.
+sidebar:
+  order: 2
+lesson:
+  id: cloud-practitioner/well-architected-framework
+  certification: cloud-practitioner
+  module: cloud-concepts
+  domain: cloud-concepts
+  taskStatements: ['1.2']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 20
+  lastReviewed: 2026-11-07
+  objectives:
+    - Explain what the AWS Well-Architected Framework is for.
+    - Name the six pillars and what each one focuses on.
+    - Identify the pillar a scenario is describing.
+    - Describe what the AWS Well-Architected Tool does.
+  prerequisites:
+    - The ideas in the Benefits of the AWS Cloud lesson.
+  references:
+    - title: AWS Well-Architected Framework
+      url: https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html
+    - title: The pillars of the framework
+      url: https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+    - title: AWS Well-Architected Tool
+      url: https://aws.amazon.com/well-architected-tool/
+    - title: 'CLF-C02 exam guide: Domain 1'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain1.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+Before a building opens, inspectors check it against a building code. The code does not design the
+building for you. It gives you tested standards and helps you spot weak points early.
+
+The **AWS Well-Architected Framework** plays a similar role for cloud systems. It is a set of best
+practices and questions that help you design and run workloads well. A **workload** is a collection of
+resources and code that delivers something of value, such as a customer website.
+
+The framework helps you weigh up the pros and cons of decisions. AWS describes a review as a
+constructive conversation, not an audit.
+
+## The six pillars
+
+The framework is organised into six pillars. Each pillar looks at the same workload from a different
+angle.
+
+### Operational excellence
+
+This pillar is about running and improving workloads well over time. It covers how teams are
+organised and how they operate systems day to day.
+
+### Security
+
+This pillar is about protecting data, systems, and assets.
+
+### Reliability
+
+This pillar is about a workload performing its intended function correctly and consistently when
+expected. Recovering from failure belongs here.
+
+### Performance efficiency
+
+This pillar is about using cloud resources efficiently to meet performance requirements, and staying
+efficient as demand and technology change.
+
+### Cost optimization
+
+This pillar is about delivering business value at the lowest price point.
+
+### Sustainability
+
+This pillar is about reducing the environmental impact of running workloads, particularly energy use
+and efficiency.
+
+<ImportantConcept title="A way to remember them">
+  Many learners use the first letters: **O**perational excellence, **S**ecurity, **R**eliability,
+  **P**erformance efficiency, **C**ost optimization, **S**ustainability. Make up a phrase that works
+  for you.
+</ImportantConcept>
+
+## Telling the pillars apart
+
+The exam asks you to identify differences between pillars. Reliability and performance efficiency are
+the pair people mix up most. Reliability asks whether the system works when it should. Performance
+efficiency asks whether it uses resources well to meet its performance needs.
+
+<ServiceComparison
+  caption="The six pillars compared"
+  columns={['Pillar', 'Main focus', 'Scenario clue']}
+  rows={[
+    {
+      name: 'Operational excellence',
+      cells: [
+        'Running and improving workloads',
+        'Improving day-to-day operations and team processes',
+      ],
+    },
+    {
+      name: 'Security',
+      cells: ['Protecting data, systems, and assets', 'Controlling access, protecting data'],
+    },
+    {
+      name: 'Reliability',
+      cells: ['Working correctly and consistently', 'Recovering from failure'],
+    },
+    {
+      name: 'Performance efficiency',
+      cells: ['Using resources efficiently', 'Choosing the right resources as demand changes'],
+    },
+    {
+      name: 'Cost optimization',
+      cells: ['Value at the lowest price point', 'Removing unnecessary spending'],
+    },
+    {
+      name: 'Sustainability',
+      cells: ['Reducing environmental impact', 'Reducing energy use'],
+    },
+  ]}
+/>
+
+## The AWS Well-Architected Tool
+
+The **AWS Well-Architected Tool** is a service in the AWS Management Console. You answer questions
+about a workload, and it measures your architecture against the framework and gives recommendations.
+AWS provides it at no charge.
+
+<RealWorldExample title="Real-world example: a delivery company">
+  A Durban delivery company reviews its tracking system with the Well-Architected Tool. The review
+  finds that the system runs in one Availability Zone, which is a **reliability** risk. It also
+  finds servers running all night with nothing to do, which is a **cost optimization** and
+  **sustainability** concern. The team now has a prioritised list of improvements.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  Know all six pillar names and match each to a scenario. Sustainability is easy to forget, and
+  words like "elasticity" or "agility" are benefits of the cloud, not pillars.
+</ExamTip>
+
+## Common misconceptions
+
+- **"A Well-Architected review is an audit."** AWS describes it as a constructive conversation.
+- **"There are five pillars."** Older material lists five. The framework now has six, including
+  sustainability.
+- **"Each pillar applies to a different system."** All six apply to the same workload, and decisions
+  in one pillar can affect another.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Pick an app you use every day. For each pillar,
+write one question you would ask its builders, such as "What happens if a data center fails?" for
+reliability.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/well-architected-framework"
+  questionIds={[
+    'clf-waf-reliability-scenario',
+    'clf-waf-pillar-names',
+    'clf-waf-sustainability-scenario',
+    'clf-waf-tool',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- The Well-Architected Framework is a set of best practices and questions for cloud workloads.
+- Its six pillars are operational excellence, security, reliability, performance efficiency, cost
+  optimization, and sustainability.
+- Reliability is about working correctly. Performance efficiency is about using resources well.
+- The AWS Well-Architected Tool reviews a workload against the framework at no charge.
+
+</LessonSummary>

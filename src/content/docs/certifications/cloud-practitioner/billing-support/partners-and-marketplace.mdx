@@ -1,0 +1,135 @@
+---
+title: AWS Partners and AWS Marketplace
+description: The role of the AWS Partner Network, independent software vendors, and system integrators, and what AWS Marketplace offers.
+sidebar:
+  order: 4
+lesson:
+  id: cloud-practitioner/partners-and-marketplace
+  certification: cloud-practitioner
+  module: billing-support
+  domain: billing-support
+  taskStatements: ['4.3']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 15
+  lastReviewed: 2026-11-07
+  objectives:
+    - Describe the role of the AWS Partner Network.
+    - Tell independent software vendors and system integrators apart.
+    - Identify the benefits of being an AWS Partner.
+    - Identify the key services that AWS Marketplace offers.
+  references:
+    - title: AWS Partner Network
+      url: https://aws.amazon.com/partners/
+    - title: AWS Partner programs
+      url: https://aws.amazon.com/partners/programs/
+    - title: What is AWS Marketplace?
+      url: https://docs.aws.amazon.com/marketplace/latest/buyerguide/what-is-marketplace.html
+    - title: 'CLF-C02 exam guide: Domain 4'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain4.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+A shopping centre has an owner, but the shops are run by others. Some shops sell products. Others offer
+services, such as a tailor who alters what you buy. The centre brings customers and sellers together.
+
+AWS has a similar ecosystem. Other companies build products on AWS, or help customers use it.
+
+## The AWS Partner Network
+
+The **AWS Partner Network** is a global community of organisations that use AWS technologies and programs
+to build solutions and services for customers.
+
+<ServiceComparison
+  caption="Types of AWS Partner compared"
+  columns={['Type', 'What it does', 'Everyday comparison']}
+  rows={[
+    {
+      name: 'Independent software vendor (ISV)',
+      cells: ['Builds and sells its own software', 'A shop selling a product'],
+    },
+    {
+      name: 'System integrator',
+      cells: ['Helps customers design and build solutions', 'A builder who does the work for you'],
+    },
+  ]}
+/>
+
+### Benefits of being an AWS Partner
+
+The exam guide lists partner training and certification, partner events, and partner volume discounts.
+AWS also describes co-selling with AWS and selling in AWS Marketplace.
+
+## AWS Marketplace
+
+**AWS Marketplace** is a curated digital catalog for finding, buying, deploying, and managing third-party
+software, data, and services. Sellers can be independent software vendors, resellers, or individuals.
+
+Key points:
+
+- Pricing options include free trials, hourly, monthly, annual, multi-year, and Bring Your Own License.
+- Charges appear on your AWS bill, which simplifies **cost management**.
+- It supports **governance and entitlement**, meaning control of who can buy and use what.
+
+<ImportantConcept>
+  AWS Marketplace sells **third-party** products. AWS Professional Services and the AWS Partner
+  Network offer **people** who can help.
+</ImportantConcept>
+
+<RealWorldExample title="Real-world example: adding a security tool">
+  A Mbombela logistics company needs a third-party firewall. It finds one in AWS Marketplace,
+  deploys it, and pays through its AWS bill. For a larger project, it hires a system integrator from
+  the AWS Partner Network to design its migration.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Third-party software on your AWS bill** points to AWS Marketplace. **Sells its own software**
+  means an independent software vendor. **Helps build a solution** means a system integrator.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Everything in AWS Marketplace is made by AWS."** It is a catalog of third-party products.
+- **"AWS Partners are AWS employees."** Partners are separate organisations.
+- **"Marketplace products need a separate invoice."** Charges appear on the AWS bill.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Browse
+[AWS Marketplace](https://aws.amazon.com/marketplace) and find a product in a category that interests
+you. Note who sells it and what pricing options it offers.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/partners-and-marketplace"
+  questionIds={[
+    'clf-partner-marketplace',
+    'clf-partner-isv',
+    'clf-partner-si',
+    'clf-partner-benefits',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- The AWS Partner Network connects customers with organisations that build on AWS.
+- Independent software vendors sell software, and system integrators build solutions.
+- AWS Marketplace is a catalog of third-party software, data, and services.
+- Marketplace charges appear on the AWS bill.
+
+</LessonSummary>

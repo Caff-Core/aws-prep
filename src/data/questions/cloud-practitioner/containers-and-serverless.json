@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-containers-eks",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/containers-and-serverless",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company already uses Kubernetes and wants a managed option on AWS. Which service fits?",
+    "options": [
+      {
+        "id": "eks",
+        "text": "Amazon EKS",
+        "explanation": "Correct. Amazon EKS is managed Kubernetes."
+      },
+      {
+        "id": "lambda",
+        "text": "AWS Lambda",
+        "explanation": "Lambda runs code without Kubernetes."
+      },
+      {
+        "id": "lightsail",
+        "text": "Amazon Lightsail",
+        "explanation": "Lightsail suits simple websites and small applications."
+      },
+      {
+        "id": "rds",
+        "text": "Amazon RDS",
+        "explanation": "Amazon RDS is a database service."
+      }
+    ],
+    "correctOptionIds": ["eks"],
+    "explanation": "Kubernetes points to Amazon EKS.",
+    "references": [
+      {
+        "title": "What is Amazon EKS?",
+        "url": "https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-containers-fargate",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/containers-and-serverless",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A team wants to run containers without managing EC2 instances. Which option fits?",
+    "options": [
+      {
+        "id": "fargate",
+        "text": "AWS Fargate",
+        "explanation": "Correct. Fargate is serverless compute for containers."
+      },
+      {
+        "id": "ec2",
+        "text": "Amazon EC2 instances that the team patches",
+        "explanation": "This means managing servers."
+      },
+      {
+        "id": "glacier",
+        "text": "S3 Glacier",
+        "explanation": "This is archive storage."
+      },
+      {
+        "id": "route53",
+        "text": "Amazon Route 53",
+        "explanation": "Route 53 provides DNS."
+      }
+    ],
+    "correctOptionIds": ["fargate"],
+    "explanation": "Containers without server management point to AWS Fargate.",
+    "references": [
+      {
+        "title": "AWS Fargate for Amazon ECS",
+        "url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-containers-lambda",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/containers-and-serverless",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants a short piece of code to run each time a file arrives in Amazon S3, without managing servers. Which service fits?",
+    "options": [
+      {
+        "id": "lambda",
+        "text": "AWS Lambda",
+        "explanation": "Correct. Lambda runs code in response to events."
+      },
+      {
+        "id": "ec2",
+        "text": "Amazon EC2",
+        "explanation": "This would need a server running all the time."
+      },
+      {
+        "id": "eks",
+        "text": "Amazon EKS",
+        "explanation": "This is more than a short event-driven task needs."
+      },
+      {
+        "id": "redshift",
+        "text": "Amazon Redshift",
+        "explanation": "Redshift is a data warehouse."
+      }
+    ],
+    "correctOptionIds": ["lambda"],
+    "explanation": "Code that reacts to events points to AWS Lambda.",
+    "references": [
+      {
+        "title": "What is AWS Lambda?",
+        "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-containers-serverless-meaning",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/containers-and-serverless",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "What does serverless mean?",
+    "options": [
+      {
+        "id": "aws-manages",
+        "text": "Servers exist, but the customer does not manage them",
+        "explanation": "Correct. AWS handles the servers."
+      },
+      {
+        "id": "no-servers",
+        "text": "No servers exist at all",
+        "explanation": "Servers still exist."
+      },
+      {
+        "id": "own-servers",
+        "text": "The customer buys its own servers",
+        "explanation": "That describes on-premises."
+      },
+      {
+        "id": "free",
+        "text": "The service has no charges",
+        "explanation": "Serverless services still have charges."
+      }
+    ],
+    "correctOptionIds": ["aws-manages"],
+    "explanation": "Serverless removes server management, not the servers themselves.",
+    "references": [
+      {
+        "title": "What is AWS Lambda?",
+        "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-containers-ecs-fargate",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.3",
+    "lessonId": "cloud-practitioner/containers-and-serverless",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO services can run containers on AWS?",
+    "options": [
+      {
+        "id": "ecs",
+        "text": "Amazon ECS",
+        "explanation": "Correct. Amazon ECS orchestrates containers."
+      },
+      {
+        "id": "eks",
+        "text": "Amazon EKS",
+        "explanation": "Correct. Amazon EKS runs Kubernetes."
+      },
+      {
+        "id": "sns",
+        "text": "Amazon SNS",
+        "explanation": "Amazon SNS publishes messages."
+      },
+      {
+        "id": "athena",
+        "text": "Amazon Athena",
+        "explanation": "Athena queries data in Amazon S3."
+      },
+      {
+        "id": "kms",
+        "text": "AWS KMS",
+        "explanation": "AWS KMS manages keys."
+      }
+    ],
+    "correctOptionIds": ["ecs", "eks"],
+    "explanation": "Amazon ECS and Amazon EKS both orchestrate containers.",
+    "references": [
+      {
+        "title": "What is Amazon ECS?",
+        "url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
