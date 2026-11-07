@@ -1,0 +1,192 @@
+---
+title: Integration, developer, and other services
+description: AWS services for messaging, business applications, developer tools, end-user computing, frontend web and mobile apps, and IoT.
+sidebar:
+  order: 9
+lesson:
+  id: cloud-practitioner/other-in-scope-services
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.8']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Choose the right service to deliver messages and send notifications.
+    - Identify services for business applications and developer tools.
+    - Identify services for end-user computing, frontend apps, and IoT.
+  references:
+    - title: CLF-C02 in-scope services
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/clf-02-in-scope-services.md
+    - title: What is Amazon EventBridge?
+      url: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html
+    - title: What is Amazon SNS?
+      url: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
+    - title: What is Amazon SQS?
+      url: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html
+    - title: What is AWS Step Functions?
+      url: https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html
+    - title: What is Amazon Connect?
+      url: https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html
+    - title: What is Amazon SES?
+      url: https://docs.aws.amazon.com/ses/latest/dg/Welcome.html
+    - title: What is AWS CodeBuild?
+      url: https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html
+    - title: What is AWS CodePipeline?
+      url: https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html
+    - title: What is AWS X-Ray?
+      url: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html
+    - title: Amazon WorkSpaces
+      url: https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces.html
+    - title: AWS Amplify
+      url: https://aws.amazon.com/amplify/
+    - title: What is AWS IoT?
+      url: https://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+A large company has many departments that are easy to overlook, such as the mailroom, the call center,
+and the workshop. This lesson is a tour of those departments on AWS. For each service, learn what it is
+for. The exam does not expect detail beyond that.
+
+## Messaging and integration
+
+Applications often need to pass messages. **Decoupling** means components communicate without depending
+directly on each other, so one can fail or slow down without breaking the rest.
+
+<ServiceComparison
+  caption="AWS messaging and integration services compared"
+  columns={['Service', 'What it does', 'Everyday comparison']}
+  rows={[
+    {
+      name: 'Amazon SNS',
+      cells: ['Publishes a message to all subscribers of a topic', 'A group announcement'],
+    },
+    {
+      name: 'Amazon SQS',
+      cells: [
+        'Holds messages in a queue until a consumer processes them',
+        'A queue of tickets at a counter',
+      ],
+    },
+    {
+      name: 'Amazon EventBridge',
+      cells: ['Routes events from sources to targets', 'A switchboard'],
+    },
+    {
+      name: 'AWS Step Functions',
+      cells: ['Orchestrates workflows made of steps', 'A checklist that runs itself'],
+    },
+  ]}
+/>
+
+<ImportantConcept>
+  **Amazon SNS** pushes one message to **many** subscribers, including email and SMS. **Amazon SQS**
+  holds messages until a consumer **pulls** one to process it.
+</ImportantConcept>
+
+## Business applications
+
+- **Amazon Connect** is a cloud contact center for voice, chat, and SMS. Its documentation now calls this
+  Amazon Connect Customer, within a wider Amazon Connect family.
+- **Amazon Simple Email Service (Amazon SES)** sends and receives email from your own domains.
+
+For help from AWS itself, customers use **AWS Support**, covered in the
+[support lesson](/certifications/cloud-practitioner/billing-support/support-and-technical-resources/).
+
+## Developer tools
+
+<ServiceComparison
+  caption="AWS developer tools compared"
+  columns={['Service', 'What it does', 'Stage']}
+  rows={[
+    {
+      name: 'AWS CodeBuild',
+      cells: ['Compiles code, runs tests, and produces artifacts', 'Build'],
+    },
+    { name: 'AWS CodePipeline', cells: ['Automates the stages of a software release', 'Deliver'] },
+    {
+      name: 'AWS X-Ray',
+      cells: ['Traces requests to find bottlenecks and errors', 'Troubleshoot'],
+    },
+  ]}
+/>
+
+## End-user computing
+
+These services present desktops and applications to people on their own devices.
+
+- **Amazon WorkSpaces** provides virtual desktops in the cloud.
+- **Amazon AppStream 2.0** streams desktop applications to users. Its documentation now uses the name
+  WorkSpaces Applications, so you may see either name.
+- **Amazon WorkSpaces Secure Browser** gives users secure browser access to websites and web applications.
+
+## Frontend web and mobile
+
+**AWS Amplify** helps developers build, deploy, and host web and mobile applications.
+
+## Internet of Things
+
+**AWS IoT Core** connects devices to AWS so that they can send and receive messages. The **Internet of
+Things (IoT)** means everyday physical devices, such as sensors, connected to a network.
+
+<RealWorldExample title="Real-world example: a smart farm">
+  A Free State farm fits soil sensors that connect through AWS IoT Core. When moisture falls too
+  low, an event triggers an Amazon SNS notification to the farm manager. Readings wait in an Amazon
+  SQS queue until the processing application handles them, so a busy period loses nothing.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Send alerts to many subscribers** means Amazon SNS. **Queue, or decouple** means Amazon SQS.
+  **Bulk email** means Amazon SES. **Contact center** means Amazon Connect. **Virtual desktop**
+  means Amazon WorkSpaces. **Stream an application** means AppStream 2.0. **Connect devices** means
+  AWS IoT Core.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Amazon SNS and Amazon SES are the same."** SNS is a general notification service. SES is for email.
+- **"Amazon SQS sends messages to many subscribers."** A queue message is typically processed by one
+  consumer, then deleted.
+- **"WorkSpaces and AppStream 2.0 are identical."** One gives a whole desktop, the other streams
+  applications.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Think about an online order. Write down the steps
+that happen after payment. Decide where a queue would help, and where a notification would.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/other-in-scope-services"
+  questionIds={['clf-other-sns', 'clf-other-sqs', 'clf-other-workspaces', 'clf-other-xray']}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Amazon SNS publishes to subscribers, and Amazon SQS queues messages.
+- Amazon Connect is a contact center, and Amazon SES handles email.
+- AWS CodeBuild, CodePipeline, and X-Ray support building, delivering, and troubleshooting.
+- WorkSpaces, AppStream 2.0, and WorkSpaces Secure Browser deliver desktops and applications.
+- AWS Amplify supports web and mobile apps, and AWS IoT Core connects devices.
+
+</LessonSummary>
