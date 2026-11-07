@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-srm-aws-responsibility",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.1",
+    "lessonId": "cloud-practitioner/shared-responsibility-model",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "Under the AWS shared responsibility model, which task is the responsibility of AWS?",
+    "options": [
+      {
+        "id": "physical",
+        "text": "Securing the physical data centers",
+        "explanation": "Correct. AWS is responsible for the facilities and hardware that run its services."
+      },
+      {
+        "id": "data",
+        "text": "Classifying the customer's data",
+        "explanation": "Customers remain responsible for their data."
+      },
+      {
+        "id": "iam",
+        "text": "Setting IAM permissions for staff",
+        "explanation": "Customers control access to their resources."
+      },
+      {
+        "id": "guest-os",
+        "text": "Patching the guest operating system on an Amazon EC2 instance",
+        "explanation": "On Amazon EC2, the customer manages the guest operating system."
+      }
+    ],
+    "correctOptionIds": ["physical"],
+    "explanation": "AWS is responsible for security of the cloud, including physical facilities.",
+    "references": [
+      {
+        "title": "Shared Responsibility Model",
+        "url": "https://aws.amazon.com/compliance/shared-responsibility-model/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-srm-ec2-patching",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.1",
+    "lessonId": "cloud-practitioner/shared-responsibility-model",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company runs its application on Amazon EC2 instances. Who must apply security patches to the guest operating system?",
+    "options": [
+      {
+        "id": "customer",
+        "text": "The customer",
+        "explanation": "Correct. With Amazon EC2, the customer manages the guest operating system, including updates and patches."
+      },
+      {
+        "id": "aws",
+        "text": "AWS",
+        "explanation": "AWS manages the host layer, not the guest operating system on Amazon EC2."
+      },
+      {
+        "id": "partner",
+        "text": "An AWS Partner, by default",
+        "explanation": "Customers may hire partners, but the responsibility does not pass to one by default."
+      },
+      {
+        "id": "nobody",
+        "text": "Nobody, because EC2 instances do not need patching",
+        "explanation": "Guest operating systems need patching."
+      }
+    ],
+    "correctOptionIds": ["customer"],
+    "explanation": "The guest operating system on Amazon EC2 is part of security in the cloud.",
+    "references": [
+      {
+        "title": "Shared Responsibility Model",
+        "url": "https://aws.amazon.com/compliance/shared-responsibility-model/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-srm-always-customer",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.1",
+    "lessonId": "cloud-practitioner/shared-responsibility-model",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO are always the customer's responsibility, whichever AWS service is used?",
+    "options": [
+      {
+        "id": "data-class",
+        "text": "Deciding how sensitive its data is",
+        "explanation": "Correct. Data sensitivity stays with the customer."
+      },
+      {
+        "id": "access",
+        "text": "Deciding who can access its resources",
+        "explanation": "Correct. Customers control access through permissions."
+      },
+      {
+        "id": "hardware",
+        "text": "Replacing failed physical disks",
+        "explanation": "Hardware is the responsibility of AWS."
+      },
+      {
+        "id": "facility",
+        "text": "Physical security of data centers",
+        "explanation": "Facilities are the responsibility of AWS."
+      },
+      {
+        "id": "host-virt",
+        "text": "Patching the virtualization layer",
+        "explanation": "This layer is the responsibility of AWS."
+      }
+    ],
+    "correctOptionIds": ["data-class", "access"],
+    "explanation": "Customers always own their data and their access decisions.",
+    "references": [
+      {
+        "title": "Shared Responsibility Model",
+        "url": "https://aws.amazon.com/compliance/shared-responsibility-model/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-srm-rds-shift",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.1",
+    "lessonId": "cloud-practitioner/shared-responsibility-model",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company moves a database from Amazon EC2 to Amazon RDS. Which responsibility moves from the company to AWS?",
+    "options": [
+      {
+        "id": "db-patching",
+        "text": "Patching the database software",
+        "explanation": "Correct. With Amazon RDS, AWS handles database and operating system patching."
+      },
+      {
+        "id": "query-tuning",
+        "text": "Optimising the application's use of the database",
+        "explanation": "Application optimisation stays with the customer."
+      },
+      {
+        "id": "data-class",
+        "text": "Classifying the data in the database",
+        "explanation": "Data classification stays with the customer."
+      },
+      {
+        "id": "permissions",
+        "text": "Controlling which users can reach the database",
+        "explanation": "Access control stays with the customer."
+      }
+    ],
+    "correctOptionIds": ["db-patching"],
+    "explanation": "Managed services shift more of the operational work to AWS.",
+    "references": [
+      {
+        "title": "What is Amazon RDS?",
+        "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-srm-shared-control",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.1",
+    "lessonId": "cloud-practitioner/shared-responsibility-model",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which is an example of a shared control in the AWS shared responsibility model?",
+    "options": [
+      {
+        "id": "patching",
+        "text": "Patch management",
+        "explanation": "Correct. AWS patches the infrastructure, and customers patch their guest operating systems and applications."
+      },
+      {
+        "id": "physical",
+        "text": "Physical and environmental controls",
+        "explanation": "These are inherited from AWS."
+      },
+      {
+        "id": "zone",
+        "text": "Zone security",
+        "explanation": "AWS lists this as a customer-specific control."
+      },
+      {
+        "id": "comms",
+        "text": "Service and communications protection",
+        "explanation": "AWS lists this as a customer-specific control."
+      }
+    ],
+    "correctOptionIds": ["patching"],
+    "explanation": "Patch, configuration, and awareness and training are shared controls.",
+    "references": [
+      {
+        "title": "Shared Responsibility Model",
+        "url": "https://aws.amazon.com/compliance/shared-responsibility-model/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

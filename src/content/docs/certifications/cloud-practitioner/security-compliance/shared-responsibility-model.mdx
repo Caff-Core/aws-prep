@@ -1,0 +1,181 @@
+---
+title: The AWS shared responsibility model
+description: Who secures what in the AWS Cloud, and how responsibilities shift between services such as Amazon EC2, Amazon RDS, and AWS Lambda.
+sidebar:
+  order: 1
+lesson:
+  id: cloud-practitioner/shared-responsibility-model
+  certification: cloud-practitioner
+  module: security-compliance
+  domain: security-compliance
+  taskStatements: ['2.1']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Separate security of the cloud from security in the cloud.
+    - Describe AWS responsibilities and customer responsibilities.
+    - Identify responsibilities that AWS and the customer share.
+    - Explain how responsibilities shift depending on the service used.
+  prerequisites:
+    - A general idea of what servers, operating systems, and databases are.
+  references:
+    - title: Shared Responsibility Model
+      url: https://aws.amazon.com/compliance/shared-responsibility-model/
+    - title: What is Amazon RDS?
+      url: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html
+    - title: What is AWS Lambda?
+      url: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+    - title: Security in AWS Lambda operations
+      url: https://docs.aws.amazon.com/lambda/latest/operatorguide/security-ops.html
+    - title: 'CLF-C02 exam guide: Domain 2'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain2.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+When you rent a flat, the landlord keeps the building sound: the roof, the walls, and the main wiring.
+You decide who gets a key, and you lock the door. If you leave it open, that is not the landlord's
+fault.
+
+Security in the cloud works the same way. AWS looks after the building. You look after what you put
+inside it and who you let in. This division is the **AWS shared responsibility model**.
+
+## Security of the cloud and security in the cloud
+
+The whole model comes down to one short word.
+
+**AWS is responsible for security _of_ the cloud.** That means the hardware, software, networking, and
+facilities that run AWS services. It reaches from physical data center security up to the host
+operating system and virtualization layer.
+
+**The customer is responsible for security _in_ the cloud.** The customer's exact share depends on which
+services it chooses. Customers always own decisions about their data, their company requirements, and
+the laws that apply to them.
+
+<ImportantConcept>
+  Moving to AWS does not hand over all security. Customers always remain responsible for their data
+  and for who can access it.
+</ImportantConcept>
+
+## Controls: inherited, shared, and customer-specific
+
+AWS sorts IT controls into three groups.
+
+<ServiceComparison
+  caption="Types of control in the shared responsibility model"
+  columns={['Type', 'Who handles it', 'Examples']}
+  rows={[
+    {
+      name: 'Inherited',
+      cells: ['Fully from AWS', 'Physical and environmental controls'],
+    },
+    {
+      name: 'Shared',
+      cells: [
+        'AWS and the customer, each in their own layer',
+        'Patch management, configuration management, awareness and training',
+      ],
+    },
+    {
+      name: 'Customer-specific',
+      cells: ['The customer alone', 'Service and communications protection, zone security'],
+    },
+  ]}
+/>
+
+Patch management shows how a shared control works. AWS patches the infrastructure. A customer running
+its own server patches that server's guest operating system and applications.
+
+## How responsibilities shift between services
+
+The more AWS manages for you, the less you need to manage yourself. Three services show the range.
+
+- **Amazon Elastic Compute Cloud (Amazon EC2)** gives you virtual servers. You manage the guest
+  operating system, including patches, plus your applications and firewall settings.
+- **Amazon Relational Database Service (Amazon RDS)** is a managed database. AWS handles the operating
+  system and database patching, backups, high availability, and scaling. You still optimise your
+  application and control access.
+- **AWS Lambda** runs your code without servers for you to manage. AWS handles scaling and patching.
+  You remain responsible for your code, data, and permissions.
+
+<ServiceComparison
+  caption="Who manages what, by service"
+  columns={['Layer', 'Database on Amazon EC2', 'Amazon RDS']}
+  rows={[
+    { name: 'Physical facility and hardware', cells: ['AWS', 'AWS'] },
+    { name: 'Operating system patching', cells: ['Customer', 'AWS'] },
+    { name: 'Database software installation and patching', cells: ['Customer', 'AWS'] },
+    { name: 'Backups', cells: ['Customer', 'AWS'] },
+    { name: 'High availability and scaling', cells: ['Customer', 'AWS'] },
+    { name: 'Application optimisation', cells: ['Customer', 'Customer'] },
+  ]}
+/>
+
+For services such as Amazon Simple Storage Service (Amazon S3), AWS runs the infrastructure, operating
+system, and platform. The customer manages its data, including encryption options, classifying its
+assets, and permissions.
+
+<RealWorldExample title="Real-world example: a clinic's patient system">
+  A clinic in Pretoria moves its booking system to AWS. AWS secures the data centers. The clinic
+  uses Amazon RDS, so AWS patches the database software. The clinic must still decide who can see
+  patient records, encrypt that data, and meet South African privacy law. Those duties do not move
+  to AWS.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  Ask who can reach the thing being secured. **Physical access, hardware, and facilities** are
+  always AWS. **Data, access permissions, and your own code** are always the customer. **Operating
+  system patching** depends on the service: customer on Amazon EC2, AWS on Amazon RDS.
+</ExamTip>
+
+## Common misconceptions
+
+- **"AWS encrypts and protects my data for me, so I have nothing to do."** AWS provides the tools.
+  Decisions about data stay with the customer.
+- **"The split is the same for every service."** It changes with the service used.
+- **"Compliance moves to AWS."** AWS supports compliance, but customers stay responsible for following
+  the laws that apply to them.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Draw two columns labelled AWS and Customer. Sort
+these into them for a website on Amazon EC2: replacing a failed disk, patching the guest operating
+system, securing the data center, choosing passwords, and encrypting customer records. Then redo it
+for Amazon RDS and see what moves.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/shared-responsibility-model"
+  questionIds={[
+    'clf-srm-aws-responsibility',
+    'clf-srm-ec2-patching',
+    'clf-srm-always-customer',
+    'clf-srm-rds-shift',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- AWS is responsible for security of the cloud. The customer is responsible for security in the cloud.
+- Physical and environmental controls are inherited from AWS.
+- Patch management and configuration management are shared controls.
+- The customer's share depends on the service. It is larger on Amazon EC2 than on Amazon RDS.
+- Customers always remain responsible for their data and access decisions.
+
+</LessonSummary>
