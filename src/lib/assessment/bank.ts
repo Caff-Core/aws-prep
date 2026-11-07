@@ -41,12 +41,24 @@ export function getQuestions(ids: readonly string[]): Question[] {
   });
 }
 
-/** Questions a learner may see for a certification. */
+/** Questions a learner may see for a certification, in curriculum order. */
 export function getPracticeQuestions(certificationId: string): Question[] {
-  return [...bank.values()].filter(
+  const visible = [...bank.values()].filter(
     (question) =>
       question.certificationId === certificationId &&
       (question.reviewStatus === 'in-review' || question.reviewStatus === 'approved'),
+  );
+  if (visible.length === 0) return visible;
+
+  const certification = getAvailableCertification(certificationId);
+  const domainOrder = certification.domains.map((domain) => domain.id);
+  const lessonOrder = certification.modules.flatMap((module) =>
+    module.topics.map((topic) => `${certificationId}/${topic.slug}`),
+  );
+  return visible.sort(
+    (a, b) =>
+      domainOrder.indexOf(a.domainId) - domainOrder.indexOf(b.domainId) ||
+      lessonOrder.indexOf(a.lessonId) - lessonOrder.indexOf(b.lessonId),
   );
 }
 
