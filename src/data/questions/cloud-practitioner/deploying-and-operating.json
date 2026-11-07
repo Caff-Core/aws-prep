@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-deploy-iac-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.1",
+    "lessonId": "cloud-practitioner/deploying-and-operating",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company must create identical environments in several Regions and wants to avoid manual mistakes. What should it use?",
+    "options": [
+      {
+        "id": "cfn",
+        "text": "AWS CloudFormation templates",
+        "explanation": "Correct. Templates make deployments repeatable and consistent."
+      },
+      {
+        "id": "console",
+        "text": "Manual steps in the AWS Management Console",
+        "explanation": "Manual steps can leave environments inconsistent."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      },
+      {
+        "id": "budgets",
+        "text": "AWS Budgets",
+        "explanation": "AWS Budgets tracks costs."
+      }
+    ],
+    "correctOptionIds": ["cfn"],
+    "explanation": "Repeatable environments point to infrastructure as code.",
+    "references": [
+      {
+        "title": "What is AWS CloudFormation?",
+        "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-deploy-hybrid",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.1",
+    "lessonId": "cloud-practitioner/deploying-and-operating",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company keeps some systems in its own data center and connects them to workloads running on AWS. Which deployment model is this?",
+    "options": [
+      {
+        "id": "hybrid",
+        "text": "Hybrid",
+        "explanation": "Correct. A hybrid model connects cloud resources to on-premises infrastructure."
+      },
+      {
+        "id": "cloud",
+        "text": "Cloud",
+        "explanation": "A cloud model runs fully in the cloud."
+      },
+      {
+        "id": "on-premises",
+        "text": "On-premises",
+        "explanation": "An on-premises model does not use the cloud in this way."
+      },
+      {
+        "id": "saas",
+        "text": "Software as a service",
+        "explanation": "SaaS is a service model, not a deployment model."
+      }
+    ],
+    "correctOptionIds": ["hybrid"],
+    "explanation": "Cloud connected to on-premises is hybrid.",
+    "references": [
+      {
+        "title": "Types of cloud computing",
+        "url": "https://aws.amazon.com/types-of-cloud-computing/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-deploy-sdk",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.1",
+    "lessonId": "cloud-practitioner/deploying-and-operating",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A developer wants an application written in Python to call AWS services directly. Which option should the developer use?",
+    "options": [
+      {
+        "id": "sdk",
+        "text": "An AWS SDK",
+        "explanation": "Correct. SDKs let applications call AWS from programming languages."
+      },
+      {
+        "id": "console",
+        "text": "The AWS Management Console",
+        "explanation": "The console is a web interface for people."
+      },
+      {
+        "id": "direct-connect",
+        "text": "AWS Direct Connect",
+        "explanation": "Direct Connect is a network connection."
+      },
+      {
+        "id": "trusted-advisor",
+        "text": "AWS Trusted Advisor",
+        "explanation": "Trusted Advisor recommends improvements."
+      }
+    ],
+    "correctOptionIds": ["sdk"],
+    "explanation": "Calling AWS from application code points to an SDK.",
+    "references": [
+      {
+        "title": "AWS SDKs and Tools Reference Guide",
+        "url": "https://docs.aws.amazon.com/sdkref/latest/guide/overview.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-deploy-console-oneoff",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.1",
+    "lessonId": "cloud-practitioner/deploying-and-operating",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A new employee wants to explore a service once to see how it works. Which option is most suitable?",
+    "options": [
+      {
+        "id": "console",
+        "text": "The AWS Management Console",
+        "explanation": "Correct. The console suits learning and one-off tasks."
+      },
+      {
+        "id": "cfn",
+        "text": "An AWS CloudFormation template",
+        "explanation": "Templates are valuable for repeatable work, which this is not."
+      },
+      {
+        "id": "sdk",
+        "text": "A custom application built with an SDK",
+        "explanation": "This is far more work than a one-off look needs."
+      },
+      {
+        "id": "outposts",
+        "text": "AWS Outposts",
+        "explanation": "Outposts runs AWS infrastructure on site."
+      }
+    ],
+    "correctOptionIds": ["console"],
+    "explanation": "One-time exploration suits the console.",
+    "references": [
+      {
+        "title": "Types of cloud computing",
+        "url": "https://aws.amazon.com/types-of-cloud-computing/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-deploy-outposts",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.1",
+    "lessonId": "cloud-practitioner/deploying-and-operating",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company needs to run AWS infrastructure inside its own building. Which service provides this?",
+    "options": [
+      {
+        "id": "outposts",
+        "text": "AWS Outposts",
+        "explanation": "Correct. AWS Outposts runs AWS infrastructure at a customer site."
+      },
+      {
+        "id": "lightsail",
+        "text": "Amazon Lightsail",
+        "explanation": "Lightsail is a simple way to run small applications on AWS."
+      },
+      {
+        "id": "cloudfront",
+        "text": "Amazon CloudFront",
+        "explanation": "CloudFront delivers content through edge locations."
+      },
+      {
+        "id": "cloudformation",
+        "text": "AWS CloudFormation",
+        "explanation": "CloudFormation provisions resources from templates."
+      }
+    ],
+    "correctOptionIds": ["outposts"],
+    "explanation": "AWS infrastructure at your own site points to AWS Outposts.",
+    "references": [
+      {
+        "title": "What is AWS Outposts?",
+        "url": "https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

@@ -1,0 +1,192 @@
+---
+title: Deploying and operating in the cloud
+description: The ways to access and provision AWS services, when to use repeatable processes, and the cloud, hybrid, and on-premises deployment models.
+sidebar:
+  order: 1
+lesson:
+  id: cloud-practitioner/deploying-and-operating
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.1']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 20
+  lastReviewed: 2026-11-07
+  objectives:
+    - Compare the console, the AWS CLI, SDKs, and infrastructure as code.
+    - Decide between one-time operations and repeatable processes.
+    - Identify cloud, hybrid, and on-premises deployment models.
+  references:
+    - title: What is the AWS CLI?
+      url: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
+    - title: AWS SDKs and Tools Reference Guide
+      url: https://docs.aws.amazon.com/sdkref/latest/guide/overview.html
+    - title: What is AWS CloudFormation?
+      url: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html
+    - title: Infrastructure as code
+      url: https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html
+    - title: Types of cloud computing
+      url: https://aws.amazon.com/types-of-cloud-computing/
+    - title: What is AWS Outposts?
+      url: https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+There are several ways to order food. You can go to the counter and point, phone in a quick request,
+or set up a standing order that arrives the same way each week. Each suits a different need.
+
+AWS works the same way. You can click through a website, type commands, write code that calls AWS, or
+describe everything in a file that AWS builds for you.
+
+## Ways to access AWS
+
+### AWS Management Console
+
+The **console** is the web interface for AWS. You sign in and work through screens. It suits learning,
+exploring, and one-off tasks.
+
+### AWS Command Line Interface
+
+The **AWS CLI** lets you control AWS by typing commands in a terminal. Commands can be combined into
+scripts, so tasks are quicker to repeat than clicking through screens.
+
+### Software development kits
+
+**Software development kits (SDKs)** let applications call AWS services from programming languages such
+as Python, Java, and JavaScript.
+
+An **application programming interface (API)** is how software talks to AWS. The CLI and SDKs both use
+AWS APIs. This is called **programmatic access**.
+
+### Infrastructure as code
+
+**Infrastructure as code (IaC)** means describing your infrastructure in text files and treating them
+like application code. Files can be kept in source control, reviewed, and reused.
+
+**AWS CloudFormation** is the main AWS service for this. You describe resources in a template, and
+CloudFormation creates them as a **stack**. Deleting the stack deletes its resources. The AWS Cloud
+Development Kit (AWS CDK) lets you define infrastructure using programming languages.
+
+<ServiceComparison
+  caption="Ways to access AWS compared"
+  columns={['Method', 'How you use it', 'Fits when']}
+  rows={[
+    { name: 'AWS Management Console', cells: ['A web browser', 'Learning or a one-off task'] },
+    { name: 'AWS CLI', cells: ['Commands in a terminal', 'Scripting and automation'] },
+    {
+      name: 'AWS SDKs',
+      cells: ['Code in your application', 'Applications that call AWS services'],
+    },
+    {
+      name: 'Infrastructure as code',
+      cells: ['Template files', 'Repeatable, consistent environments'],
+    },
+  ]}
+/>
+
+## One-time operations or repeatable processes
+
+A one-time task, such as trying a service, is fine in the console. If you need the same result many
+times, use a repeatable process. Manual steps can leave environments inconsistent, because people make
+small mistakes or skip steps.
+
+<ImportantConcept>
+  If you will do it more than once, or it must be identical every time, automate it. Infrastructure
+  as code is the usual answer.
+</ImportantConcept>
+
+<RealWorldExample title="Real-world example: identical environments">
+  A Pietermaritzburg software team needs test, staging, and production environments that match. It
+  writes one CloudFormation template and deploys it three times, in more than one Region if needed.
+  When something changes, the team updates the template rather than repeating manual steps.
+</RealWorldExample>
+
+## Deployment models
+
+<ServiceComparison
+  caption="Deployment models compared"
+  columns={['Model', 'Where workloads run', 'Typical reason']}
+  rows={[
+    { name: 'Cloud', cells: ['Fully in the cloud', 'A new application, or a full migration'] },
+    {
+      name: 'Hybrid',
+      cells: [
+        'Cloud connected to existing on-premises systems',
+        'A gradual move, or data that must stay local',
+      ],
+    },
+    {
+      name: 'On-premises',
+      cells: [
+        'Dedicated infrastructure the organisation runs',
+        'Legacy systems or specific requirements',
+      ],
+    },
+  ]}
+/>
+
+**AWS Outposts** supports hybrid setups. It is a fully managed service that runs AWS infrastructure at
+your own site, operated by AWS as part of a Region.
+
+## Service models
+
+You may also see three service models. **Infrastructure as a service (IaaS)** gives the most control,
+such as Amazon EC2. **Platform as a service (PaaS)** removes the need to manage the underlying operating
+system and infrastructure. **Software as a service (SaaS)** is a complete application, such as web email.
+
+## What the exam expects
+
+<ExamTip>
+  **Repeatable** or **consistent environments** points to infrastructure as code and AWS
+  CloudFormation. **Scripts in a terminal** points to the AWS CLI. **Called from application code**
+  points to SDKs. **Cloud connected to on-premises** means hybrid.
+</ExamTip>
+
+## Common misconceptions
+
+- **"The console is the only way to use AWS."** Everything you administer there is also available
+  programmatically.
+- **"Hybrid means two clouds."** Here, it means cloud connected to on-premises infrastructure.
+- **"CloudFormation is a compute service."** It provisions resources from a template. You pay for the
+  resources it creates.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Write down the steps to set up a new laptop for a
+colleague. Decide which steps a script could do. That is the same thinking behind infrastructure as code.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/deploying-and-operating"
+  questionIds={[
+    'clf-deploy-iac-scenario',
+    'clf-deploy-hybrid',
+    'clf-deploy-sdk',
+    'clf-deploy-console-oneoff',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- You can use AWS through the console, the AWS CLI, SDKs, or infrastructure as code.
+- Repeatable needs call for automation, such as AWS CloudFormation.
+- Deployment models are cloud, hybrid, and on-premises.
+- AWS Outposts runs AWS infrastructure at your own site.
+
+</LessonSummary>
