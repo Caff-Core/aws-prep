@@ -1,0 +1,258 @@
+---
+title: AWS pricing models
+description: Amazon EC2 purchasing options, Reserved Instance flexibility, data transfer costs, and how storage pricing works.
+sidebar:
+  order: 1
+lesson:
+  id: cloud-practitioner/pricing-models
+  certification: cloud-practitioner
+  module: billing-support
+  domain: billing-support
+  taskStatements: ['4.1']
+  difficulty: intermediate
+  scope: essential
+  estimatedMinutes: 30
+  lastReviewed: 2026-11-07
+  objectives:
+    - Choose a compute purchasing option for a workload.
+    - Describe Reserved Instance flexibility and behaviour in AWS Organizations.
+    - Explain which data transfer is charged.
+    - Describe how storage options and tiers are priced.
+  prerequisites:
+    - Compute services.
+    - Storage services.
+  references:
+    - title: Amazon EC2 pricing
+      url: https://aws.amazon.com/ec2/pricing/
+    - title: Reserved Instances
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html
+    - title: Regional and zonal Reserved Instances
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-scope.html
+    - title: Reserved Instance behaviour in consolidated billing
+      url: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ri-behavior.html
+    - title: What are Savings Plans?
+      url: https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html
+    - title: Savings Plans types
+      url: https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html
+    - title: Spot Instances
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html
+    - title: Dedicated Instances
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
+    - title: On-Demand Capacity Reservations
+      url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+    - title: Overview of data transfer costs
+      url: https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/
+    - title: Amazon S3 pricing
+      url: https://aws.amazon.com/s3/pricing/
+    - title: 'CLF-C02 exam guide: Domain 4'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain4.md
+---
+
+import {
+  CostWarning,
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+There are many ways to pay for a place to stay. You can book a hotel night by night. You can sign a lease
+for a lower monthly rate. You can grab a last-minute deal, knowing it may be cancelled. Or you can rent
+a whole house for yourself.
+
+AWS compute works the same way. The right option depends on how steady your need is and how much
+interruption you can accept.
+
+## Compute purchasing options
+
+<ServiceComparison
+  caption="Amazon EC2 purchasing options compared"
+  columns={['Option', 'How it works', 'Fits when']}
+  rows={[
+    {
+      name: 'On-Demand Instances',
+      cells: ['Pay by the hour or second, with no commitment', 'Short or unpredictable workloads'],
+    },
+    {
+      name: 'Savings Plans',
+      cells: [
+        'Commit to an amount of use per hour for 1 or 3 years',
+        'Steady use, with flexibility',
+      ],
+    },
+    {
+      name: 'Reserved Instances',
+      cells: ['A billing discount for a 1 or 3 year term', 'Steady use of specific instances'],
+    },
+    {
+      name: 'Spot Instances',
+      cells: [
+        'Spare capacity at a large discount, can be interrupted',
+        'Flexible work that can stop',
+      ],
+    },
+    {
+      name: 'Dedicated Hosts',
+      cells: ['A physical server fully dedicated to you', 'Server-bound licenses, compliance'],
+    },
+    {
+      name: 'Dedicated Instances',
+      cells: [
+        'Instances on hardware dedicated to your account',
+        'Hardware isolation without host control',
+      ],
+    },
+    {
+      name: 'Capacity Reservations',
+      cells: ['Reserve capacity in a specific Availability Zone', 'Capacity must be guaranteed'],
+    },
+  ]}
+/>
+
+At the time of review, AWS states that Savings Plans save up to 72% and Spot Instances up to 90%, compared
+with On-Demand prices.
+
+### Savings Plans
+
+Four types exist. **Compute Savings Plans** are the most flexible, applying across instance families,
+sizes, Regions, and operating systems, and also to AWS Fargate and AWS Lambda. **EC2 Instance Savings
+Plans** commit to one instance family in one Region. There are also Database and SageMaker AI Savings
+Plans. AWS recommends Savings Plans over Reserved Instances.
+
+### Spot Instances
+
+Spot Instances use spare EC2 capacity. AWS can reclaim them with a **two-minute warning**, so they suit
+batch jobs, data analysis, and other interruptible work. They do not suit a production database that must
+keep running.
+
+### Dedicated Hosts and Dedicated Instances
+
+Both give you hardware that is not shared with other customers. **Dedicated Hosts** add visibility and
+control over the physical server, and they give fuller support for Bring Your Own License. Dedicated Instances
+do not offer that placement control.
+
+### Capacity Reservations
+
+**On-Demand Capacity Reservations** guarantee capacity, but they carry no discount of their own. You can
+combine them with Savings Plans or regional Reserved Instances to get one.
+
+<ImportantConcept>
+  A discount and a capacity guarantee are different things. Savings Plans give a discount. Capacity
+  Reservations give certainty. A zonal Reserved Instance gives both.
+</ImportantConcept>
+
+## Reserved Instance flexibility
+
+A Reserved Instance (RI) is a billing discount, not a physical server. You choose:
+
+- **Term:** one year or three years. Three years gives a larger discount.
+- **Payment:** All Upfront, Partial Upfront, or No Upfront.
+- **Class:** see the table below.
+- **Scope:** regional or zonal.
+
+<ServiceComparison
+  caption="Reserved Instance options compared"
+  columns={['Option', 'Key point']}
+  rows={[
+    { name: 'Standard', cells: ['The largest discount. Can be modified but not exchanged.'] },
+    {
+      name: 'Convertible',
+      cells: ['A smaller discount. Can be exchanged for different attributes.'],
+    },
+    {
+      name: 'Regional scope',
+      cells: ['Applies in any Availability Zone in the Region, but does not reserve capacity.'],
+    },
+    { name: 'Zonal scope', cells: ['Reserves capacity in one Availability Zone.'] },
+  ]}
+/>
+
+RIs do not renew automatically. When they expire, you pay On-Demand rates.
+
+### Reserved Instances in AWS Organizations
+
+With consolidated billing, an organization's accounts are treated as one for discounts, so one account's
+RIs can benefit the others. This sharing can be turned off in the Billing console.
+
+## Data transfer costs
+
+Data moving between places may be charged. The rule of thumb is that data coming in is free, and data
+going out or across boundaries usually is not.
+
+<ServiceComparison
+  caption="Data transfer charges"
+  columns={['Direction', 'Charged?']}
+  rows={[
+    { name: 'Inbound from the internet', cells: ['No charge'] },
+    { name: 'Within the same Availability Zone', cells: ['Generally free'] },
+    { name: 'Between Availability Zones', cells: ['Charged'] },
+    { name: 'Between Regions', cells: ['Charged'] },
+    { name: 'Outbound to the internet', cells: ['Charged'] },
+  ]}
+/>
+
+## Storage pricing
+
+Storage has several cost components. For Amazon S3, these include the amount stored, requests and data
+retrieval, data transfer, and management features. The storage class matters too. Colder classes cost
+less to store, but they can add retrieval fees and minimum storage durations.
+
+<CostWarning>
+  Unexpected bills often come from data transfer and forgotten resources. Check the pricing page of
+  each service, because rates vary by Region.
+</CostWarning>
+
+<RealWorldExample title="Real-world example: mixing options">
+  A Cape Town streaming company runs its core website all year, so it buys a Compute Savings Plan.
+  New features run On-Demand while usage is unknown. Overnight video conversion uses Spot Instances,
+  because a job can simply restart if interrupted.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Steady, long-term** points to Savings Plans or Reserved Instances. **Short or unpredictable**
+  points to On-Demand. **Can tolerate interruption** points to Spot. **Server-bound licenses**
+  points to Dedicated Hosts. **Guaranteed capacity, no commitment** points to Capacity Reservations.
+</ExamTip>
+
+## Common misconceptions
+
+- **"A Reserved Instance is a server."** It is a billing discount.
+- **"Spot Instances are cheap On-Demand."** They can be interrupted.
+- **"All data transfer is charged."** Inbound data transfer has no charge.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Write down three workloads: a website that runs
+all year, a one-week marketing campaign, and a nightly report that can restart. Pick a purchasing option
+for each and explain your choice.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/pricing-models"
+  questionIds={[
+    'clf-pricing-spot',
+    'clf-pricing-on-demand',
+    'clf-pricing-savings',
+    'clf-pricing-transfer',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- On-Demand has no commitment. Savings Plans and Reserved Instances reward commitment.
+- Spot Instances are heavily discounted but can be interrupted.
+- Dedicated Hosts and Dedicated Instances provide dedicated hardware.
+- Capacity Reservations guarantee capacity, without a discount of their own.
+- Inbound data transfer has no charge. Transfer across Availability Zones, Regions, and out to the
+  internet is charged.
+
+</LessonSummary>
