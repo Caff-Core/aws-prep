@@ -1,0 +1,221 @@
+[
+  {
+    "id": "clf-ai-sagemaker",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.7",
+    "lessonId": "cloud-practitioner/ai-ml-and-analytics",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "Data scientists want to build, train, and deploy their own machine learning models. Which service fits?",
+    "options": [
+      {
+        "id": "sagemaker",
+        "text": "Amazon SageMaker AI",
+        "explanation": "Correct. It is a managed service for building, training, and deploying models."
+      },
+      {
+        "id": "polly",
+        "text": "Amazon Polly",
+        "explanation": "Polly turns text into speech."
+      },
+      {
+        "id": "translate",
+        "text": "Amazon Translate",
+        "explanation": "Translate converts text between languages."
+      },
+      {
+        "id": "ses",
+        "text": "Amazon SES",
+        "explanation": "Amazon SES handles email."
+      }
+    ],
+    "correctOptionIds": ["sagemaker"],
+    "explanation": "Custom models point to Amazon SageMaker AI.",
+    "references": [
+      {
+        "title": "What is Amazon SageMaker AI?",
+        "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-ai-polly-transcribe",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.7",
+    "lessonId": "cloud-practitioner/ai-ml-and-analytics",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants its application to read news articles aloud. Which service fits?",
+    "options": [
+      {
+        "id": "polly",
+        "text": "Amazon Polly",
+        "explanation": "Correct. Polly turns text into lifelike speech."
+      },
+      {
+        "id": "transcribe",
+        "text": "Amazon Transcribe",
+        "explanation": "Transcribe does the opposite, turning speech into text."
+      },
+      {
+        "id": "rekognition",
+        "text": "Amazon Rekognition",
+        "explanation": "Rekognition analyses images and video."
+      },
+      {
+        "id": "glue",
+        "text": "AWS Glue",
+        "explanation": "Glue prepares data."
+      }
+    ],
+    "correctOptionIds": ["polly"],
+    "explanation": "Text to speech points to Amazon Polly.",
+    "references": [
+      {
+        "title": "What is Amazon Polly?",
+        "url": "https://docs.aws.amazon.com/polly/latest/dg/what-is.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-ai-athena",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.7",
+    "lessonId": "cloud-practitioner/ai-ml-and-analytics",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "An analyst wants to run SQL queries directly on data in Amazon S3 without managing servers. Which service fits?",
+    "options": [
+      {
+        "id": "athena",
+        "text": "Amazon Athena",
+        "explanation": "Correct. Athena runs serverless SQL queries on data in Amazon S3."
+      },
+      {
+        "id": "kinesis",
+        "text": "Amazon Kinesis",
+        "explanation": "Kinesis handles streaming data."
+      },
+      {
+        "id": "rds",
+        "text": "Amazon RDS",
+        "explanation": "Amazon RDS is a database you load data into."
+      },
+      {
+        "id": "lex",
+        "text": "Amazon Lex",
+        "explanation": "Lex builds chatbots."
+      }
+    ],
+    "correctOptionIds": ["athena"],
+    "explanation": "SQL on Amazon S3 points to Amazon Athena.",
+    "references": [
+      {
+        "title": "What is Amazon Athena?",
+        "url": "https://docs.aws.amazon.com/athena/latest/ug/what-is.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-ai-kinesis",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.7",
+    "lessonId": "cloud-practitioner/ai-ml-and-analytics",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company needs to collect and process clickstream data in real time. Which service fits?",
+    "options": [
+      {
+        "id": "kinesis",
+        "text": "Amazon Kinesis",
+        "explanation": "Correct. Kinesis collects and processes streaming data in real time."
+      },
+      {
+        "id": "glacier",
+        "text": "S3 Glacier Deep Archive",
+        "explanation": "This is archive storage."
+      },
+      {
+        "id": "textract",
+        "text": "Amazon Textract",
+        "explanation": "Textract extracts text from documents."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      }
+    ],
+    "correctOptionIds": ["kinesis"],
+    "explanation": "Real-time streams point to Amazon Kinesis.",
+    "references": [
+      {
+        "title": "What is Amazon Kinesis Data Streams?",
+        "url": "https://docs.aws.amazon.com/streams/latest/dev/introduction.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-ai-lex-textract",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.7",
+    "lessonId": "cloud-practitioner/ai-ml-and-analytics",
+    "type": "multiple-response",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A bank wants a chatbot for customers, and it wants to pull data out of scanned forms. Which TWO services fit?",
+    "options": [
+      {
+        "id": "lex",
+        "text": "Amazon Lex",
+        "explanation": "Correct. Lex builds voice and text chatbots."
+      },
+      {
+        "id": "textract",
+        "text": "Amazon Textract",
+        "explanation": "Correct. Textract extracts text, forms, and tables from documents."
+      },
+      {
+        "id": "polly",
+        "text": "Amazon Polly",
+        "explanation": "Polly creates speech from text."
+      },
+      {
+        "id": "kinesis",
+        "text": "Amazon Kinesis",
+        "explanation": "Kinesis handles streaming data."
+      },
+      {
+        "id": "emr",
+        "text": "Amazon EMR",
+        "explanation": "Amazon EMR runs big data frameworks."
+      }
+    ],
+    "correctOptionIds": ["lex", "textract"],
+    "explanation": "Chatbots mean Lex. Reading documents means Textract.",
+    "references": [
+      {
+        "title": "What is Amazon Lex?",
+        "url": "https://docs.aws.amazon.com/lexv2/latest/dg/what-is.html"
+      },
+      {
+        "title": "What is Amazon Textract?",
+        "url": "https://docs.aws.amazon.com/textract/latest/dg/what-is.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

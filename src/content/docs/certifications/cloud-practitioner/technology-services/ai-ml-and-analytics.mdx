@@ -1,0 +1,186 @@
+---
+title: AI, machine learning, and analytics
+description: AWS artificial intelligence and machine learning services and analytics services, and the tasks each one accomplishes.
+sidebar:
+  order: 8
+lesson:
+  id: cloud-practitioner/ai-ml-and-analytics
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.7']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Match AWS AI and machine learning services to the tasks they accomplish.
+    - Identify AWS services for data analytics.
+  references:
+    - title: CLF-C02 in-scope services
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/clf-02-in-scope-services.md
+    - title: What is Amazon SageMaker AI?
+      url: https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html
+    - title: What is Amazon Lex?
+      url: https://docs.aws.amazon.com/lexv2/latest/dg/what-is.html
+    - title: What is Amazon Rekognition?
+      url: https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html
+    - title: Amazon Q
+      url: https://aws.amazon.com/q/
+    - title: What is Amazon Athena?
+      url: https://docs.aws.amazon.com/athena/latest/ug/what-is.html
+    - title: What is Amazon Kinesis Data Streams?
+      url: https://docs.aws.amazon.com/streams/latest/dev/introduction.html
+    - title: What is AWS Glue?
+      url: https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html
+    - title: Amazon Quick
+      url: https://aws.amazon.com/quick/
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+A company can build its own translator from scratch, or it can hire one. Most companies hire, because
+building one is slow and expensive.
+
+**Artificial intelligence (AI)** means software doing tasks that normally need human intelligence.
+**Machine learning (ML)** is a way of building AI, where models learn from data. AWS offers ready-made AI
+services you can call directly, plus tools for building your own models.
+
+**Analytics** means turning raw data into useful answers.
+
+You do not need to know how these services work inside. For this exam, match each service to its task.
+
+## Building your own models
+
+**Amazon SageMaker AI** is a managed service for building, training, and deploying machine learning
+models. If a scenario involves data scientists creating custom models, this is the answer.
+
+## Ready-made AI services
+
+The names often hint at the job.
+
+<ServiceComparison
+  caption="AWS AI services compared"
+  columns={['Service', 'What it does', 'Memory hook']}
+  rows={[
+    { name: 'Amazon Lex', cells: ['Builds voice and text chatbots', 'Conversational bots'] },
+    { name: 'Amazon Polly', cells: ['Turns text into lifelike speech', 'A parrot that talks'] },
+    { name: 'Amazon Transcribe', cells: ['Turns speech into text', 'Writing down what was said'] },
+    { name: 'Amazon Translate', cells: ['Translates text between languages', 'The name says it'] },
+    {
+      name: 'Amazon Comprehend',
+      cells: ['Finds meaning in text, such as sentiment and key phrases', 'Understanding text'],
+    },
+    {
+      name: 'Amazon Rekognition',
+      cells: ['Analyses images and video', 'Recognising what it sees'],
+    },
+    {
+      name: 'Amazon Textract',
+      cells: ['Extracts text, forms, and tables from documents', 'Extracting text'],
+    },
+    {
+      name: 'Amazon Q',
+      cells: ['A generative AI assistant for business and developers', 'Ask it a question'],
+    },
+  ]}
+/>
+
+<ImportantConcept>
+  Polly and Transcribe are opposites. Polly goes from **text to speech**. Transcribe goes from
+  **speech to text**.
+</ImportantConcept>
+
+## Analytics services
+
+<ServiceComparison
+  caption="AWS analytics services compared"
+  columns={['Service', 'What it does', 'Scenario clue']}
+  rows={[
+    {
+      name: 'Amazon Athena',
+      cells: ['Runs SQL queries directly on data in Amazon S3', 'Query S3 with SQL, serverless'],
+    },
+    {
+      name: 'Amazon Kinesis',
+      cells: ['Collects and processes streaming data in real time', 'Real-time streams'],
+    },
+    {
+      name: 'AWS Glue',
+      cells: ['Discovers, catalogs, and prepares data', 'Extract, transform, and load (ETL)'],
+    },
+    {
+      name: 'Amazon EMR',
+      cells: ['Runs big data frameworks such as Apache Spark', 'Hadoop or Spark clusters'],
+    },
+    {
+      name: 'Amazon OpenSearch Service',
+      cells: ['Search, log analytics, and monitoring', 'Search and log analysis'],
+    },
+    {
+      name: 'Amazon Redshift',
+      cells: ['Data warehouse for large-scale analysis', 'Data warehouse'],
+    },
+    {
+      name: 'Amazon Quick',
+      cells: ['Business insights and business intelligence', 'Dashboards and insights'],
+    },
+  ]}
+/>
+
+The exam guide names Amazon Quick. Amazon Quick Sight is its business intelligence capability, so older
+material that mentions Amazon QuickSight refers to the dashboards side of this.
+
+<RealWorldExample title="Real-world example: a call center">
+  An East London insurer records support calls. Amazon Transcribe turns them into text. Amazon
+  Comprehend finds whether customers sound satisfied. The results land in Amazon S3, where analysts
+  query them with Amazon Athena and share dashboards with managers.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  Learn the verb for each service. **Build models** means SageMaker AI. **Chatbot** means Lex.
+  **Analyse images** means Rekognition. **Extract from documents** means Textract. **Query Amazon S3
+  with SQL** means Athena. **Real-time streaming** means Kinesis.
+</ExamTip>
+
+## Common misconceptions
+
+- **"I need ML skills to use these services."** Ready-made services are called through an API.
+- **"Textract and Transcribe do the same thing."** Textract reads documents. Transcribe listens to speech.
+- **"Athena needs a database server."** It is serverless and queries data in Amazon S3.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Think of a contact center. List three tasks it
+performs, and match an AWS AI service to each one using the table above.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/ai-ml-and-analytics"
+  questionIds={['clf-ai-sagemaker', 'clf-ai-polly-transcribe', 'clf-ai-athena', 'clf-ai-kinesis']}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Amazon SageMaker AI builds, trains, and deploys custom models.
+- Ready-made services handle speech, language, images, documents, and chatbots.
+- Athena queries Amazon S3 with SQL, Kinesis handles streams, and Glue prepares data.
+- Amazon Redshift and Amazon Quick support analysis and business insights.
+
+</LessonSummary>
