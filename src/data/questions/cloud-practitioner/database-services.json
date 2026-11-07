@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-db-managed",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.4",
+    "lessonId": "cloud-practitioner/database-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants a MySQL database but does not want to manage patching or backups. Which option fits?",
+    "options": [
+      {
+        "id": "rds",
+        "text": "Amazon RDS",
+        "explanation": "Correct. Amazon RDS handles patching and backups."
+      },
+      {
+        "id": "ec2",
+        "text": "MySQL installed on Amazon EC2",
+        "explanation": "The customer would manage patching and backups."
+      },
+      {
+        "id": "s3",
+        "text": "Amazon S3",
+        "explanation": "Amazon S3 is object storage."
+      },
+      {
+        "id": "kinesis",
+        "text": "Amazon Kinesis",
+        "explanation": "Kinesis handles streaming data."
+      }
+    ],
+    "correctOptionIds": ["rds"],
+    "explanation": "Managed relational databases reduce operational work.",
+    "references": [
+      {
+        "title": "What is Amazon RDS?",
+        "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-db-dynamodb",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.4",
+    "lessonId": "cloud-practitioner/database-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "An application needs a serverless NoSQL database with single-digit millisecond performance. Which service fits?",
+    "options": [
+      {
+        "id": "dynamodb",
+        "text": "Amazon DynamoDB",
+        "explanation": "Correct. DynamoDB is a serverless NoSQL database."
+      },
+      {
+        "id": "aurora",
+        "text": "Amazon Aurora",
+        "explanation": "Aurora is relational."
+      },
+      {
+        "id": "redshift",
+        "text": "Amazon Redshift",
+        "explanation": "Redshift is a data warehouse."
+      },
+      {
+        "id": "efs",
+        "text": "Amazon EFS",
+        "explanation": "Amazon EFS is file storage."
+      }
+    ],
+    "correctOptionIds": ["dynamodb"],
+    "explanation": "Serverless NoSQL points to Amazon DynamoDB.",
+    "references": [
+      {
+        "title": "What is Amazon DynamoDB?",
+        "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-db-elasticache",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.4",
+    "lessonId": "cloud-practitioner/database-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A website wants to speed up reads of frequently used data by holding it in memory. Which service fits?",
+    "options": [
+      {
+        "id": "elasticache",
+        "text": "Amazon ElastiCache",
+        "explanation": "Correct. ElastiCache is an in-memory cache."
+      },
+      {
+        "id": "glacier",
+        "text": "S3 Glacier Deep Archive",
+        "explanation": "This is long-term archive storage."
+      },
+      {
+        "id": "ebs",
+        "text": "Amazon EBS",
+        "explanation": "Amazon EBS is block storage."
+      },
+      {
+        "id": "dms",
+        "text": "AWS DMS",
+        "explanation": "AWS DMS migrates data."
+      }
+    ],
+    "correctOptionIds": ["elasticache"],
+    "explanation": "In-memory caching points to Amazon ElastiCache.",
+    "references": [
+      {
+        "title": "What is Amazon ElastiCache?",
+        "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-db-sct",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.4",
+    "lessonId": "cloud-practitioner/database-services",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company moves from one database engine to a different one and must convert its schema. Which tool helps with the conversion?",
+    "options": [
+      {
+        "id": "sct",
+        "text": "AWS Schema Conversion Tool",
+        "explanation": "Correct. AWS SCT converts schemas between engines."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions."
+      },
+      {
+        "id": "inspector",
+        "text": "Amazon Inspector",
+        "explanation": "Inspector scans for vulnerabilities."
+      },
+      {
+        "id": "cost-explorer",
+        "text": "AWS Cost Explorer",
+        "explanation": "Cost Explorer analyses costs."
+      }
+    ],
+    "correctOptionIds": ["sct"],
+    "explanation": "AWS SCT converts the structure, and AWS DMS moves the data.",
+    "references": [
+      {
+        "title": "What is the AWS Schema Conversion Tool?",
+        "url": "https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-db-relational",
+    "certificationId": "cloud-practitioner",
+    "domainId": "technology-services",
+    "taskStatementId": "3.4",
+    "lessonId": "cloud-practitioner/database-services",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which TWO are relational database services?",
+    "options": [
+      {
+        "id": "rds",
+        "text": "Amazon RDS",
+        "explanation": "Correct. Amazon RDS is a managed relational database."
+      },
+      {
+        "id": "aurora",
+        "text": "Amazon Aurora",
+        "explanation": "Correct. Aurora is a managed relational engine."
+      },
+      {
+        "id": "dynamodb",
+        "text": "Amazon DynamoDB",
+        "explanation": "DynamoDB is NoSQL."
+      },
+      {
+        "id": "elasticache",
+        "text": "Amazon ElastiCache",
+        "explanation": "ElastiCache is an in-memory cache."
+      },
+      {
+        "id": "s3",
+        "text": "Amazon S3",
+        "explanation": "Amazon S3 is object storage."
+      }
+    ],
+    "correctOptionIds": ["rds", "aurora"],
+    "explanation": "Amazon RDS and Amazon Aurora are relational.",
+    "references": [
+      {
+        "title": "What is Amazon Aurora?",
+        "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

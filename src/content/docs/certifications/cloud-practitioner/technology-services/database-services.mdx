@@ -1,0 +1,170 @@
+---
+title: Database services
+description: When to use a managed database, how relational, NoSQL, and in-memory databases differ, and which AWS tools support database migration.
+sidebar:
+  order: 5
+lesson:
+  id: cloud-practitioner/database-services
+  certification: cloud-practitioner
+  module: technology-services
+  domain: technology-services
+  taskStatements: ['3.4']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Decide between EC2-hosted databases and AWS managed databases.
+    - Identify relational, NoSQL, and in-memory database services.
+    - Identify AWS DMS and AWS SCT as database migration tools.
+  prerequisites:
+    - The AWS shared responsibility model.
+  references:
+    - title: What is Amazon RDS?
+      url: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html
+    - title: What is Amazon Aurora?
+      url: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+    - title: What is Amazon DynamoDB?
+      url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html
+    - title: What is Amazon ElastiCache?
+      url: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html
+    - title: What is Amazon Redshift?
+      url: https://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html
+    - title: What is the AWS Schema Conversion Tool?
+      url: https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html
+    - title: What is AWS Database Migration Service?
+      url: https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html
+    - title: 'CLF-C02 exam guide: Domain 3'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain3.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+A library has different ways to find things. A catalogue with strict columns works for books. A set of
+labelled boxes is quick for grabbing something by name. A pile on the front desk holds what people ask
+for most.
+
+Databases differ in the same way. No single type suits every job, so AWS offers several.
+
+## Managed databases or databases on Amazon EC2
+
+You can install a database yourself on an Amazon EC2 instance, or use a **managed database** where AWS
+does much of the work.
+
+<ServiceComparison
+  caption="EC2-hosted and managed databases compared"
+  columns={['Task', 'Database on Amazon EC2', 'Amazon RDS']}
+  rows={[
+    { name: 'Hardware', cells: ['AWS', 'AWS'] },
+    { name: 'Operating system and database patching', cells: ['Customer', 'AWS'] },
+    { name: 'Backups', cells: ['Customer', 'AWS'] },
+    { name: 'High availability and scaling', cells: ['Customer', 'AWS'] },
+    { name: 'Application optimisation', cells: ['Customer', 'Customer'] },
+  ]}
+/>
+
+Choose a managed database to reduce operational work. Choose Amazon EC2 when you need full control over
+the database and its operating system.
+
+## Relational databases
+
+A **relational database** stores data in tables with rows and columns, and it uses Structured Query
+Language (SQL).
+
+**Amazon Relational Database Service (Amazon RDS)** is a managed relational database. It supports engines
+including MySQL, PostgreSQL, MariaDB, Oracle Database, Microsoft SQL Server, and IBM Db2.
+
+**Amazon Aurora** is a managed relational engine built for the cloud. It is compatible with MySQL and
+PostgreSQL, and its storage grows automatically.
+
+## NoSQL databases
+
+A **NoSQL** database does not use fixed tables in the relational way.
+
+**Amazon DynamoDB** is a serverless, fully managed NoSQL database with single-digit millisecond
+performance. It supports key-value and document data. It suits very large scale and simple access
+patterns.
+
+## In-memory databases
+
+Memory is much faster than disk. **Amazon ElastiCache** is an in-memory cache, supporting Valkey,
+Memcached, and Redis OSS. It stores frequently used data so that applications respond faster.
+
+## Data warehouses
+
+**Amazon Redshift** is a fully managed data warehouse, built for analysing large amounts of data rather
+than running day-to-day transactions.
+
+<ServiceComparison
+  caption="AWS database services compared"
+  columns={['Service', 'Type', 'Scenario clue']}
+  rows={[
+    { name: 'Amazon RDS', cells: ['Relational', 'Managed MySQL, PostgreSQL, or SQL Server'] },
+    { name: 'Amazon Aurora', cells: ['Relational', 'MySQL or PostgreSQL compatible, cloud-built'] },
+    { name: 'Amazon DynamoDB', cells: ['NoSQL', 'Serverless key-value at massive scale'] },
+    { name: 'Amazon ElastiCache', cells: ['In-memory', 'Speed up reads with a cache'] },
+    { name: 'Amazon Redshift', cells: ['Data warehouse', 'Analytics on large data sets'] },
+  ]}
+/>
+
+## Database migration tools
+
+**AWS Database Migration Service (AWS DMS)** moves data and can keep replicating changes.
+
+**AWS Schema Conversion Tool (AWS SCT)** converts a database's schema, meaning its structure, from one
+engine to another. If you move between different engines, you may need both tools.
+
+<ImportantConcept>AWS SCT converts the **structure**. AWS DMS moves the **data**.</ImportantConcept>
+
+<RealWorldExample title="Real-world example: a mobile game">
+  A Durban games studio stores player profiles in Amazon DynamoDB, because millions of players need
+  fast lookups by player ID. Its billing system uses Amazon Aurora, because financial records fit
+  relational tables. A leaderboard sits in Amazon ElastiCache so that it loads instantly.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Relational** points to Amazon RDS or Aurora. **NoSQL, key-value, or serverless database** points
+  to Amazon DynamoDB. **In-memory or caching** points to Amazon ElastiCache. **Different database
+  engine** points to AWS SCT with AWS DMS.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Managed means I do nothing."** You still optimise your application and control access.
+- **"DynamoDB is relational."** It is NoSQL, and it has no JOIN operator.
+- **"AWS DMS converts schemas."** Schema conversion is the role of AWS SCT and DMS Schema Conversion.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Sketch how a small shop might store products,
+orders, and customers in three tables. Then consider a shopping cart that only needs fast lookups by
+customer ID. Which would suit a relational database, and which a key-value one?
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/database-services"
+  questionIds={['clf-db-managed', 'clf-db-dynamodb', 'clf-db-elasticache', 'clf-db-sct']}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Managed databases shift patching, backups, and scaling to AWS.
+- Amazon RDS and Aurora are relational. Amazon DynamoDB is NoSQL.
+- Amazon ElastiCache is an in-memory cache, and Amazon Redshift is a data warehouse.
+- AWS SCT converts schemas, and AWS DMS moves data.
+
+</LessonSummary>
