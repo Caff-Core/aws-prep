@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-support-tam",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/support-and-technical-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company wants a designated Technical Account Manager. Which plan provides one?",
+    "options": [
+      {
+        "id": "enterprise",
+        "text": "AWS Enterprise Support",
+        "explanation": "Correct. Enterprise Support includes a designated Technical Account Manager."
+      },
+      {
+        "id": "basic",
+        "text": "Basic Support",
+        "explanation": "Basic Support does not include one."
+      },
+      {
+        "id": "business-plus",
+        "text": "AWS Business Support+",
+        "explanation": "This plan does not include a designated Technical Account Manager."
+      },
+      {
+        "id": "none",
+        "text": "No plan offers one",
+        "explanation": "Enterprise Support and Unified Operations do."
+      }
+    ],
+    "correctOptionIds": ["enterprise"],
+    "explanation": "A TAM comes with Enterprise Support and Unified Operations.",
+    "references": [
+      {
+        "title": "AWS Support plans",
+        "url": "https://aws.amazon.com/premiumsupport/plans/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-support-trusted-advisor",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/support-and-technical-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants recommendations on saving money and closing security gaps in its AWS environment. Which service fits?",
+    "options": [
+      {
+        "id": "ta",
+        "text": "AWS Trusted Advisor",
+        "explanation": "Correct. It inspects your environment and recommends improvements."
+      },
+      {
+        "id": "health",
+        "text": "AWS Health Dashboard",
+        "explanation": "This reports events."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      },
+      {
+        "id": "marketplace",
+        "text": "AWS Marketplace",
+        "explanation": "AWS Marketplace is a catalog of third-party products."
+      }
+    ],
+    "correctOptionIds": ["ta"],
+    "explanation": "Recommendations point to AWS Trusted Advisor.",
+    "references": [
+      {
+        "title": "AWS Trusted Advisor",
+        "url": "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-support-health",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/support-and-technical-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants to see whether planned AWS maintenance will affect its resources. Where should it look?",
+    "options": [
+      {
+        "id": "health",
+        "text": "AWS Health Dashboard",
+        "explanation": "Correct. It shows service health and account-specific events."
+      },
+      {
+        "id": "cost-explorer",
+        "text": "AWS Cost Explorer",
+        "explanation": "Cost Explorer analyses costs."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions in your account."
+      },
+      {
+        "id": "config",
+        "text": "AWS Config",
+        "explanation": "AWS Config records resource configuration."
+      }
+    ],
+    "correctOptionIds": ["health"],
+    "explanation": "Events affecting you point to the AWS Health Dashboard.",
+    "references": [
+      {
+        "title": "What is AWS Health?",
+        "url": "https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-support-abuse",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/support-and-technical-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company receives spam that appears to come from AWS resources. Who should it report this to?",
+    "options": [
+      {
+        "id": "trust-safety",
+        "text": "The AWS Trust and Safety team",
+        "explanation": "Correct. This team handles abuse of AWS resources."
+      },
+      {
+        "id": "marketplace",
+        "text": "An AWS Marketplace seller",
+        "explanation": "Sellers do not handle abuse reports."
+      },
+      {
+        "id": "tam",
+        "text": "Its own Technical Account Manager only",
+        "explanation": "A TAM is not the channel for reporting abuse."
+      },
+      {
+        "id": "partner",
+        "text": "An AWS Partner",
+        "explanation": "Partners do not handle abuse of AWS resources."
+      }
+    ],
+    "correctOptionIds": ["trust-safety"],
+    "explanation": "Abuse of AWS resources is reported to AWS Trust and Safety.",
+    "references": [
+      {
+        "title": "Contact AWS",
+        "url": "https://aws.amazon.com/contact-us/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-support-prescriptive",
+    "certificationId": "cloud-practitioner",
+    "domainId": "billing-support",
+    "taskStatementId": "4.3",
+    "lessonId": "cloud-practitioner/support-and-technical-resources",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A team wants expert guides and patterns for a large migration. Which official resource fits?",
+    "options": [
+      {
+        "id": "prescriptive",
+        "text": "AWS Prescriptive Guidance",
+        "explanation": "Correct. It offers guides and patterns from AWS experts."
+      },
+      {
+        "id": "shield",
+        "text": "AWS Shield",
+        "explanation": "AWS Shield protects against DDoS attacks."
+      },
+      {
+        "id": "budgets",
+        "text": "AWS Budgets",
+        "explanation": "AWS Budgets tracks costs."
+      },
+      {
+        "id": "ses",
+        "text": "Amazon SES",
+        "explanation": "Amazon SES handles email."
+      }
+    ],
+    "correctOptionIds": ["prescriptive"],
+    "explanation": "Guides and patterns point to AWS Prescriptive Guidance.",
+    "references": [
+      {
+        "title": "AWS Prescriptive Guidance",
+        "url": "https://aws.amazon.com/prescriptive-guidance/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]

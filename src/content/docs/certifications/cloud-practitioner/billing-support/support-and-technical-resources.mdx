@@ -1,0 +1,207 @@
+---
+title: AWS Support and technical resources
+description: AWS Support plans, AWS Trusted Advisor, AWS Health, reporting abuse, and where to find official technical resources.
+sidebar:
+  order: 3
+lesson:
+  id: cloud-practitioner/support-and-technical-resources
+  certification: cloud-practitioner
+  module: billing-support
+  domain: billing-support
+  taskStatements: ['4.3']
+  difficulty: beginner
+  scope: essential
+  estimatedMinutes: 25
+  lastReviewed: 2026-11-07
+  objectives:
+    - Compare AWS Support plans.
+    - Identify the roles of Trusted Advisor, the AWS Health Dashboard, and the AWS Health API.
+    - Locate official AWS technical resources.
+    - Identify how to report abuse of AWS resources.
+  references:
+    - title: AWS Support plans
+      url: https://aws.amazon.com/premiumsupport/plans/
+    - title: Compare AWS Support plans (documentation)
+      url: https://docs.aws.amazon.com/awssupport/latest/user/aws-support-plans.html
+    - title: AWS Trusted Advisor
+      url: https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html
+    - title: Get started with AWS Trusted Advisor
+      url: https://docs.aws.amazon.com/awssupport/latest/user/get-started-with-aws-trusted-advisor.html
+    - title: What is AWS Health?
+      url: https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html
+    - title: AWS Prescriptive Guidance
+      url: https://aws.amazon.com/prescriptive-guidance/
+    - title: AWS Professional Services
+      url: https://aws.amazon.com/professional-services/
+    - title: Contact AWS
+      url: https://aws.amazon.com/contact-us/
+    - title: 'CLF-C02 exam guide: Domain 4'
+      url: https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02-domain4.md
+---
+
+import {
+  ExamTip,
+  ImportantConcept,
+  KnowledgeCheck,
+  LessonSummary,
+  RealWorldExample,
+  ServiceComparison,
+} from '~/components/learning';
+
+## The idea in plain language
+
+When a car breaks down, your options depend on what you signed up for. Everyone has the owner's manual. A
+roadside plan sends someone within the hour. A fleet contract gives you a named person who knows your
+vehicles.
+
+AWS Support plans work the same way, from free self-service up to dedicated experts.
+
+## AWS Support plans
+
+<ServiceComparison
+  caption="AWS Support plans compared"
+  columns={['Plan', 'Recommended for', 'Highlights']}
+  rows={[
+    {
+      name: 'Basic',
+      cells: [
+        'All customers, included',
+        'Customer service, documentation, communities, core Trusted Advisor checks',
+      ],
+    },
+    {
+      name: 'AWS Business Support+',
+      cells: [
+        'Production workloads',
+        '24/7 technical support by phone, web, and chat, full Trusted Advisor checks',
+      ],
+    },
+    {
+      name: 'AWS Enterprise Support',
+      cells: [
+        'Business-critical workloads',
+        'A designated Technical Account Manager and proactive services',
+      ],
+    },
+    {
+      name: 'AWS Unified Operations',
+      cells: [
+        'Mission-critical workloads',
+        'Adds specialist engineers and faster response targets',
+      ],
+    },
+  ]}
+/>
+
+<ImportantConcept title="AWS has changed its plan names">
+  Developer Support, Business Support, and Enterprise On-Ramp end on 1 January 2027. Older study
+  material still lists them. The exam guide uses Basic Support, AWS Business Support+, AWS
+  Enterprise Support, and AWS Unified Operations.
+</ImportantConcept>
+
+A **Technical Account Manager (TAM)** is a designated AWS contact who provides guidance. TAMs come with
+Enterprise Support and Unified Operations.
+
+The **AWS Support Center** is where you open and manage support cases.
+
+## Tools that help you monitor your environment
+
+### AWS Trusted Advisor
+
+**AWS Trusted Advisor** inspects your environment and recommends improvements. Its categories are cost
+optimization, performance, security, fault tolerance, service limits, and operational excellence. Basic
+Support includes service limit checks and selected security and fault tolerance checks. Full access
+needs a higher plan.
+
+### AWS Health
+
+The **AWS Health Dashboard** is available to all customers at no extra cost. It shows service health and
+events that affect your account, including planned activities. The **AWS Health API** gives programmatic
+access to the same kind of information and is tied to your support plan.
+
+<ServiceComparison
+  caption="AWS Trusted Advisor and AWS Health compared"
+  columns={['Tool', 'Answers', 'Example']}
+  rows={[
+    {
+      name: 'AWS Trusted Advisor',
+      cells: ['What should I improve?', 'Idle resources that waste money'],
+    },
+    {
+      name: 'AWS Health Dashboard',
+      cells: ['Is AWS affecting me?', 'Planned maintenance on a resource'],
+    },
+  ]}
+/>
+
+## Official technical resources
+
+- **AWS documentation, whitepapers, and blogs** on official AWS websites.
+- **AWS Prescriptive Guidance** provides guides and patterns from AWS experts for cloud adoption and
+  modernization.
+- **AWS Knowledge Center** answers common questions.
+- **AWS re:Post** is the community question-and-answer site, included for all support plans.
+
+## Hands-on help from AWS
+
+- **AWS Professional Services** are AWS consulting teams that help design, build, migrate, and manage
+  workloads.
+- **AWS solutions architects** give technical guidance on designing solutions.
+
+## Reporting abuse
+
+The **AWS Trust and Safety** team handles abuse of AWS resources, such as spam or attacks that come from
+AWS infrastructure. If you suspect abuse, use the "Report abuse" option on the
+[Contact AWS](https://aws.amazon.com/contact-us/) page.
+
+<RealWorldExample title="Real-world example: an online bank">
+  A Sandton fintech runs a production payments platform, so it needs AWS Business Support+ at least.
+  As it grows and its platform becomes business-critical, it moves to AWS Enterprise Support for a
+  Technical Account Manager. Its engineers check the AWS Health Dashboard for planned events.
+</RealWorldExample>
+
+## What the exam expects
+
+<ExamTip>
+  **Technical Account Manager** points to Enterprise Support or Unified Operations. **Best-practice
+  checks** points to Trusted Advisor. **Events affecting your account** points to the AWS Health
+  Dashboard. **Report abuse** points to the AWS Trust and Safety team.
+</ExamTip>
+
+## Common misconceptions
+
+- **"Trusted Advisor and AWS Health do the same job."** One recommends improvements. The other reports
+  events.
+- **"Basic Support includes technical support cases."** Basic covers account and billing questions and
+  service quota increases.
+- **"Developer Support is the cheapest paid plan."** It ends on 1 January 2027, so check current plans.
+
+## Try it yourself (optional)
+
+You need no AWS account for this, and it costs nothing. Open the
+[AWS Support plans page](https://aws.amazon.com/premiumsupport/plans/) and find which plan a small
+business with one production website should choose, and why.
+
+## Knowledge check
+
+<KnowledgeCheck
+  quizId="cloud-practitioner/support-and-technical-resources"
+  questionIds={[
+    'clf-support-tam',
+    'clf-support-trusted-advisor',
+    'clf-support-health',
+    'clf-support-abuse',
+  ]}
+/>
+
+## Summary
+
+<LessonSummary>
+
+- Current plans are Basic, AWS Business Support+, AWS Enterprise Support, and AWS Unified Operations.
+- Trusted Advisor recommends improvements across six categories.
+- The AWS Health Dashboard shows events that affect you.
+- AWS Prescriptive Guidance, documentation, and re:Post provide self-service help.
+- The AWS Trust and Safety team handles abuse reports.
+
+</LessonSummary>
