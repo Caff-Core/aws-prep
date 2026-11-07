@@ -1,0 +1,212 @@
+[
+  {
+    "id": "clf-governance-artifact",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/governance-and-compliance",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "An auditor asks a company for an AWS SOC report. Where can the company download it?",
+    "options": [
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "Correct. AWS Artifact provides on-demand access to AWS compliance documents."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions in an account."
+      },
+      {
+        "id": "config",
+        "text": "AWS Config",
+        "explanation": "AWS Config records resource configuration."
+      },
+      {
+        "id": "inspector",
+        "text": "Amazon Inspector",
+        "explanation": "Inspector scans for vulnerabilities."
+      }
+    ],
+    "correctOptionIds": ["artifact"],
+    "explanation": "AWS Artifact is the place for AWS security and compliance reports.",
+    "references": [
+      {
+        "title": "What is AWS Artifact?",
+        "url": "https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-governance-cloudtrail",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/governance-and-compliance",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A security team needs to find out which user deleted a resource yesterday. Which service should it use?",
+    "options": [
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "Correct. CloudTrail records actions taken by users, roles, and services."
+      },
+      {
+        "id": "cloudwatch",
+        "text": "Amazon CloudWatch",
+        "explanation": "CloudWatch monitors metrics and logs, but CloudTrail is the record of who did what."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      },
+      {
+        "id": "trusted-advisor",
+        "text": "AWS Trusted Advisor",
+        "explanation": "Trusted Advisor recommends improvements."
+      }
+    ],
+    "correctOptionIds": ["cloudtrail"],
+    "explanation": "Who did what, and when, points to AWS CloudTrail.",
+    "references": [
+      {
+        "title": "What is AWS CloudTrail?",
+        "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-governance-config",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/governance-and-compliance",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A company wants to see how a resource's settings changed over time and to flag resources that break its rules. Which service fits?",
+    "options": [
+      {
+        "id": "config",
+        "text": "AWS Config",
+        "explanation": "Correct. AWS Config records configuration history, and its rules flag noncompliant resources."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions rather than the configuration state of resources."
+      },
+      {
+        "id": "guardduty",
+        "text": "Amazon GuardDuty",
+        "explanation": "GuardDuty detects threats."
+      },
+      {
+        "id": "waf",
+        "text": "AWS WAF",
+        "explanation": "AWS WAF filters web requests."
+      }
+    ],
+    "correctOptionIds": ["config"],
+    "explanation": "Configuration history and compliance rules point to AWS Config.",
+    "references": [
+      {
+        "title": "What is AWS Config?",
+        "url": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-governance-customer-duty",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/governance-and-compliance",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "A company uses AWS services that hold a relevant compliance certification. What does this mean for the company?",
+    "options": [
+      {
+        "id": "still-responsible",
+        "text": "The company is still responsible for its own compliance",
+        "explanation": "Correct. Customers remain responsible for complying with the laws that apply to them."
+      },
+      {
+        "id": "auto-compliant",
+        "text": "The company becomes compliant automatically",
+        "explanation": "AWS certifications cover the AWS side only."
+      },
+      {
+        "id": "aws-liable",
+        "text": "AWS becomes responsible for the company's legal compliance",
+        "explanation": "Legal compliance stays with the customer."
+      },
+      {
+        "id": "no-audit",
+        "text": "The company no longer needs audits",
+        "explanation": "Using AWS does not remove a company's audit duties."
+      }
+    ],
+    "correctOptionIds": ["still-responsible"],
+    "explanation": "AWS supports compliance. It does not take on the customer's obligations.",
+    "references": [
+      {
+        "title": "AWS Compliance Programs",
+        "url": "https://aws.amazon.com/compliance/programs/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-governance-monitoring",
+    "certificationId": "cloud-practitioner",
+    "domainId": "security-compliance",
+    "taskStatementId": "2.2",
+    "lessonId": "cloud-practitioner/governance-and-compliance",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants an alarm when a server's CPU use stays high. Which service provides this?",
+    "options": [
+      {
+        "id": "cloudwatch",
+        "text": "Amazon CloudWatch",
+        "explanation": "Correct. CloudWatch provides metrics and alarms."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions, not performance metrics."
+      },
+      {
+        "id": "artifact",
+        "text": "AWS Artifact",
+        "explanation": "AWS Artifact provides compliance documents."
+      },
+      {
+        "id": "config",
+        "text": "AWS Config",
+        "explanation": "AWS Config records configuration, not performance."
+      }
+    ],
+    "correctOptionIds": ["cloudwatch"],
+    "explanation": "Metrics and alarms point to Amazon CloudWatch.",
+    "references": [
+      {
+        "title": "What is Amazon CloudWatch?",
+        "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
