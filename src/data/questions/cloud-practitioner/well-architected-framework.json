@@ -1,0 +1,217 @@
+[
+  {
+    "id": "clf-waf-reliability-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.2",
+    "lessonId": "cloud-practitioner/well-architected-framework",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company wants its order system to keep performing its function correctly and to recover quickly when a component fails. Which pillar of the AWS Well-Architected Framework does this match?",
+    "options": [
+      {
+        "id": "reliability",
+        "text": "Reliability",
+        "explanation": "Correct. Reliability is about a workload working correctly and consistently, including recovery from failure."
+      },
+      {
+        "id": "performance-efficiency",
+        "text": "Performance efficiency",
+        "explanation": "This pillar is about using resources efficiently to meet performance needs."
+      },
+      {
+        "id": "cost-optimization",
+        "text": "Cost optimization",
+        "explanation": "This pillar is about delivering value at the lowest price point."
+      },
+      {
+        "id": "sustainability",
+        "text": "Sustainability",
+        "explanation": "This pillar is about reducing environmental impact."
+      }
+    ],
+    "correctOptionIds": ["reliability"],
+    "explanation": "The clues are correct, consistent operation and recovery from failure.",
+    "references": [
+      {
+        "title": "The pillars of the framework",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-waf-pillar-names",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.2",
+    "lessonId": "cloud-practitioner/well-architected-framework",
+    "type": "multiple-response",
+    "isScenario": false,
+    "difficulty": "easy",
+    "prompt": "Which TWO are pillars of the AWS Well-Architected Framework?",
+    "options": [
+      {
+        "id": "security",
+        "text": "Security",
+        "explanation": "Correct. Security is one of the six pillars."
+      },
+      {
+        "id": "sustainability",
+        "text": "Sustainability",
+        "explanation": "Correct. Sustainability is one of the six pillars."
+      },
+      {
+        "id": "elasticity",
+        "text": "Elasticity",
+        "explanation": "Elasticity is a benefit of the cloud, not a pillar."
+      },
+      {
+        "id": "agility",
+        "text": "Agility",
+        "explanation": "Agility is a benefit of the cloud, not a pillar."
+      },
+      {
+        "id": "governance",
+        "text": "Governance",
+        "explanation": "Governance is an AWS Cloud Adoption Framework perspective, not a Well-Architected pillar."
+      }
+    ],
+    "correctOptionIds": ["security", "sustainability"],
+    "explanation": "The six pillars are operational excellence, security, reliability, performance efficiency, cost optimization, and sustainability.",
+    "references": [
+      {
+        "title": "The pillars of the framework",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-waf-sustainability-scenario",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.2",
+    "lessonId": "cloud-practitioner/well-architected-framework",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "easy",
+    "prompt": "A company has set a goal to reduce the energy used by its cloud workloads. Which pillar should it focus on?",
+    "options": [
+      {
+        "id": "sustainability",
+        "text": "Sustainability",
+        "explanation": "Correct. This pillar focuses on environmental impact, particularly energy use and efficiency."
+      },
+      {
+        "id": "operational-excellence",
+        "text": "Operational excellence",
+        "explanation": "This pillar is about running and improving workloads."
+      },
+      {
+        "id": "reliability",
+        "text": "Reliability",
+        "explanation": "This pillar is about working correctly and consistently."
+      },
+      {
+        "id": "security",
+        "text": "Security",
+        "explanation": "This pillar is about protecting data, systems, and assets."
+      }
+    ],
+    "correctOptionIds": ["sustainability"],
+    "explanation": "Energy use and environmental impact belong to the sustainability pillar.",
+    "references": [
+      {
+        "title": "The pillars of the framework",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-waf-tool",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.2",
+    "lessonId": "cloud-practitioner/well-architected-framework",
+    "type": "single-answer",
+    "isScenario": false,
+    "difficulty": "medium",
+    "prompt": "Which AWS offering lets a team answer questions about a workload and compare it with architectural best practices?",
+    "options": [
+      {
+        "id": "wa-tool",
+        "text": "AWS Well-Architected Tool",
+        "explanation": "Correct. It reviews and measures an architecture against the framework."
+      },
+      {
+        "id": "cloudtrail",
+        "text": "AWS CloudTrail",
+        "explanation": "CloudTrail records actions taken in an account. It does not review architecture."
+      },
+      {
+        "id": "pricing-calculator",
+        "text": "AWS Pricing Calculator",
+        "explanation": "The Pricing Calculator estimates costs."
+      },
+      {
+        "id": "dms",
+        "text": "AWS Database Migration Service",
+        "explanation": "AWS DMS moves data between databases."
+      }
+    ],
+    "correctOptionIds": ["wa-tool"],
+    "explanation": "The AWS Well-Architected Tool is available in the console at no charge.",
+    "references": [
+      {
+        "title": "AWS Well-Architected Tool",
+        "url": "https://aws.amazon.com/well-architected-tool/"
+      }
+    ],
+    "reviewStatus": "in-review"
+  },
+  {
+    "id": "clf-waf-performance-vs-reliability",
+    "certificationId": "cloud-practitioner",
+    "domainId": "cloud-concepts",
+    "taskStatementId": "1.2",
+    "lessonId": "cloud-practitioner/well-architected-framework",
+    "type": "single-answer",
+    "isScenario": true,
+    "difficulty": "medium",
+    "prompt": "A team reviews whether it has selected the right type of server to meet its performance requirements, and whether that choice still makes sense as demand changes. Which pillar is the team focusing on?",
+    "options": [
+      {
+        "id": "performance-efficiency",
+        "text": "Performance efficiency",
+        "explanation": "Correct. This pillar is about using resources efficiently to meet performance needs as demand and technology change."
+      },
+      {
+        "id": "reliability",
+        "text": "Reliability",
+        "explanation": "Reliability concerns whether the workload works correctly, not how efficiently resources are chosen."
+      },
+      {
+        "id": "operational-excellence",
+        "text": "Operational excellence",
+        "explanation": "This pillar concerns how teams run and improve workloads."
+      },
+      {
+        "id": "security",
+        "text": "Security",
+        "explanation": "Nothing in the scenario involves protecting data or systems."
+      }
+    ],
+    "correctOptionIds": ["performance-efficiency"],
+    "explanation": "Choosing resources to meet performance needs is the focus of performance efficiency.",
+    "references": [
+      {
+        "title": "The pillars of the framework",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+      }
+    ],
+    "reviewStatus": "in-review"
+  }
+]
